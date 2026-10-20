@@ -1,0 +1,35 @@
+{
+  "claudeVersion" : "2.37337.1",
+  "focusedElement" : {
+    "nearestWebAreaURL" : "https://claude.ai/epitaxy",
+    "role" : "AXTextArea"
+  },
+  "frontmost" : true,
+  "windows" : [
+    {
+      "focused" : true,
+      "frame" : {
+        "height" : 949,
+        "width" : 1512,
+        "x" : 0,
+        "y" : 33
+      },
+      "main" : true,
+      "minimized" : false,
+      "title" : "Claude",
+      "webAreas" : [
+        {
+          "focused" : false,
+          "frame" : {
+            "height" : 949,
+            "width" : 1512,
+            "x" : 0,
+            "y" : 33
+          },
+          "title" : "Claude",
+          "url" : "https://claude.ai/epitaxy"
+        }
+      ]
+    }
+  ]
+}

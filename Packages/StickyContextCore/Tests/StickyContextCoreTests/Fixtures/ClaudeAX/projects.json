@@ -1,0 +1,35 @@
+{
+  "claudeVersion" : "2.37337.1",
+  "focusedElement" : {
+    "nearestWebAreaURL" : "https://claude.ai/projects",
+    "role" : "AXWebArea"
+  },
+  "frontmost" : true,
+  "windows" : [
+    {
+      "focused" : true,
+      "frame" : {
+        "height" : 949,
+        "width" : 1512,
+        "x" : 0,
+        "y" : 33
+      },
+      "main" : true,
+      "minimized" : false,
+      "title" : "Claude",
+      "webAreas" : [
+        {
+          "focused" : true,
+          "frame" : {
+            "height" : 949,
+            "width" : 1512,
+            "x" : 0,
+            "y" : 33
+          },
+          "title" : "Projects - Claude",
+          "url" : "https://claude.ai/projects"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "sourceLanguage": "en",
+  "strings": {
+    "CFBundleDisplayName": {
+      "comment": "Bundle display name",
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hintlet"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hintlet"
+          }
+        }
+      }
+    },
+    "CFBundleName": {
+      "comment": "Bundle name",
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hintlet"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hintlet"
+          }
+        }
+      }
+    },
+    "NSAppleEventsUsageDescription": {
+      "comment": "Privacy - AppleEvents Sending Usage Description",
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hintlet asks Finder which folder a window shows, so notes can stick to that folder, and asks Terminal or iTerm which tab is in front, to recognise a Claude Code conversation running there. It only reads locations and tabs, and never changes files or types anything."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hintlet 會詢問 Finder 視窗目前顯示哪個資料夾，讓便利貼綁在資料夾上；也會詢問終端機目前的分頁，認出其中執行的 Claude Code 對話。只讀取位置與分頁，不會更動任何檔案或輸入任何指令。"
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}

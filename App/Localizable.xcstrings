@@ -1,0 +1,5782 @@
+{
+  "sourceLanguage": "en",
+  "strings": {
+    "%@ 已用於「%@」。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ is already used for “%2$@”."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ 已用於「%@」。"
+          }
+        }
+      }
+    },
+    "%@ 已被系統使用（系統設定 › 鍵盤 › 鍵盤快速鍵）。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ is already used by macOS (System Settings › Keyboard › Keyboard Shortcuts)."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ 已被系統使用（系統設定 › 鍵盤 › 鍵盤快速鍵）。"
+          }
+        }
+      }
+    },
+    "%@ 常是其他 App 自己的快捷鍵，請再加上 ⌥ 或 ⌃。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ is often an app’s own shortcut. Add ⌥ or ⌃."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ 常是其他 App 自己的快捷鍵，請再加上 ⌥ 或 ⌃。"
+          }
+        }
+      }
+    },
+    "%@：按一下展開，按住設定": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: Click to expand, hold for options"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@：按一下展開，按住設定"
+          }
+        }
+      }
+    },
+    "%@：按一下收合，按住設定": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: Click to collapse, hold for options"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@：按一下收合，按住設定"
+          }
+        }
+      }
+    },
+    "Claude 對話": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude Conversation"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude 對話"
+          }
+        }
+      }
+    },
+    "Claude 對話：%@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude conversation: %@"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude 對話：%@"
+          }
+        }
+      }
+    },
+    "Claude 的完整輔助使用資訊": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude’s Full Accessibility Information"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude 的完整輔助使用資訊"
+          }
+        }
+      }
+    },
+    "Claude 的設定開著": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude’s settings are open"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude 的設定開著"
+          }
+        }
+      }
+    },
+    "不是這裡": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Not here"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "不是這裡"
+          }
+        }
+      }
+    },
+    "便利貼": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Note"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "便利貼"
+          }
+        }
+      }
+    },
+    "便利貼列表": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notes List"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "便利貼列表"
+          }
+        }
+      }
+    },
+    "便利貼檔案可能來自較新版本的 Hintlet，或已損壞。原檔沒有刪除，已保留在：\n\n%@\n\n「Backups」資料夾裡也有較早的備份。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The notes file may come from a newer version of Hintlet, or it may be damaged. It wasn’t deleted; it’s kept at:\n\n%@\n\nThe “Backups” folder also has earlier copies."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "便利貼檔案可能來自較新版本的 Hintlet，或已損壞。原檔沒有刪除，已保留在：\n\n%@\n\n「Backups」資料夾裡也有較早的備份。"
+          }
+        }
+      }
+    },
+    "便利貼檔案可能來自較新版本的 Hintlet，或已損壞，而且無法移開。為了不覆蓋它，這次執行期間不會儲存任何便利貼。\n\n%@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The notes file may come from a newer version of Hintlet, or it may be damaged, and it couldn’t be moved aside. So it isn’t overwritten, no notes will be saved until Hintlet restarts.\n\n%@"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "便利貼檔案可能來自較新版本的 Hintlet，或已損壞，而且無法移開。為了不覆蓋它，這次執行期間不會儲存任何便利貼。\n\n%@"
+          }
+        }
+      }
+    },
+    "備份": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Backup"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "備份"
+          }
+        }
+      }
+    },
+    "備份與搬家": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Back Up or Move to Another Mac"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "備份與搬家"
+          }
+        }
+      }
+    },
+    "全域快捷鍵": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Global Shortcuts"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "全域快捷鍵"
+          }
+        }
+      }
+    },
+    "全域快捷鍵需要包含 ⌘、⌥ 或 ⌃。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A global shortcut needs ⌘, ⌥ or ⌃."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "全域快捷鍵需要包含 ⌘、⌥ 或 ⌃。"
+          }
+        }
+      }
+    },
+    "全選": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Select All"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "全選"
+          }
+        }
+      }
+    },
+    "刪除": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "刪除"
+          }
+        }
+      }
+    },
+    "剪下": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cut"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "剪下"
+          }
+        }
+      }
+    },
+    "匯入備份…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Import Backup…"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "匯入備份…"
+          }
+        }
+      }
+    },
+    "匯出全部便利貼…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Export All Notes…"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "匯出全部便利貼…"
+          }
+        }
+      }
+    },
+    "匯出會把所有便利貼（包括垃圾桶裡的）存成一個檔案。在另一台 Mac 或重新安裝後匯入，已有的便利貼不會重複，同一張保留較新的版本。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exporting saves every note, including those in the trash, to a single file. Import it on another Mac or after reinstalling: notes already there aren’t duplicated, and the newer version of a note is kept."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "匯出會把所有便利貼（包括垃圾桶裡的）存成一個檔案。在另一台 Mac 或重新安裝後匯入，已有的便利貼不會重複，同一張保留較新的版本。"
+          }
+        }
+      }
+    },
+    "只用視窗範圍": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Use Windows Only"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "只用視窗範圍"
+          }
+        }
+      }
+    },
+    "可能是這裡？「%@」": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Belongs here? “%@”"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "可能是這裡？「%@」"
+          }
+        }
+      }
+    },
+    "可能是這裡？（空白便利貼）": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Belongs here? (empty note)"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "可能是這裡？（空白便利貼）"
+          }
+        }
+      }
+    },
+    "回復預設值": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restore Defaults"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "回復預設值"
+          }
+        }
+      }
+    },
+    "在 Finder 中顯示": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Show in Finder"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在 Finder 中顯示"
+          }
+        }
+      }
+    },
+    "在任何 App 裡都能使用。按一下快捷鍵再按下新的組合，按 Esc 取消。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "These work in any app. Click a shortcut, then press the new combination, or Esc to cancel."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在任何 App 裡都能使用。按一下快捷鍵再按下新的組合，按 Esc 取消。"
+          }
+        }
+      }
+    },
+    "好": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "OK"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "好"
+          }
+        }
+      }
+    },
+    "對話": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chat"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "對話"
+          }
+        }
+      }
+    },
+    "已刪除": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deleted"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已刪除"
+          }
+        }
+      }
+    },
+    "已匯入：新增 %lld 張，更新 %lld 張。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Imported: %1$lld new, %2$lld updated."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已匯入：新增 %lld 張，更新 %lld 張。"
+          }
+        }
+      }
+    },
+    "已匯出 %lld 張便利貼到「%@」。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exported %1$lld notes to “%2$@”."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已匯出 %lld 張便利貼到「%@」。"
+          }
+        }
+      }
+    },
+    "已選取": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Selected"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已選取"
+          }
+        }
+      }
+    },
+    "已開啟": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "On"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已開啟"
+          }
+        }
+      }
+    },
+    "已開啟。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "On."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已開啟。"
+          }
+        }
+      }
+    },
+    "已開啟，但要先開啟上面的權限才會生效。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "On, but it works only once the permission above is on."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已開啟，但要先開啟上面的權限才會生效。"
+          }
+        }
+      }
+    },
+    "已關閉：Claude 上的便利貼綁在整個視窗。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Off: notes on Claude belong to the whole window."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已關閉：Claude 上的便利貼綁在整個視窗。"
+          }
+        }
+      }
+    },
+    "復原": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Undo"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "復原"
+          }
+        }
+      }
+    },
+    "復原刪除（⌘Z）": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Undo delete (⌘Z)"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "復原刪除（⌘Z）"
+          }
+        }
+      }
+    },
+    "快捷鍵": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Shortcuts"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "快捷鍵"
+          }
+        }
+      }
+    },
+    "打開系統設定": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open System Settings"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "打開系統設定"
+          }
+        }
+      }
+    },
+    "打開網頁後，就能把便利貼貼在那個網頁上。也可以先貼在整個視窗。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open a web page, then you can stick a note on it. Or stick it on the whole window for now."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "打開網頁後，就能把便利貼貼在那個網頁上。也可以先貼在整個視窗。"
+          }
+        }
+      }
+    },
+    "拷貝": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copy"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "拷貝"
+          }
+        }
+      }
+    },
+    "按一下，把這張便利貼貼回這個視窗": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Click to stick this note back on this window"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "按一下，把這張便利貼貼回這個視窗"
+          }
+        }
+      }
+    },
+    "改貼在這個視窗": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stick on This Window"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "改貼在這個視窗"
+          }
+        }
+      }
+    },
+    "整個視窗": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Window"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "整個視窗"
+          }
+        }
+      }
+    },
+    "文件": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Document"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "文件"
+          }
+        }
+      }
+    },
+    "文件：%@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Document: %@"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "文件：%@"
+          }
+        }
+      }
+    },
+    "新增便利貼": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "New Note"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新增便利貼"
+          }
+        }
+      }
+    },
+    "新對話還沒建立": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This conversation hasn’t started yet"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新對話還沒建立"
+          }
+        }
+      }
+    },
+    "暫時隱藏全部": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hide All for Now"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "暫時隱藏全部"
+          }
+        }
+      }
+    },
+    "未開啟": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Off"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "未開啟"
+          }
+        }
+      }
+    },
+    "權限": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Permissions"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "權限"
+          }
+        }
+      }
+    },
+    "浮動": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Floating"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "浮動"
+          }
+        }
+      }
+    },
+    "清單項目": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Checklist"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "清單項目"
+          }
+        }
+      }
+    },
+    "無法使用 %@，可能已被其他 App 使用。原本的快捷鍵保留不變。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ can’t be used; another app may have it. The previous shortcut stays."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "無法使用 %@，可能已被其他 App 使用。原本的快捷鍵保留不變。"
+          }
+        }
+      }
+    },
+    "無法匯出：%@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couldn’t export: %@"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "無法匯出：%@"
+          }
+        }
+      }
+    },
+    "無法讀取先前的便利貼": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your earlier notes couldn’t be read"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "無法讀取先前的便利貼"
+          }
+        }
+      }
+    },
+    "用來知道你目前在哪個視窗，讓便利貼在切走時隱藏、回來時出現，並跟著視窗移動。Hintlet 只讀取視窗的位置與標題，不會記錄你的輸入。沒有這個權限時，便利貼只能浮動顯示。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lets Hintlet know which window you’re in, so notes hide when you switch away, come back when you return, and move with their window. Hintlet reads only windows’ positions and titles and never records your typing. Without it, notes can only float."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "用來知道你目前在哪個視窗，讓便利貼在切走時隱藏、回來時出現，並跟著視窗移動。Hintlet 只讀取視窗的位置與標題，不會記錄你的輸入。沒有這個權限時，便利貼只能浮動顯示。"
+          }
+        }
+      }
+    },
+    "目前無法使用，可能已被其他 App 使用，請換一個。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Not working right now; another app may have it. Choose another."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "目前無法使用，可能已被其他 App 使用，請換一個。"
+          }
+        }
+      }
+    },
+    "稍後": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Later"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "稍後"
+          }
+        }
+      }
+    },
+    "空白鍵": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Space"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "空白鍵"
+          }
+        }
+      }
+    },
+    "粉紅色": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pink"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "粉紅色"
+          }
+        }
+      }
+    },
+    "紫色": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Purple"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "紫色"
+          }
+        }
+      }
+    },
+    "結束 Hintlet": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quit Hintlet"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "結束 Hintlet"
+          }
+        }
+      }
+    },
+    "綠色": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Green"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "綠色"
+          }
+        }
+      }
+    },
+    "網頁": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Web Page"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "網頁"
+          }
+        }
+      }
+    },
+    "網頁：%@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Web page: %@"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "網頁：%@"
+          }
+        }
+      }
+    },
+    "網頁：%@ — %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Web page: %1$@ — %2$@"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "網頁：%@ — %@"
+          }
+        }
+      }
+    },
+    "編輯": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Edit"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "編輯"
+          }
+        }
+      }
+    },
+    "Hintlet": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hintlet"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hintlet"
+          }
+        }
+      }
+    },
+    "Hintlet 不需要「輸入監控」或「螢幕錄製」權限。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hintlet doesn’t need Input Monitoring or Screen Recording."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hintlet 不需要「輸入監控」或「螢幕錄製」權限。"
+          }
+        }
+      }
+    },
+    "Hintlet 備份 %@.json": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hintlet Backup %@.json"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hintlet 備份 %@.json"
+          }
+        }
+      }
+    },
+    "Hintlet 設定": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hintlet Settings"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hintlet 設定"
+          }
+        }
+      }
+    },
+    "Hintlet 需要「%@」權限，才能知道你目前在哪個視窗，讓便利貼在切走時隱藏、回來時出現，並跟著視窗移動。\n\n請在「系統設定 › 隱私權與安全性 › %@」中打開「Hintlet」。\n\nHintlet 只讀取視窗的位置與標題，不會記錄你的輸入，也不會上傳任何內容。\n\n沒有授權時，便利貼仍可使用，但會一直浮動顯示。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hintlet needs the “%1$@” permission to know which window you’re in, so notes hide when you switch away, come back when you return, and move with the window.\n\nTurn on Hintlet in System Settings › Privacy & Security › %2$@.\n\nHintlet reads only each window’s position and title. It doesn’t record what you type or upload anything.\n\nWithout it, notes still work, but they always float."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hintlet 需要「%@」權限，才能知道你目前在哪個視窗，讓便利貼在切走時隱藏、回來時出現，並跟著視窗移動。\n\n請在「系統設定 › 隱私權與安全性 › %@」中打開「Hintlet」。\n\nHintlet 只讀取視窗的位置與標題，不會記錄你的輸入，也不會上傳任何內容。\n\n沒有授權時，便利貼仍可使用，但會一直浮動顯示。"
+          }
+        }
+      }
+    },
+    "Hintlet（已隱藏全部）": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hintlet (all hidden)"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hintlet（已隱藏全部）"
+          }
+        }
+      }
+    },
+    "Hintlet：便利貼已暫時隱藏": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hintlet: notes are hidden for now"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hintlet：便利貼已暫時隱藏"
+          }
+        }
+      }
+    },
+    "藍色": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blue"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "藍色"
+          }
+        }
+      }
+    },
+    "裝置控制與資料存取": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Device Control & Data Access"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "裝置控制與資料存取"
+          }
+        }
+      }
+    },
+    "要把便利貼貼在某個 Claude 對話上，Hintlet 需要請 Claude 開啟完整的輔助使用資訊，才能知道目前顯示的是哪個對話。\n\n開啟後 Claude 會多用一些記憶體與處理器資源。Hintlet 只讀取對話的網址與標題；只有你開了 AI 便利貼的 Chat 對話，才會讀取頁面上已載入的訊息來寫摘要。\n\n不開啟的話，在 Claude 上的便利貼會綁在整個視窗。之後可以從選單列的 Hintlet 選單改變。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "To stick notes on a Claude conversation, Hintlet asks Claude to turn on its full accessibility information, so it can tell which conversation is showing.\n\nClaude then uses a little more memory and processor time. Hintlet reads only the conversation’s address and title; only in a Chat conversation where you turned on an AI note does it read the messages the page has loaded, to write the summary.\n\nIf you don’t turn it on, notes on Claude stick to the whole window. You can change this later from the Hintlet menu in the menu bar."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "要把便利貼貼在某個 Claude 對話上，Hintlet 需要請 Claude 開啟完整的輔助使用資訊，才能知道目前顯示的是哪個對話。\n\n開啟後 Claude 會多用一些記憶體與處理器資源。Hintlet 只讀取對話的網址與標題；只有你開了 AI 便利貼的 Chat 對話，才會讀取頁面上已載入的訊息來寫摘要。\n\n不開啟的話，在 Claude 上的便利貼會綁在整個視窗。之後可以從選單列的 Hintlet 選單改變。"
+          }
+        }
+      }
+    },
+    "視窗（認不出對話）：%@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Window (conversation not recognized): %@"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "視窗（認不出對話）：%@"
+          }
+        }
+      }
+    },
+    "視窗（認不出對話）：%@ — %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Window (conversation not recognized): %1$@ — %2$@"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "視窗（認不出對話）：%@ — %@"
+          }
+        }
+      }
+    },
+    "視窗（這一頁不能貼）：%@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Window (can’t stick on this page): %@"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "視窗（這一頁不能貼）：%@"
+          }
+        }
+      }
+    },
+    "視窗（這一頁不能貼）：%@ — %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Window (can’t stick on this page): %1$@ — %2$@"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "視窗（這一頁不能貼）：%@ — %@"
+          }
+        }
+      }
+    },
+    "視窗：%@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Window: %@"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "視窗：%@"
+          }
+        }
+      }
+    },
+    "視窗：%@ — %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Window: %1$@ — %2$@"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "視窗：%@ — %@"
+          }
+        }
+      }
+    },
+    "設定…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Settings…"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "設定…"
+          }
+        }
+      }
+    },
+    "認不出這一頁是哪個對話，所以這張便利貼綁在視窗上，任何頁面都會看到。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This page couldn’t be matched to a conversation, so the note sticks to the window and shows on every page."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "認不出這一頁是哪個對話，所以這張便利貼綁在視窗上，任何頁面都會看到。"
+          }
+        }
+      }
+    },
+    "認得 Claude 的對話": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recognize Claude Conversations"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "認得 Claude 的對話"
+          }
+        }
+      }
+    },
+    "請按下新的快捷鍵…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Press New Shortcut…"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "請按下新的快捷鍵…"
+          }
+        }
+      }
+    },
+    "讓便利貼認得 Claude 的對話": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Let notes recognize Claude conversations"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "讓便利貼認得 Claude 的對話"
+          }
+        }
+      }
+    },
+    "讓便利貼跟著視窗出現": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Let notes follow your windows"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "讓便利貼跟著視窗出現"
+          }
+        }
+      }
+    },
+    "貼上": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Paste"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "貼上"
+          }
+        }
+      }
+    },
+    "貼在哪裡": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Where it sticks"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "貼在哪裡"
+          }
+        }
+      }
+    },
+    "貼在整個 Claude 視窗": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stuck on the whole Claude window"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "貼在整個 Claude 視窗"
+          }
+        }
+      }
+    },
+    "貼在整個視窗": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stuck on the whole window"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "貼在整個視窗"
+          }
+        }
+      }
+    },
+    "資料夾": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Folder"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "資料夾"
+          }
+        }
+      }
+    },
+    "資料夾：%@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Folder: %@"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "資料夾：%@"
+          }
+        }
+      }
+    },
+    "輔助使用": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Accessibility"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "輔助使用"
+          }
+        }
+      }
+    },
+    "送出第一則訊息後，就能把便利貼貼在這個對話上。也可以先貼在整個 Claude 視窗。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Send the first message, then you can stick a note on this conversation. Or stick it on the whole Claude window for now."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "送出第一則訊息後，就能把便利貼貼在這個對話上。也可以先貼在整個 Claude 視窗。"
+          }
+        }
+      }
+    },
+    "這一頁是瀏覽器自己的頁面，或讀不到網址，所以這張便利貼綁在視窗上，換到任何網頁都會看到。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This is one of the browser’s own pages, or its address couldn’t be read, so the note sticks to the window and shows on every page."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "這一頁是瀏覽器自己的頁面，或讀不到網址，所以這張便利貼綁在視窗上，換到任何網頁都會看到。"
+          }
+        }
+      }
+    },
+    "這個備份來自較新版本的 Hintlet，請先更新 Hintlet 再匯入。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This backup comes from a newer Hintlet. Update Hintlet, then import it."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "這個備份來自較新版本的 Hintlet，請先更新 Hintlet 再匯入。"
+          }
+        }
+      }
+    },
+    "這個分頁還沒有網頁": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This tab has no web page yet"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "這個分頁還沒有網頁"
+          }
+        }
+      }
+    },
+    "這個檔案不是 Hintlet 的備份，或已損壞，沒有匯入任何東西。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This file isn’t a Hintlet backup, or it’s damaged. Nothing was imported."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "這個檔案不是 Hintlet 的備份，或已損壞，沒有匯入任何東西。"
+          }
+        }
+      }
+    },
+    "還原": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Undo"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "還原"
+          }
+        }
+      }
+    },
+    "還沒決定：第一次在 Claude 上新增便利貼時會詢問。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Not decided yet: you’ll be asked the first time you add a note on Claude."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "還沒決定：第一次在 Claude 上新增便利貼時會詢問。"
+          }
+        }
+      }
+    },
+    "重做": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Redo"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "重做"
+          }
+        }
+      }
+    },
+    "開啟": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Turn On"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "開啟"
+          }
+        }
+      }
+    },
+    "開啟後 Hintlet 會請 Claude 提供完整的輔助使用資訊，才能知道目前顯示的是哪個對話，讓便利貼貼在對話上。Claude 會多用一些記憶體與處理器資源。Hintlet 只讀取對話的網址與標題；只有開了 AI 便利貼的 Chat 對話，才會讀取頁面上已載入的訊息。關閉時，Claude 上的便利貼綁在整個視窗。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "When on, Hintlet asks Claude for its full accessibility information, to know which conversation it shows so notes can stick to it. Claude then uses a little more memory and processor time. Hintlet reads only conversations’ addresses and titles; only in a Chat conversation with an AI note does it read the messages the page has loaded. When off, notes on Claude belong to the whole window."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "開啟後 Hintlet 會請 Claude 提供完整的輔助使用資訊，才能知道目前顯示的是哪個對話，讓便利貼貼在對話上。Claude 會多用一些記憶體與處理器資源。Hintlet 只讀取對話的網址與標題；只有開了 AI 便利貼的 Chat 對話，才會讀取頁面上已載入的訊息。關閉時，Claude 上的便利貼綁在整個視窗。"
+          }
+        }
+      }
+    },
+    "關掉設定、回到對話後再貼。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Close the settings and go back to the conversation first."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "關掉設定、回到對話後再貼。"
+          }
+        }
+      }
+    },
+    "黃色": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yellow"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "黃色"
+          }
+        }
+      }
+    },
+    "所有便利貼": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "All Notes"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "所有便利貼"
+          }
+        }
+      }
+    },
+    "所有便利貼…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "All Notes…"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "所有便利貼…"
+          }
+        }
+      }
+    },
+    "搜尋便利貼": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Search notes"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "搜尋便利貼"
+          }
+        }
+      }
+    },
+    "清除搜尋": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clear search"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "清除搜尋"
+          }
+        }
+      }
+    },
+    "還沒有便利貼": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No notes yet"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "還沒有便利貼"
+          }
+        }
+      }
+    },
+    "沒有符合「%@」的便利貼": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No notes match “%@”"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "沒有符合「%@」的便利貼"
+          }
+        }
+      }
+    },
+    "按 ⌘⌥N 在目前的工作內容上貼一張。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Press ⌘⌥N to stick one on what you’re working on."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "按 ⌘⌥N 在目前的工作內容上貼一張。"
+          }
+        }
+      }
+    },
+    "待找回": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Waiting to Be Found"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "待找回"
+          }
+        }
+      }
+    },
+    "重新綁定": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rebind"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "重新綁定"
+          }
+        }
+      }
+    },
+    "綁到「%@」": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bind to “%@”"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "綁到「%@」"
+          }
+        }
+      }
+    },
+    "先切到要綁定的視窗或對話，再打開列表。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Switch to the window or conversation to bind to, then open the list."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "先切到要綁定的視窗或對話，再打開列表。"
+          }
+        }
+      }
+    },
+    "改為浮動": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Make Floating"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "改為浮動"
+          }
+        }
+      }
+    },
+    "垃圾桶": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trash"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "垃圾桶"
+          }
+        }
+      }
+    },
+    "清空垃圾桶": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Empty Trash"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "清空垃圾桶"
+          }
+        }
+      }
+    },
+    "永久刪除": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete Forever"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "永久刪除"
+          }
+        }
+      }
+    },
+    "要永久刪除這張便利貼嗎？": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete this note forever?"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "要永久刪除這張便利貼嗎？"
+          }
+        }
+      }
+    },
+    "要清空垃圾桶嗎？": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Empty the trash?"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "要清空垃圾桶嗎？"
+          }
+        }
+      }
+    },
+    "清空": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Empty"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "清空"
+          }
+        }
+      }
+    },
+    "垃圾桶裡的 %lld 張便利貼會永久刪除。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The %lld notes in the trash will be deleted forever."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "垃圾桶裡的 %lld 張便利貼會永久刪除。"
+          }
+        }
+      }
+    },
+    "這個動作無法復原。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This can’t be undone."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "這個動作無法復原。"
+          }
+        }
+      }
+    },
+    "取消": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancel"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "取消"
+          }
+        }
+      }
+    },
+    "資料夾與文件": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Folders and Documents"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "資料夾與文件"
+          }
+        }
+      }
+    },
+    "Claude Code（終端機）": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude Code (Terminal)"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude Code（終端機）"
+          }
+        }
+      }
+    },
+    "已封存": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Archived"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已封存"
+          }
+        }
+      }
+    },
+    "前往": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Go"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "前往"
+          }
+        }
+      }
+    },
+    "在 Claude 打開這個對話": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open this conversation in Claude"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在 Claude 打開這個對話"
+          }
+        }
+      }
+    },
+    "（空白）": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "(Empty)"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "（空白）"
+          }
+        }
+      }
+    },
+    "%lld 天後永久刪除": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deleted forever in %lld days"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld 天後永久刪除"
+          }
+        }
+      }
+    },
+    "App 重新開啟後，認不出原本的視窗": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Its window can’t be recognised after the app restarted"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "App 重新開啟後，認不出原本的視窗"
+          }
+        }
+      }
+    },
+    "原本的視窗已關閉": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Its window was closed"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "原本的視窗已關閉"
+          }
+        }
+      }
+    },
+    "找不到原本的資料夾或檔案": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Its folder or file can’t be found"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "找不到原本的資料夾或檔案"
+          }
+        }
+      }
+    },
+    "更新 AI 摘要": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Refresh AI summary"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "更新 AI 摘要"
+          }
+        }
+      }
+    },
+    "⏸ 暫停記錄": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⏸ Pause recording"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⏸ 暫停記錄"
+          }
+        }
+      }
+    },
+    "▶︎ 繼續記錄": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "▶︎ Resume recording"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "▶︎ 繼續記錄"
+          }
+        }
+      }
+    },
+    "已暫停記錄": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recording paused"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已暫停記錄"
+          }
+        }
+      }
+    },
+    "✨ 轉成 AI 便利貼": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "✨ Make this an AI note"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "✨ 轉成 AI 便利貼"
+          }
+        }
+      }
+    },
+    "讓 AI 記錄脈絡？": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Let AI keep track of this conversation?"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "讓 AI 記錄脈絡？"
+          }
+        }
+      }
+    },
+    "✨ 讓 AI 記錄脈絡？": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "✨ Let AI keep track?"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "✨ 讓 AI 記錄脈絡？"
+          }
+        }
+      }
+    },
+    "正在做什麼": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Doing"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "正在做什麼"
+          }
+        }
+      }
+    },
+    "停在哪裡": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stopped at"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "停在哪裡"
+          }
+        }
+      }
+    },
+    "下一步": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Next"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "下一步"
+          }
+        }
+      }
+    },
+    "正在更新…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Updating…"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "正在更新…"
+          }
+        }
+      }
+    },
+    "更新失敗，顯示上一次的內容": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couldn’t update; showing the last summary"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "更新失敗，顯示上一次的內容"
+          }
+        }
+      }
+    },
+    "更新於 %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Updated %@"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "更新於 %@"
+          }
+        }
+      }
+    },
+    "僅根據已載入的 %lld 則訊息": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Based only on the %lld loaded messages"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "僅根據已載入的 %lld 則訊息"
+          }
+        }
+      }
+    },
+    "AI 便利貼": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI note"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI 便利貼"
+          }
+        }
+      }
+    },
+    "對話內容還不夠，之後再記錄脈絡。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Not enough in this conversation yet; it will be summarised later."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "對話內容還不夠，之後再記錄脈絡。"
+          }
+        }
+      }
+    },
+    "讀不到這個對話的紀錄。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couldn’t read this conversation’s transcript."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "讀不到這個對話的紀錄。"
+          }
+        }
+      }
+    },
+    "正在讀取對話…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reading the conversation…"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "正在讀取對話…"
+          }
+        }
+      }
+    },
+    "更新失敗（%@），顯示上一次的內容": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couldn’t update (%@); showing the last summary"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "更新失敗（%@），顯示上一次的內容"
+          }
+        }
+      }
+    },
+    "無法寫出摘要：%@。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couldn’t write a summary: %@."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "無法寫出摘要：%@。"
+          }
+        }
+      }
+    },
+    "連不上網路": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "no internet connection"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "連不上網路"
+          }
+        }
+      }
+    },
+    "AI": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI"
+          }
+        }
+      }
+    },
+    "無法存進鑰匙圈。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couldn’t save to the Keychain."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "無法存進鑰匙圈。"
+          }
+        }
+      }
+    },
+    "無法從鑰匙圈移除。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couldn’t remove from the Keychain."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "無法從鑰匙圈移除。"
+          }
+        }
+      }
+    },
+    "由誰寫 AI 便利貼": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Who writes AI notes"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "由誰寫 AI 便利貼"
+          }
+        }
+      }
+    },
+    "使用 Claude API 時，AI 便利貼所在對話的內容會上傳到 Anthropic，費用由你的 API key 支付。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "With the Claude API, the conversations that have AI notes are uploaded to Anthropic and billed to your API key."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "使用 Claude API 時，AI 便利貼所在對話的內容會上傳到 Anthropic，費用由你的 API key 支付。"
+          }
+        }
+      }
+    },
+    "裝置端模型在這台 Mac 上執行，對話內容不會離開這台 Mac。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The on-device model runs on this Mac; conversations never leave it."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "裝置端模型在這台 Mac 上執行，對話內容不會離開這台 Mac。"
+          }
+        }
+      }
+    },
+    "裝置端模型（不上傳）": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "On-device model (nothing uploaded)"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "裝置端模型（不上傳）"
+          }
+        }
+      }
+    },
+    "裝置端模型（這台 Mac 無法使用）": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "On-device model (not available on this Mac)"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "裝置端模型（這台 Mac 無法使用）"
+          }
+        }
+      }
+    },
+    "Claude API key": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude API key"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude API key"
+          }
+        }
+      }
+    },
+    "key 只存在 macOS 鑰匙圈，不會寫進便利貼的資料檔、備份或匯出檔。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The key is kept only in the macOS Keychain, never in the notes file, its backups or exports."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "key 只存在 macOS 鑰匙圈，不會寫進便利貼的資料檔、備份或匯出檔。"
+          }
+        }
+      }
+    },
+    "已儲存在鑰匙圈": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saved in the Keychain"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已儲存在鑰匙圈"
+          }
+        }
+      }
+    },
+    "移除 key": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remove Key"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "移除 key"
+          }
+        }
+      }
+    },
+    "貼上 API key": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Paste API key"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "貼上 API key"
+          }
+        }
+      }
+    },
+    "儲存": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Save"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "儲存"
+          }
+        }
+      }
+    },
+    "AI 便利貼顏色": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Note Colour"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI 便利貼顏色"
+          }
+        }
+      }
+    },
+    "所有 AI 便利貼都用這個顏色，變更後立即套用。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "All AI notes use this colour; changes apply at once."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "所有 AI 便利貼都用這個顏色，變更後立即套用。"
+          }
+        }
+      }
+    },
+    "改用 Claude API？": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Use the Claude API?"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "改用 Claude API？"
+          }
+        }
+      }
+    },
+    "改用並上傳": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Use and Upload"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "改用並上傳"
+          }
+        }
+      }
+    },
+    "AI 便利貼要寫摘要時，它所在對話的內容（你的要求與 Claude 的回覆）會上傳到 Anthropic 的 Claude API，使用你的 API key 並由你付費。之後切走對話時的自動更新也會上傳。只有 AI 便利貼的對話會上傳，其他便利貼與對話不會。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "When an AI note writes its summary, its conversation (your requests and Claude’s replies) is uploaded to Anthropic’s Claude API, using your API key and billed to you. Automatic updates when you switch away from a conversation are uploaded too. Only conversations with an AI note are uploaded; other notes and conversations are not."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI 便利貼要寫摘要時，它所在對話的內容（你的要求與 Claude 的回覆）會上傳到 Anthropic 的 Claude API，使用你的 API key 並由你付費。之後切走對話時的自動更新也會上傳。只有 AI 便利貼的對話會上傳，其他便利貼與對話不會。"
+          }
+        }
+      }
+    },
+    "Hintlet Claude API key": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hintlet Claude API key"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hintlet Claude API key"
+          }
+        }
+      }
+    },
+    "%@ 執行失敗": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ failed"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ 執行失敗"
+          }
+        }
+      }
+    },
+    "%@ 尚未登入，請先在終端機登入": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ isn’t signed in; sign in from Terminal first"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ 尚未登入，請先在終端機登入"
+          }
+        }
+      }
+    },
+    "AI 便利貼要寫摘要時，它所在對話的內容（你的要求與 Claude 的回覆）會上傳到 OpenAI API，使用你的 OpenAI API key 並由你付費。之後切走對話時的自動更新也會上傳。只有 AI 便利貼的對話會上傳，其他便利貼與對話不會。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "When an AI note writes its summary, the content of its conversation (your requests and Claude’s replies) is uploaded to the OpenAI API, using your OpenAI API key at your expense. The automatic updates when you switch away from the conversation are uploaded too. Only conversations with an AI note are uploaded; other notes and conversations are not."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI 便利貼要寫摘要時，它所在對話的內容（你的要求與 Claude 的回覆）會上傳到 OpenAI API，使用你的 OpenAI API key 並由你付費。之後切走對話時的自動更新也會上傳。只有 AI 便利貼的對話會上傳，其他便利貼與對話不會。"
+          }
+        }
+      }
+    },
+    "AI 便利貼要寫摘要時，Hintlet 會在背景執行這台 Mac 上的 Claude Code，把它所在對話的內容（你的要求與 Claude 的回覆）交給 Claude Code 上傳到 Anthropic，用你登入的 Claude 帳號的用量。之後切走對話時的自動更新也會上傳。只有 AI 便利貼的對話會上傳，其他便利貼與對話不會。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "When an AI note writes its summary, Hintlet runs Claude Code on this Mac in the background and hands it the content of the note’s conversation (your requests and Claude’s replies), which Claude Code uploads to Anthropic using the Claude account you signed in with. The automatic updates when you switch away from the conversation are uploaded too. Only conversations with an AI note are uploaded; other notes and conversations are not."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI 便利貼要寫摘要時，Hintlet 會在背景執行這台 Mac 上的 Claude Code，把它所在對話的內容（你的要求與 Claude 的回覆）交給 Claude Code 上傳到 Anthropic，用你登入的 Claude 帳號的用量。之後切走對話時的自動更新也會上傳。只有 AI 便利貼的對話會上傳，其他便利貼與對話不會。"
+          }
+        }
+      }
+    },
+    "AI 便利貼要寫摘要時，Hintlet 會在背景執行這台 Mac 上的 Codex，把它所在對話的內容（你的要求與 Claude 的回覆）交給 Codex 上傳到 OpenAI，用你登入 Codex 的 ChatGPT 帳號的用量。之後切走對話時的自動更新也會上傳。只有 AI 便利貼的對話會上傳，其他便利貼與對話不會。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "When an AI note writes its summary, Hintlet runs Codex on this Mac in the background and hands it the content of the note’s conversation (your requests and Claude’s replies), which Codex uploads to OpenAI using the ChatGPT account you signed in to Codex with. The automatic updates when you switch away from the conversation are uploaded too. Only conversations with an AI note are uploaded; other notes and conversations are not."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI 便利貼要寫摘要時，Hintlet 會在背景執行這台 Mac 上的 Codex，把它所在對話的內容（你的要求與 Claude 的回覆）交給 Codex 上傳到 OpenAI，用你登入 Codex 的 ChatGPT 帳號的用量。之後切走對話時的自動更新也會上傳。只有 AI 便利貼的對話會上傳，其他便利貼與對話不會。"
+          }
+        }
+      }
+    },
+    "AI 服務暫時無法使用": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "the AI service is unavailable for now"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI 服務暫時無法使用"
+          }
+        }
+      }
+    },
+    "API key 無效或沒有權限": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "the API key is invalid or has no access"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "API key 無效或沒有權限"
+          }
+        }
+      }
+    },
+    "API 錯誤 %lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "API error %lld"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "API 錯誤 %lld"
+          }
+        }
+      }
+    },
+    "Claude API key（會上傳到 Anthropic）": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude API key (uploads to Anthropic)"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude API key（會上傳到 Anthropic）"
+          }
+        }
+      }
+    },
+    "Claude Code 與 Codex": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude Code and Codex"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude Code 與 Codex"
+          }
+        }
+      }
+    },
+    "Claude 帳號，透過 Claude Code（找不到 Claude Code）": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude account, through Claude Code (Claude Code not found)"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude 帳號，透過 Claude Code（找不到 Claude Code）"
+          }
+        }
+      }
+    },
+    "Claude 帳號，透過 Claude Code（會上傳到 Anthropic）": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude account, through Claude Code (uploads to Anthropic)"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude 帳號，透過 Claude Code（會上傳到 Anthropic）"
+          }
+        }
+      }
+    },
+    "Codex 帳號，透過 Codex（找不到 Codex）": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex account, through Codex (Codex not found)"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex 帳號，透過 Codex（找不到 Codex）"
+          }
+        }
+      }
+    },
+    "Codex 帳號，透過 Codex（會上傳到 OpenAI）": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex account, through Codex (uploads to OpenAI)"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex 帳號，透過 Codex（會上傳到 OpenAI）"
+          }
+        }
+      }
+    },
+    "OpenAI API key": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "OpenAI API key"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "OpenAI API key"
+          }
+        }
+      }
+    },
+    "OpenAI API key（會上傳到 OpenAI）": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "OpenAI API key (uploads to OpenAI)"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "OpenAI API key（會上傳到 OpenAI）"
+          }
+        }
+      }
+    },
+    "使用 Claude 帳號時，Hintlet 在背景執行這台 Mac 上的 Claude Code，AI 便利貼所在對話的內容會上傳到 Anthropic，用量算在你登入的 Claude 方案裡，不需要 API key。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "With your Claude account, Hintlet runs Claude Code on this Mac in the background: the conversation an AI note is on is uploaded to Anthropic and counts against the Claude plan you signed in with. No API key needed."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "使用 Claude 帳號時，Hintlet 在背景執行這台 Mac 上的 Claude Code，AI 便利貼所在對話的內容會上傳到 Anthropic，用量算在你登入的 Claude 方案裡，不需要 API key。"
+          }
+        }
+      }
+    },
+    "使用 Codex 帳號時，Hintlet 在背景執行這台 Mac 上的 Codex，AI 便利貼所在對話的內容會上傳到 OpenAI，用量算在你登入 Codex 的 ChatGPT 方案裡，不需要 API key。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "With your Codex account, Hintlet runs Codex on this Mac in the background: the conversation an AI note is on is uploaded to OpenAI and counts against the ChatGPT plan you signed in to Codex with. No API key needed."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "使用 Codex 帳號時，Hintlet 在背景執行這台 Mac 上的 Codex，AI 便利貼所在對話的內容會上傳到 OpenAI，用量算在你登入 Codex 的 ChatGPT 方案裡，不需要 API key。"
+          }
+        }
+      }
+    },
+    "使用 OpenAI API 時，AI 便利貼所在對話的內容會上傳到 OpenAI，費用由你的 API key 支付。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "With the OpenAI API, the conversation an AI note is on is uploaded to OpenAI and paid for with your API key."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "使用 OpenAI API 時，AI 便利貼所在對話的內容會上傳到 OpenAI，費用由你的 API key 支付。"
+          }
+        }
+      }
+    },
+    "尚未在設定中填入 API key": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "no API key entered in Settings"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "尚未在設定中填入 API key"
+          }
+        }
+      }
+    },
+    "帳號要先在終端機登入：Claude Code 在 claude 裡輸入 /login，Codex 執行 codex login。Hintlet 只在背景執行它們寫摘要，不給它們任何工具，也不留下 session。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sign in from Terminal first: type /login in claude for Claude Code, run codex login for Codex. Hintlet only runs them in the background to write summaries, gives them no tools and leaves no session behind."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "帳號要先在終端機登入：Claude Code 在 claude 裡輸入 /login，Codex 執行 codex login。Hintlet 只在背景執行它們寫摘要，不給它們任何工具，也不留下 session。"
+          }
+        }
+      }
+    },
+    "找不到": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Not found"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "找不到"
+          }
+        }
+      }
+    },
+    "找不到 %@，請在設定中選擇它的位置": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ not found; choose where it is in Settings"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "找不到 %@，請在設定中選擇它的位置"
+          }
+        }
+      }
+    },
+    "改用 Claude 帳號？": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Use your Claude account?"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "改用 Claude 帳號？"
+          }
+        }
+      }
+    },
+    "改用 Codex 帳號？": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Use your Codex account?"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "改用 Codex 帳號？"
+          }
+        }
+      }
+    },
+    "改用 OpenAI API？": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Use the OpenAI API?"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "改用 OpenAI API？"
+          }
+        }
+      }
+    },
+    "模型拒絕回答": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "the model declined to answer"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "模型拒絕回答"
+          }
+        }
+      }
+    },
+    "用量已達上限": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "usage limit reached"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "用量已達上限"
+          }
+        }
+      }
+    },
+    "看不懂 AI 服務的回覆": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "couldn’t read the AI service’s reply"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "看不懂 AI 服務的回覆"
+          }
+        }
+      }
+    },
+    "等太久沒有回應": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "no answer in time"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "等太久沒有回應"
+          }
+        }
+      }
+    },
+    "Hintlet OpenAI API key": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hintlet OpenAI API key"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hintlet OpenAI API key"
+          }
+        }
+      }
+    },
+    "自動尋找": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Find Automatically"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "自動尋找"
+          }
+        }
+      }
+    },
+    "這個檔案不能執行，請選 claude 或 codex 本身。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "That file can’t be run. Choose claude or codex itself."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "這個檔案不能執行，請選 claude 或 codex 本身。"
+          }
+        }
+      }
+    },
+    "選擇 claude 執行檔": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose the claude executable"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "選擇 claude 執行檔"
+          }
+        }
+      }
+    },
+    "選擇 codex 執行檔": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose the codex executable"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "選擇 codex 執行檔"
+          }
+        }
+      }
+    },
+    "選擇…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose…"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "選擇…"
+          }
+        }
+      }
+    },
+    "新便利貼的大小": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "New Note Size"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新便利貼的大小"
+          }
+        }
+      }
+    },
+    "新增的便利貼用這個大小，之後仍可拖曳邊緣調整。已有的便利貼不變。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "New notes are made at this size; you can still drag their edges afterwards. Notes you already have stay as they are."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新增的便利貼用這個大小，之後仍可拖曳邊緣調整。已有的便利貼不變。"
+          }
+        }
+      }
+    },
+    "寬度": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Width"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "寬度"
+          }
+        }
+      }
+    },
+    "高度": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Height"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "高度"
+          }
+        }
+      }
+    },
+    "文字大小": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Text Size"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "文字大小"
+          }
+        }
+      }
+    },
+    "所有便利貼的文字都用這個大小，第一行標題大 1 pt。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Every note's text is this size; the first line, its title, is 1 pt larger."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "所有便利貼的文字都用這個大小，第一行標題大 1 pt。"
+          }
+        }
+      }
+    },
+    "%lld pt": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld pt"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld pt"
+          }
+        }
+      }
+    },
+    "下一步：補測試": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Next: add tests"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "下一步：補測試"
+          }
+        }
+      }
+    },
+    "顏色": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Colour"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "顏色"
+          }
+        }
+      }
+    },
+    "新增的便利貼用「新便利貼」的顏色，之後可在動態島換色。所有 AI 便利貼都用「AI 便利貼」的顏色，變更後立即套用，動態島上不能換。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "New notes start in the “New notes” colour; change it later on the island. Every AI note is in the “AI note” colour, which applies at once and isn't changed on the island."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新增的便利貼用「新便利貼」的顏色，之後可在動態島換色。所有 AI 便利貼都用「AI 便利貼」的顏色，變更後立即套用，動態島上不能換。"
+          }
+        }
+      }
+    },
+    "新便利貼": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "New notes"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新便利貼"
+          }
+        }
+      }
+    },
+    "一般": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "General"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "一般"
+          }
+        }
+      }
+    },
+    "刪除這個視窗的 %lld 張便利貼？": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete %lld Notes on This Window?"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "刪除這個視窗的 %lld 張便利貼？"
+          }
+        }
+      }
+    },
+    "它們會移到垃圾桶，30 天內可在「所有便利貼」中還原。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "They go to the trash, and you can restore them from All Notes for 30 days."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "它們會移到垃圾桶，30 天內可在「所有便利貼」中還原。"
+          }
+        }
+      }
+    },
+    "• 新增便利貼：在任何 App 按全域快捷鍵，便利貼會貼在你正在看的視窗、網頁、資料夾或 Claude 對話上。\n• 點一下便利貼開始輸入，選單列會換成 Hintlet 的選單；按 Esc 回到原本的 App。\n• 便利貼上方的動態島：按一下收合，按住或按右鍵可換顏色、改貼在哪裡、刪除。\n• 切到別的視窗時，便利貼會自動隱藏；回來時再出現。\n• 所有便利貼與垃圾桶都在「視窗 › 所有便利貼」。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "• New note: press the global shortcut in any app, and the note sticks to the window, web page, folder or Claude conversation you're looking at.\n• Click a note to type in it; the menu bar becomes Hintlet's. Press Esc to go back to the app you were in.\n• The island above a note: click to collapse it; press and hold, or right-click, to change its colour, where it sticks, or delete it.\n• Notes hide when you switch to another window and come back when you return.\n• All notes and the trash are in Window › All Notes."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "• 新增便利貼：在任何 App 按全域快捷鍵，便利貼會貼在你正在看的視窗、網頁、資料夾或 Claude 對話上。\n• 點一下便利貼開始輸入，選單列會換成 Hintlet 的選單；按 Esc 回到原本的 App。\n• 便利貼上方的動態島：按一下收合，按住或按右鍵可換顏色、改貼在哪裡、刪除。\n• 切到別的視窗時，便利貼會自動隱藏；回來時再出現。\n• 所有便利貼與垃圾桶都在「視窗 › 所有便利貼」。"
+          }
+        }
+      }
+    },
+    "刪除便利貼": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete Note"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "刪除便利貼"
+          }
+        }
+      }
+    },
+    "刪除這個視窗的所有便利貼…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete All Notes on This Window…"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "刪除這個視窗的所有便利貼…"
+          }
+        }
+      }
+    },
+    "完成編輯": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Done Editing"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "完成編輯"
+          }
+        }
+      }
+    },
+    "實際大小": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Actual Size"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "實際大小"
+          }
+        }
+      }
+    },
+    "展開": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Expand"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "展開"
+          }
+        }
+      }
+    },
+    "拷貝便利貼內容": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copy Note Text"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "拷貝便利貼內容"
+          }
+        }
+      }
+    },
+    "收合": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Collapse"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "收合"
+          }
+        }
+      }
+    },
+    "放大文字": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bigger Text"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "放大文字"
+          }
+        }
+      }
+    },
+    "暫停 AI 記錄": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pause AI Notes"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "暫停 AI 記錄"
+          }
+        }
+      }
+    },
+    "格式": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Format"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "格式"
+          }
+        }
+      }
+    },
+    "檔案": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "File"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "檔案"
+          }
+        }
+      }
+    },
+    "立即更新摘要": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Update Summary Now"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "立即更新摘要"
+          }
+        }
+      }
+    },
+    "縮小文字": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Smaller Text"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "縮小文字"
+          }
+        }
+      }
+    },
+    "繼續 AI 記錄": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Resume AI Notes"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "繼續 AI 記錄"
+          }
+        }
+      }
+    },
+    "Hintlet 使用說明": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hintlet Help"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hintlet 使用說明"
+          }
+        }
+      }
+    },
+    "視窗": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Window"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "視窗"
+          }
+        }
+      }
+    },
+    "設定": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Settings"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "設定"
+          }
+        }
+      }
+    },
+    "說明": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Help"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "說明"
+          }
+        }
+      }
+    },
+    "貼在": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stick To"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "貼在"
+          }
+        }
+      }
+    },
+    "轉成 AI 便利貼": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Make AI Note"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "轉成 AI 便利貼"
+          }
+        }
+      }
+    },
+    "關於 Hintlet": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "About Hintlet"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "關於 Hintlet"
+          }
+        }
+      }
+    },
+    "關閉視窗": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Close Window"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "關閉視窗"
+          }
+        }
+      }
+    },
+    "隱藏這個視窗的便利貼": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hide Notes on This Window"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "隱藏這個視窗的便利貼"
+          }
+        }
+      }
+    },
+    "顯示這個視窗的便利貼": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Show Notes on This Window"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "顯示這個視窗的便利貼"
+          }
+        }
+      }
+    },
+    "不顯示圖示時，仍可用全域快捷鍵新增便利貼；在 Finder 或 Spotlight 再次打開 Hintlet，會打開所有便利貼。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Without the icon, the global shortcuts still make notes; opening Hintlet again from Finder or Spotlight shows all notes."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "不顯示圖示時，仍可用全域快捷鍵新增便利貼；在 Finder 或 Spotlight 再次打開 Hintlet，會打開所有便利貼。"
+          }
+        }
+      }
+    },
+    "中（240 × 180）": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Medium (240 × 180)"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "中（240 × 180）"
+          }
+        }
+      }
+    },
+    "小（200 × 150）": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Small (200 × 150)"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "小（200 × 150）"
+          }
+        }
+      }
+    },
+    "大（320 × 240）": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Large (320 × 240)"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "大（320 × 240）"
+          }
+        }
+      }
+    },
+    "自訂…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Custom…"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "自訂…"
+          }
+        }
+      }
+    },
+    "匯入": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Import"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "匯入"
+          }
+        }
+      }
+    },
+    "匯出": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Export"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "匯出"
+          }
+        }
+      }
+    },
+    "啟動": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Startup"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "啟動"
+          }
+        }
+      }
+    },
+    "在選單列顯示 Hintlet 圖示": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Show Hintlet in the menu bar"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在選單列顯示 Hintlet 圖示"
+          }
+        }
+      }
+    },
+    "大小": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Size"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "大小"
+          }
+        }
+      }
+    },
+    "字體大小": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Text size"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "字體大小"
+          }
+        }
+      }
+    },
+    "所有便利貼的文字都用這個大小，第一行標題大 1 pt。編輯便利貼時也可以用 ⌘+ 與 ⌘− 調整。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Every note's text is this size; the first line, its title, is 1 pt larger. While typing in a note, ⌘+ and ⌘− change it too."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "所有便利貼的文字都用這個大小，第一行標題大 1 pt。編輯便利貼時也可以用 ⌘+ 與 ⌘− 調整。"
+          }
+        }
+      }
+    },
+    "打開登入項目設定": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open Login Items"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "打開登入項目設定"
+          }
+        }
+      }
+    },
+    "文字": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Text"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "文字"
+          }
+        }
+      }
+    },
+    "新增的便利貼用這個大小與顏色，之後仍可拖曳邊緣調整大小、在動態島換色。已有的便利貼不變。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "New notes are made at this size and in this colour; you can still drag their edges and change the colour on the island. Notes you already have stay as they are."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新增的便利貼用這個大小與顏色，之後仍可拖曳邊緣調整大小、在動態島換色。已有的便利貼不變。"
+          }
+        }
+      }
+    },
+    "無法變更：%@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couldn't change it: %@"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "無法變更：%@"
+          }
+        }
+      }
+    },
+    "登入時開啟 Hintlet": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open Hintlet at login"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "登入時開啟 Hintlet"
+          }
+        }
+      }
+    },
+    "Hintlet 不需要「輸入監控」或「螢幕錄製」權限，也不會上傳任何內容。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hintlet doesn't need Input Monitoring or Screen Recording, and doesn't upload anything."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hintlet 不需要「輸入監控」或「螢幕錄製」權限，也不會上傳任何內容。"
+          }
+        }
+      }
+    },
+    "要在「系統設定 › 一般 › 登入項目」允許 Hintlet。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Allow Hintlet in System Settings › General › Login Items."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "要在「系統設定 › 一般 › 登入項目」允許 Hintlet。"
+          }
+        }
+      }
+    },
+    "選單列": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Menu Bar"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "選單列"
+          }
+        }
+      }
+    },
+    "預覽": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Preview"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "預覽"
+          }
+        }
+      }
+    },
+    "服務": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Services"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "服務"
+          }
+        }
+      }
+    },
+    "隱藏其他": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hide Others"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "隱藏其他"
+          }
+        }
+      }
+    },
+    "全部顯示": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Show All"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "全部顯示"
+          }
+        }
+      }
+    },
+    "放大": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bigger"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "放大"
+          }
+        }
+      }
+    },
+    "縮小": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Smaller"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "縮小"
+          }
+        }
+      }
+    },
+    "預設大小": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Default Size"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "預設大小"
+          }
+        }
+      }
+    },
+    "字體": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Font"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "字體"
+          }
+        }
+      }
+    },
+    "顯示方式": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "View"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "顯示方式"
+          }
+        }
+      }
+    },
+    "暫時隱藏全部便利貼": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hide All Notes for Now"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "暫時隱藏全部便利貼"
+          }
+        }
+      }
+    },
+    "顯示全部便利貼": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Show All Notes"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "顯示全部便利貼"
+          }
+        }
+      }
+    },
+    "最小化": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Minimize"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "最小化"
+          }
+        }
+      }
+    },
+    "縮放": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zoom"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "縮放"
+          }
+        }
+      }
+    },
+    "將全部移至最前": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bring All to Front"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "將全部移至最前"
+          }
+        }
+      }
+    },
+    "位置": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Places"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "位置"
+          }
+        }
+      }
+    },
+    "刪除的便利貼會在這裡保留 30 天。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deleted notes stay here for 30 days."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "刪除的便利貼會在這裡保留 30 天。"
+          }
+        }
+      }
+    },
+    "按 ⌥⌘N 在目前的工作內容上貼一張。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Press ⌥⌘N to stick one on what you're working on."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "按 ⌥⌘N 在目前的工作內容上貼一張。"
+          }
+        }
+      }
+    },
+    "最近刪除": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recently Deleted"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "最近刪除"
+          }
+        }
+      }
+    },
+    "沒有其他內容": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No additional text"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "沒有其他內容"
+          }
+        }
+      }
+    },
+    "沒有待找回的便利貼": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No Notes Waiting"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "沒有待找回的便利貼"
+          }
+        }
+      }
+    },
+    "沒有最近刪除的便利貼": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No Recently Deleted Notes"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "沒有最近刪除的便利貼"
+          }
+        }
+      }
+    },
+    "石墨金": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Graphite and Gold"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "石墨金"
+          }
+        }
+      }
+    },
+    "視窗關閉或認不出來時，它的便利貼會在這裡等你重新綁定。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "When a window closes or can't be recognised, its notes wait here for you to stick them somewhere again."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "視窗關閉或認不出來時，它的便利貼會在這裡等你重新綁定。"
+          }
+        }
+      }
+    },
+    "轉成一般便利貼": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Make Ordinary Note"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "轉成一般便利貼"
+          }
+        }
+      }
+    },
+    "ChatGPT 帳號": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ChatGPT Account"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ChatGPT 帳號"
+          }
+        }
+      }
+    },
+    "ChatGPT 帳號（Codex）": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ChatGPT account (Codex)"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ChatGPT 帳號（Codex）"
+          }
+        }
+      }
+    },
+    "Claude 帳號": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude Account"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude 帳號"
+          }
+        }
+      }
+    },
+    "到 Anthropic Console 取得 API key": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Get an API key from the Anthropic Console"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "到 Anthropic Console 取得 API key"
+          }
+        }
+      }
+    },
+    "到 OpenAI 取得 API key": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Get an API key from OpenAI"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "到 OpenAI 取得 API key"
+          }
+        }
+      }
+    },
+    "取得 ChatGPT": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Get ChatGPT"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "取得 ChatGPT"
+          }
+        }
+      }
+    },
+    "取得 Claude Code": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Get Claude Code"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "取得 Claude Code"
+          }
+        }
+      }
+    },
+    "在這台 Mac 上執行，不上傳": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Runs on this Mac; nothing is uploaded"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在這台 Mac 上執行，不上傳"
+          }
+        }
+      }
+    },
+    "尚未登入": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Not signed in"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "尚未登入"
+          }
+        }
+      }
+    },
+    "已安裝在其他位置…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Installed Somewhere Else…"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已安裝在其他位置…"
+          }
+        }
+      }
+    },
+    "已登入": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Signed in"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已登入"
+          }
+        }
+      }
+    },
+    "已登入：%@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Signed in as %@"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已登入：%@"
+          }
+        }
+      }
+    },
+    "找不到 Claude Code": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude Code not found"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "找不到 Claude Code"
+          }
+        }
+      }
+    },
+    "找不到 Codex": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex not found"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "找不到 Codex"
+          }
+        }
+      }
+    },
+    "按用量付費；會上傳到 Anthropic": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pay as you go; uploads to Anthropic"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "按用量付費；會上傳到 Anthropic"
+          }
+        }
+      }
+    },
+    "按用量付費；會上傳到 OpenAI": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pay as you go; uploads to OpenAI"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "按用量付費；會上傳到 OpenAI"
+          }
+        }
+      }
+    },
+    "會打開瀏覽器，登入後授權 Hintlet 使用。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opens your browser; sign in there to let Hintlet use it."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "會打開瀏覽器，登入後授權 Hintlet 使用。"
+          }
+        }
+      }
+    },
+    "檢查中…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Checking…"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "檢查中…"
+          }
+        }
+      }
+    },
+    "無法確認是否已登入": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couldn't tell whether you're signed in"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "無法確認是否已登入"
+          }
+        }
+      }
+    },
+    "狀態": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Status"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "狀態"
+          }
+        }
+      }
+    },
+    "用你的 ChatGPT 方案，免 API key；會上傳到 OpenAI": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uses your ChatGPT plan, no API key; uploads to OpenAI"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "用你的 ChatGPT 方案，免 API key；會上傳到 OpenAI"
+          }
+        }
+      }
+    },
+    "用你的 Claude 方案，免 API key；會上傳到 Anthropic": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uses your Claude plan, no API key; uploads to Anthropic"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "用你的 Claude 方案，免 API key；會上傳到 Anthropic"
+          }
+        }
+      }
+    },
+    "登入…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sign In…"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "登入…"
+          }
+        }
+      }
+    },
+    "等待登入…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Waiting for sign-in…"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "等待登入…"
+          }
+        }
+      }
+    },
+    "Hintlet 只在背景用它寫摘要，不給它任何工具，也不留下對話紀錄。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hintlet only uses it in the background to write summaries, gives it no tools, and leaves no conversation behind."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hintlet 只在背景用它寫摘要，不給它任何工具，也不留下對話紀錄。"
+          }
+        }
+      }
+    },
+    "裝置端模型": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "On-device model"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "裝置端模型"
+          }
+        }
+      }
+    },
+    "請在瀏覽器完成登入，完成後會自動回到這裡。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finish signing in in your browser; this updates by itself when you're done."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "請在瀏覽器完成登入，完成後會自動回到這裡。"
+          }
+        }
+      }
+    },
+    "這台 Mac 無法使用（需要 Apple Intelligence）": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Not available on this Mac (needs Apple Intelligence)"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "這台 Mac 無法使用（需要 Apple Intelligence）"
+          }
+        }
+      }
+    },
+    "重新檢查": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Check Again"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "重新檢查"
+          }
+        }
+      }
+    },
+    "需要 ChatGPT App（內含 Codex）才能用帳號登入。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Signing in with your account needs the ChatGPT app, which includes Codex."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "需要 ChatGPT App（內含 Codex）才能用帳號登入。"
+          }
+        }
+      }
+    },
+    "需要 Claude Code 才能用帳號登入。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Signing in with your account needs Claude Code."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "需要 Claude Code 才能用帳號登入。"
+          }
+        }
+      }
+    },
+    "%lld 張便利貼": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld notes"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld 張便利貼"
+          }
+        }
+      }
+    },
+    "光暈": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Glow"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "光暈"
+          }
+        }
+      }
+    },
+    "前往對話": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Go to Conversation"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "前往對話"
+          }
+        }
+      }
+    },
+    "在這裡看它的全文、改它的字，或前往它所在的地方。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "See the whole note here, edit it, or go to where it is."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在這裡看它的全文、改它的字，或前往它所在的地方。"
+          }
+        }
+      }
+    },
+    "搜尋": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Search"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "搜尋"
+          }
+        }
+      }
+    },
+    "選一張便利貼": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Select a Note"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "選一張便利貼"
+          }
+        }
+      }
+    },
+    "還沒有摘要": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No summary yet"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "還沒有摘要"
+          }
+        }
+      }
+    },
+    "毛玻璃": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Frosted Glass"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "毛玻璃"
+          }
+        }
+      }
+    },
+    "要永久刪除這 %lld 張便利貼嗎？": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete These %lld Notes Permanently?"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "要永久刪除這 %lld 張便利貼嗎？"
+          }
+        }
+      }
+    },
+    "已選取 %lld 張便利貼": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld Notes Selected"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已選取 %lld 張便利貼"
+          }
+        }
+      }
+    },
+    "粉霧": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pastel Mist"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "粉霧"
+          }
+        }
+      }
+    },
+    "夕陽": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sunset"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "夕陽"
+          }
+        }
+      }
+    },
+    "✦ 摘要": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "✦ Summary"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "✦ 摘要"
+          }
+        }
+      }
+    },
+    "正在%@，停在%@；下一步%@。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Working on %1$@; stopped at %2$@; next, %3$@."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "正在%1$@，停在%2$@；下一步%3$@。"
+          }
+        }
+      }
+    },
+    "暫停記錄": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pause Recording"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "暫停記錄"
+          }
+        }
+      }
+    },
+    "繼續記錄": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Resume Recording"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "繼續記錄"
+          }
+        }
+      }
+    },
+    "改回一般": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Make Ordinary"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "改回一般"
+          }
+        }
+      }
+    },
+    "貼在 Claude 對話上的便利貼才能轉成 AI 便利貼（每個對話一張）": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Only a note on a Claude conversation can become an AI note (one per conversation)"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "貼在 Claude 對話上的便利貼才能轉成 AI 便利貼（每個對話一張）"
+          }
+        }
+      }
+    },
+    "目標": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Goal"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "目標"
+          }
+        }
+      }
+    },
+    "現況": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Status"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "現況"
+          }
+        }
+      }
+    },
+    "進行中": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In progress"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "進行中"
+          }
+        }
+      }
+    },
+    "完成": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Done"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "完成"
+          }
+        }
+      }
+    },
+    "等你": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your turn"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "等你"
+          }
+        }
+      }
+    },
+    "卡住": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stuck"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "卡住"
+          }
+        }
+      }
+    },
+    "重點": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Key point"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "重點"
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}
