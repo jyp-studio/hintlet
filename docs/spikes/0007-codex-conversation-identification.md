@@ -2,7 +2,7 @@
 
 日期：2026-10-21。調查對象：本機 Codex `26.1007.71326`（`/Applications/ChatGPT.app`，bundle ID `com.openai.codex`）。
 
-狀態：**尚未找到已驗證、可由 Hintlet 讀取的當前視窗 thread ID。停在識別調查，不實作名稱配對，也未啟用 Codex 對話綁定或 AI 便利貼。**
+狀態（第一階段）：**公開 AX metadata 沒有取得 thread ID。** 後續 [報告 08](0008-codex-window-routing-research.md) 已驗證可透過對話專屬選單取得真實 UUID；持續自動綁定仍有剪貼簿與視窗競態待解。尚未啟用 Codex 對話綁定或 AI 便利貼，也未實作名稱配對。
 
 ## 找到的訊號
 
