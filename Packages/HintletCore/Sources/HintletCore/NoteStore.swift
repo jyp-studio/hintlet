@@ -16,6 +16,8 @@ public final class NoteStore {
         4: { $0 },
         // Version 6 only added AI notes (`StoredNote.ai`); every older note is handwritten.
         5: { $0 },
+        // Version 7 only added a kind of conversation (Codex threads).
+        6: { $0 },
     ]
     static let backupsToKeep = 5
     /// Autosave writes often; a backup an hour (and one per run) keeps the backups far enough apart to help.

@@ -48,7 +48,7 @@ public struct ClaudeSessionFolder: Sendable {
     private func organisations(for kind: ConversationKind) -> [URL] {
         let folder: String
         switch kind {
-        case .chat, .cli: return []
+        case .chat, .cli, .codex: return []
         case .cowork: folder = "local-agent-mode-sessions"
         case .code: folder = "claude-code-sessions"
         }

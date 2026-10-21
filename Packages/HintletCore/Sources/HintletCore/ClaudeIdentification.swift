@@ -5,6 +5,8 @@ public enum ConversationKind: String, Codable, Sendable {
     case chat, cowork, code
     /// Claude Code run in Terminal or iTerm; the ID is its session ID, kept when the session is resumed.
     case cli
+    /// A thread in the Codex app, by its thread ID; told only by a title no other thread has (ADR-0003).
+    case codex
 }
 
 /// A Claude conversation, by the ID in its address; stable across restarts of either app (ADR-0001).

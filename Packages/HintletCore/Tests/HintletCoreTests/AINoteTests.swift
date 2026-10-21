@@ -414,7 +414,7 @@ struct SavingAINotes {
 
         #expect(engine.displayedNotes.map(\.text) == ["手寫"])
         #expect(engine.displayedNotes.first?.ai == nil)
-        #expect(NotesDocument.currentVersion == 6)
+        #expect(NotesDocument.currentVersion == 7)
     }
 }
 

@@ -10,7 +10,9 @@ import HintletCore
 @MainActor
 final class CaretWatcher {
     /// The caret's rect in AppKit coordinates, or nil when there is none to keep clear.
-    var onCaret: ((CGRect?) -> Void)?
+    /// Also whether the text was just typed in: the same field as last time, with a different length. Focus
+    /// landing in a field (switching apps, threads or desktops) puts a caret there without anyone typing.
+    var onCaret: ((CGRect?, _ typed: Bool) -> Void)?
 
     /// Electron apps show their text to Accessibility only once asked to. Only apps named here are asked: some
     /// (VS Code among them) take it as a screen reader starting up and change how they behave. Claude is asked by
@@ -24,6 +26,8 @@ final class CaretWatcher {
     private var observer: AXObserver?
     private var app: NSRunningApplication?
     private var isReadPending = false
+    /// The field last read and how long its text was.
+    private var lastField: (element: AXUIElement, length: Int?)?
     private var workspaceToken: NSObjectProtocol?
 
     func start() {
@@ -42,7 +46,8 @@ final class CaretWatcher {
             self.observer = nil
         }
         self.app = app
-        onCaret?(nil)
+        lastField = nil
+        onCaret?(nil, false)
         guard let app, app.processIdentifier != ProcessInfo.processInfo.processIdentifier else { return }
         var created: AXObserver?
         let callback: AXObserverCallback = { _, _, _, refcon in
@@ -70,20 +75,27 @@ final class CaretWatcher {
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
             isReadPending = false
-            onCaret?(readCaret())
+            let (caret, typed) = readCaret()
+            onCaret?(caret, typed)
         }
     }
 
-    private func readCaret() -> CGRect? {
-        guard let app, let primary = NSScreen.screens.first else { return nil }
+    private func readCaret() -> (CGRect?, Bool) {
+        guard let app, let primary = NSScreen.screens.first else { return (nil, false) }
         let element = AXUIElementCreateApplication(app.processIdentifier)
-        guard let focused = element.elementAttribute(kAXFocusedUIElementAttribute),
-              let range: AnyObject = focused.attribute(kAXSelectedTextRangeAttribute),
-              CFGetTypeID(range) == AXValueGetTypeID() else { return nil }
-        guard var rect = Self.caretBounds(in: focused, range: range as! AXValue) else { return nil }
+        guard let focused = element.elementAttribute(kAXFocusedUIElementAttribute) else {
+            lastField = nil
+            return (nil, false)
+        }
+        let length: Int? = focused.attribute(kAXNumberOfCharactersAttribute)
+        let typed = lastField.map { CFEqual($0.element, focused) && $0.length != length } ?? false
+        lastField = (focused, length)
+        guard let range: AnyObject = focused.attribute(kAXSelectedTextRangeAttribute),
+              CFGetTypeID(range) == AXValueGetTypeID(),
+              var rect = Self.caretBounds(in: focused, range: range as! AXValue) else { return (nil, false) }
         // An empty selection often comes back with no width.
         rect.size.width = max(rect.width, 2)
-        return ScreenCoordinates.appKitRect(fromTopLeft: rect, primaryScreenHeight: primary.frame.height)
+        return (ScreenCoordinates.appKitRect(fromTopLeft: rect, primaryScreenHeight: primary.frame.height), typed)
     }
 
     /// Apps answer differently. AppKit text gives the caret for the empty selection. Chromium (Claude, browsers)

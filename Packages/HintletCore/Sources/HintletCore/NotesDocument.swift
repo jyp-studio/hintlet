@@ -11,7 +11,8 @@ public struct NotesDocument: Codable, Equatable, Sendable {
     /// 4: notes bound to a web page (`StoredBinding.webPage`).
     /// 5: conversations of Claude Code in a terminal (`ConversationKind.cli`).
     /// 6: AI notes (`StoredNote.ai`).
-    public static let currentVersion = 6
+    /// 7: conversations in the Codex app (`ConversationKind.codex`).
+    public static let currentVersion = 7
 
     var formatVersion = NotesDocument.currentVersion
     var notes: [StoredNote]

@@ -156,12 +156,13 @@ final class OverlayController {
         windowInMotion && note.windowID != nil
     }
 
-    /// Notes under the caret of the app in front fade where they are, and come back a moment after it has left.
-    /// The note being typed in stays as it is.
-    func caretMoved(to caret: CGRect?) {
+    /// Notes the user types under in the app in front fade where they are, and come back a moment after the caret
+    /// has left. Only typing fades a note: focus landing in a field as the user switches apps, threads or
+    /// desktops would fade it just before it hides for the switch. The note being typed in stays as it is.
+    func caretMoved(to caret: CGRect?, typed: Bool) {
         for note in engine.displayedNotes {
             guard let panel = panels[note.id], panel.isShown, !panel.isEditing else { continue }
-            if let caret, GivingWay.fades(note.frame, forCaret: caret) {
+            if let caret, typed || givingWay.contains(note.id), GivingWay.fades(note.frame, forCaret: caret) {
                 returning.removeValue(forKey: note.id)?.cancel()
                 givingWay.insert(note.id)
                 panel.giveWay(true)
@@ -172,8 +173,9 @@ final class OverlayController {
                     self?.panels[note.id]?.giveWay(false)
                 }
                 returning[note.id] = comeBack
-                // Back at once when the caret is gone altogether (another app came in front).
-                DispatchQueue.main.asyncAfter(deadline: .now() + (caret == nil ? 0 : Self.returnDelay), execute: comeBack)
+                // Also when another app came in front: by then the note has usually hidden for the switch, and
+                // coming back at once would flash it first.
+                DispatchQueue.main.asyncAfter(deadline: .now() + Self.returnDelay, execute: comeBack)
             }
         }
     }

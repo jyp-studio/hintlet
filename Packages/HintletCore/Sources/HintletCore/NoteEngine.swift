@@ -908,6 +908,15 @@ public final class NoteEngine {
         return frame.clamped(into: screen.placeableFrame)
     }
 
+    /// Codex threads are listed under the app that shows them, which macOS calls ChatGPT.
+    private static func listedApp(of kind: ConversationKind) -> ListedApp {
+        switch kind {
+        case .cli: .claudeCodeTerminal
+        case .codex: .app("ChatGPT")
+        case .chat, .cowork, .code: .app("Claude")
+        }
+    }
+
     private func screen(containing point: CGPoint) -> Screen? {
         screens.first { $0.frame.contains(point) } ?? screens.first
     }
@@ -986,7 +995,7 @@ extension NoteEngine {
         case .conversation(let ref, let title, _):
             let info = sessions(ref)
             let name = info.map(\.title).flatMap { $0.isEmpty ? nil : $0 } ?? title
-            return Listing(key: .conversation(ref), app: ref.kind == .cli ? .claudeCodeTerminal : .app("Claude"), context: .conversation(title: name),
+            return Listing(key: .conversation(ref), app: Self.listedApp(of: ref.kind), context: .conversation(title: name),
                            conversation: ref, isArchived: info?.isArchived ?? false)
         case .webPage(let address, let title, _):
             let shownTitle = visibleWindow(showingPage: address)?.1 ?? title

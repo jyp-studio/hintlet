@@ -14,13 +14,14 @@ The app is in English and Traditional Chinese. Project docs (spec, ADRs, spike r
   - **Window** — any app. The note follows the window as it moves, resizes, minimises, goes full screen or changes display.
   - **Folder or document** — Finder folders and apps that report a file path (Pages, Preview, TextEdit…). Any window showing it brings the note back, even after a restart.
   - **Claude conversation** — Chat, Cowork and Code in the Claude desktop app. The note shows only on that conversation and comes back after Claude or Hintlet restarts.
+  - **Codex thread** — a thread in the Codex app, when its name is unique (see Known limitations).
   - **Web page** *(experimental)* — Safari, by address. Private windows only stick to the window, and their addresses and titles are never saved.
   - **Claude Code in Terminal or iTerm** *(experimental)* — sticks to the session and comes back with `claude --resume`.
   - **Floating** — on every desktop, including full-screen spaces.
 - **Waiting to Be Found** — notes on an ordinary window can't follow it across an app restart. When a window with the same app and title shows up, a small "Belongs here?" marker offers to put the note back. Nothing is ever re-attached by title alone.
 - **Delete and undo** — "Undo" (or ⌘Z) for 6 seconds after deleting; deleted notes stay in the trash for 30 days.
 - **All Notes (⌘⌥L)** — search every note, bring back waiting notes, restore from the trash, or go straight to a Claude conversation.
-- **AI notes** — a note on a Claude conversation can become an AI note that keeps the conversation's goal, key point and next step up to date after each reply. You can pause it, or turn it back into an ordinary note. Choose who writes it:
+- **AI notes** — a note on a Claude conversation or a Codex thread can become an AI note that keeps the conversation's goal, key point and next step up to date after each reply. You can turn it back into an ordinary note. Choose who writes it:
   - the on-device model (macOS 26+ with Apple Intelligence; nothing leaves your Mac)
   - your Claude or Codex account, through their CLIs
   - your own Claude API or OpenAI API key, kept in the Keychain
@@ -97,7 +98,8 @@ The full list is in the [verification report](docs/delivery/0001-mvp-verificatio
 
 - **Many checks haven't been done on a real Mac yet**, notably switching between Claude conversations and the "Belongs here?" flow after a restart. The [manual checklist](docs/delivery/0001-manual-checklist.md) lists what's left.
 - **Recognizing Claude conversations relies on interfaces Claude doesn't publish**: the web area's address, Chat's message markup, and Cowork and Code session files. If a Claude update breaks them, notes fall back to the window; they never land on the wrong conversation.
-- **Chrome** only has the window scope, because it doesn't expose page addresses unless its full accessibility tree is turned on. Arc, Edge, Brave and Firefox only have the window scope too, and so do Codex conversations, which can only be told apart by title.
+- **Chrome** only has the window scope, because it doesn't expose page addresses unless its full accessibility tree is turned on. Arc, Edge, Brave and Firefox only have the window scope too.
+- **Codex threads** can only be told apart by their title, so a note goes on a thread only when no other thread has the same name; otherwise it stays on the window ([ADR-0003](docs/adr/0003-identify-codex-threads-by-unique-title.md)). Deleting or archiving a thread doesn't move its notes to the trash.
 - Claude Code is only recognized in Terminal and iTerm, not in Ghostty, WezTerm or VS Code.
 - Private-window detection has only been tested with the browsers in English.
 - Deleting a Chat conversation doesn't move its notes to the trash, because Chat has no local file to watch.

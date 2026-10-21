@@ -62,6 +62,8 @@ final class WindowContextProvider {
     let claudePages = ClaudePages()
     /// Which web page Safari or Chrome shows.
     private let browserPages = BrowserPages()
+    /// Which thread the Codex app shows.
+    private let codexPages = CodexPages()
     /// Claude gives no notice when the conversation changes without focus moving (e.g. a link, or a click
     /// in the sidebar), so its page is also read now and then while it is in front. A read is a cached
     /// element's address, about 0.03 ms (report 0002). Twice a second, with room to fall in with other
@@ -69,6 +71,7 @@ final class WindowContextProvider {
     /// Browsers neither say when a single-page site changes its address (YouTube), so theirs is read the same way.
     private var claudePoll: Timer?
     private static let claudePollInterval: TimeInterval = 0.5
+    private static let codexPollInterval: TimeInterval = 0.25
 
     /// Windows that close are only reported to observers registered on them; tracked per observer.
     private var destroyWatched: [AXUIElement] = []
@@ -348,6 +351,17 @@ final class WindowContextProvider {
             poll.tolerance = 0.1
             RunLoop.main.add(poll, forMode: .common)
             claudePoll = poll
+        } else if app.bundleIdentifier == CodexPages.bundleID {
+            // Switching threads moves focus inside the page, mostly; the title is read then. Not always (a click
+            // in the sidebar can leave focus be), so it is also read now and then, more often than Claude's
+            // address: the title is all there is, and it is one cached read.
+            AXObserverAddNotification(created, element, kAXFocusedUIElementChangedNotification as CFString, refcon)
+            let poll = Timer(timeInterval: Self.codexPollInterval, repeats: true) { [weak self] _ in
+                MainActor.assumeIsolated { self?.checkCodexPage() }
+            }
+            poll.tolerance = 0.1
+            RunLoop.main.add(poll, forMode: .common)
+            claudePoll = poll
         } else if BrowserPages.isBrowser(app.bundleIdentifier) {
             let poll = Timer(timeInterval: Self.claudePollInterval, repeats: true) { [weak self] _ in
                 MainActor.assumeIsolated { self?.checkBrowserPage() }
@@ -404,6 +418,14 @@ final class WindowContextProvider {
               claudePages.pageMayHaveChanged(),
               let window = element.elementAttribute(kAXFocusedWindowAttribute) else { return }
         if claudePages.page(of: app, element: element, window: window) != last.claudePage { refresh() }
+    }
+
+    /// Reads which thread Codex shows and reports the window if it changed.
+    private func checkCodexPage() {
+        guard !isMoving, !ticker.isRunning, let last = lastWindow, let app = watchedApp, let element = watchedElement,
+              NSWorkspace.shared.frontmostApplication?.processIdentifier == app.processIdentifier,
+              let window = element.elementAttribute(kAXFocusedWindowAttribute) else { return }
+        if codexPages.page(of: app, in: window) != last.claudePage { refresh() }
     }
 
     /// Reads which Claude Code session the terminal's front tab shows and reports the window if it changed.
@@ -494,6 +516,8 @@ final class WindowContextProvider {
         var claudePage: ClaudePage?
         if app.bundleIdentifier == ClaudePages.bundleID {
             claudePage = claudePages.page(of: app, element: element, window: window)
+        } else if app.bundleIdentifier == CodexPages.bundleID {
+            claudePage = codexPages.page(of: app, in: window)
         } else if let bundleID = app.bundleIdentifier, TerminalSessions.bundleIDs.contains(bundleID) {
             // Reported with the tab as last known; corrected once the terminal answers.
             claudePage = waitingForFolder

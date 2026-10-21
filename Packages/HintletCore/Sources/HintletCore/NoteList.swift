@@ -63,7 +63,7 @@ extension ConversationRef {
         case .chat: path = "chat"
         case .cowork: path = "cowork"
         case .code: path = "epitaxy"
-        case .cli: return nil
+        case .cli, .codex: return nil
         }
         return URL(string: "claude://claude.ai/\(path)/\(id)")
     }

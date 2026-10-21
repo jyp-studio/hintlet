@@ -107,11 +107,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private func startGivingWay() {
         guard !isGivingWay else { return }
         isGivingWay = true
-        caretWatcher.onCaret = { [weak self] caret in
+        caretWatcher.onCaret = { [weak self] caret, typed in
             guard let self else { return }
             // Typing with ⌥ held is for a character, not for peeking.
-            if caret != nil { optionPeek.interrupt() }
-            overlay.caretMoved(to: caret)
+            if typed { optionPeek.interrupt() }
+            overlay.caretMoved(to: caret, typed: typed)
         }
         optionPeek.onPeek = { [weak self] peeking in self?.overlay.peekThrough(peeking) }
         caretWatcher.start()
@@ -324,8 +324,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         applyAISettings()
     }
 
-    /// Where an AI note's conversation is read from: Code and Cowork from Claude's local transcripts, Chat
-    /// from its page (only what it has loaded).
+    /// Where an AI note's conversation is read from: Code and Cowork from Claude's local transcripts, Codex
+    /// threads from Codex's, Chat from its page (only what it has loaded).
     private var conversationContent: @Sendable (ConversationRef) async throws -> ConversationContent {
         { [chatReadings] ref in
             if ref.kind == .chat { return try await chatReadings.content(of: ref) }

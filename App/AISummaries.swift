@@ -41,8 +41,8 @@ enum AISummaries {
         .appendingPathComponent("com.jyp.hintlet/AI", isDirectory: true)
 
     /// The conversations AI notes can be made on with the backends here. Chat is read from its page, so
-    /// only what the page has loaded (ticket 15).
-    static let conversationKinds: Set<ConversationKind> = [.code, .cowork, .chat]
+    /// only what the page has loaded (ticket 15). Codex threads from Codex's own files (ADR-0003).
+    static let conversationKinds: Set<ConversationKind> = [.code, .cowork, .chat, .codex]
 
     /// How often a Chat conversation with an AI note is read while it shows, so its note can still be
     /// brought up to date once the user has moved on to another conversation (the page then shows that one).
@@ -66,25 +66,33 @@ enum AISummaries {
     /// since it was last read isn't read again (switching away from a conversation happens often).
     @Sendable static func content(of ref: ConversationRef) async throws -> ConversationContent {
         try await Task.detached(priority: .utility) {
+            if ref.kind == .codex {
+                let files = CodexPages.rollouts.files(for: ref.id)
+                guard !files.isEmpty else { throw ClaudeTranscriptFiles.ReadError.notFound }
+                return try await cache.content(of: files) { try CodexPages.rollouts.content(of: ref.id) }
+            }
             guard let url = transcripts.transcript(for: ref) else { throw ClaudeTranscriptFiles.ReadError.notFound }
-            return try await cache.content(at: url)
+            return try await cache.content(of: [url]) { try ClaudeTranscriptFiles.content(at: url) }
         }.value
     }
 }
 
-/// The last read of each transcript, by its size and modification date.
+/// The last read of each transcript (a Codex thread can take more than one file), by the files' sizes and
+/// modification dates.
 private actor TranscriptCache {
-    private var entries: [URL: (stamp: [FileAttributeKey: AnyHashable], content: ConversationContent)] = [:]
+    private var entries: [[URL]: (stamp: [[FileAttributeKey: AnyHashable]], content: ConversationContent)] = [:]
 
-    func content(at url: URL) throws -> ConversationContent {
-        let attributes = try FileManager.default.attributesOfItem(atPath: url.path)
-        let stamp: [FileAttributeKey: AnyHashable] = [
-            .size: attributes[.size] as? Int ?? -1,
-            .modificationDate: attributes[.modificationDate] as? Date ?? .distantPast,
-        ]
-        if let entry = entries[url], entry.stamp == stamp { return entry.content }
-        let content = try ClaudeTranscriptFiles.content(at: url)
-        entries[url] = (stamp, content)
+    func content(of files: [URL], read: () throws -> ConversationContent) throws -> ConversationContent {
+        let stamp: [[FileAttributeKey: AnyHashable]] = try files.map { url in
+            let attributes = try FileManager.default.attributesOfItem(atPath: url.path)
+            return [
+                .size: attributes[.size] as? Int ?? -1,
+                .modificationDate: attributes[.modificationDate] as? Date ?? .distantPast,
+            ]
+        }
+        if let entry = entries[files], entry.stamp == stamp { return entry.content }
+        let content = try read()
+        entries[files] = (stamp, content)
         return content
     }
 }
