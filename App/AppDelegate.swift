@@ -7,8 +7,6 @@ import UniformTypeIdentifiers
 @MainActor
 final class AppDelegate: NSObject, NSApplicationDelegate {
     static func main() {
-        // Before anything reads the notes or the settings.
-        LegacyData.migrate()
         // Notes don't go full screen: AppKit shouldn't add "進入全螢幕" to the 顯示方式 menu.
         UserDefaults.standard.register(defaults: ["NSFullScreenMenuItemEverywhere": false])
         let app = NSApplication.shared

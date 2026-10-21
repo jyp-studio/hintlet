@@ -89,7 +89,6 @@ tccutil reset AppleEvents com.jyp.hintlet
 - Notes are saved automatically to `~/Library/Application Support/com.jyp.hintlet/notes.json`.
 - `Backups/` in the same folder keeps the last 5 copies.
 - **Settings › Backups** exports every note to one file and imports it again. Importing merges note by note, so nothing is duplicated, and exports never contain API keys.
-- Coming from 0.1.0, whose bundle ID was `com.jyp.stickycontext`: the first launch copies your notes and settings over and leaves the old folder as it was. Grant Accessibility and Automation again, and type your API keys in again.
 - To uninstall, quit Hintlet and delete the app. Your notes stay in the folder above until you delete it.
 
 ## Known limitations
