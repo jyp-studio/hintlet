@@ -1,0 +1,22 @@
+[
+  {
+    "elapsedMilliseconds": 158,
+    "matchesExpected": true,
+    "status": "identified",
+    "threadPseudonym": "1f130a307eb05a9389b7434c87fd6c8a",
+    "totalProbeMilliseconds": 226,
+    "windowNumber": 107,
+    "switchDelayMilliseconds": 30,
+    "synchronizedCaptureStarted": true
+  },
+  {
+    "elapsedMilliseconds": 155,
+    "matchesExpected": true,
+    "status": "identified",
+    "threadPseudonym": "1f130a307eb05a9389b7434c87fd6c8a",
+    "totalProbeMilliseconds": 223,
+    "windowNumber": 107,
+    "switchDelayMilliseconds": 120,
+    "synchronizedCaptureStarted": true
+  }
+]

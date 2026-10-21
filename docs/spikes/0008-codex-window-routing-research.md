@@ -118,6 +118,8 @@ swift Tools/codex-conversation-link-probe.swift --copy-deeplink --expect <known-
 
 但 `count windows` 回傳 0（同時 AX 可看到一個視窗），`URL of active tab of front window` 回傳 -1719。因此目前腳本字典的 browser window/tab 介面沒有涵蓋這個 Codex 對話視窗，不能用來取得其 thread。沒有執行 JavaScript。
 
+後續 [報告 09](0009-codex-identification-performance.md) 已將完整流程測到 210–220 ms，並完成真正的雙視窗案例；同時確認 panel token 不能永久快取 UUID。下列仍保留本階段的限制。
+
 ## 目前可採用的結論
 
 比報告 07 有明確進展：**已實測可透過指定對話 header 的原生選單取得真正 UUID，同名完全不影響。** 之前把「AXURL 不含 ID」當成沒有其他識別路徑的理由不夠完整。

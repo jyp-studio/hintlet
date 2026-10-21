@@ -6,6 +6,16 @@ import AppKit
 import ApplicationServices
 import CryptoKit
 
+// The app already uses this to distinguish native windows from changing AX references.
+@_silgen_name("_AXUIElementGetWindow")
+private func axWindowNumber(_ element: AXUIElement, _ number: UnsafeMutablePointer<CGWindowID>) -> AXError
+
+func windowNumber(_ element: AXUIElement) -> CGWindowID? {
+    var number: CGWindowID = 0
+    guard axWindowNumber(element, &number) == .success, number != 0 else { return nil }
+    return number
+}
+
 func attribute(_ element: AXUIElement, _ name: String) -> AnyObject? {
     var value: AnyObject?
     guard AXUIElementCopyAttributeValue(element, name as CFString, &value) == .success else { return nil }
@@ -19,6 +29,12 @@ func descendants(_ root: AXUIElement) -> [AXUIElement]? {
         let element = queue[next]
         next += 1
         AXUIElementSetMessagingTimeout(element, 0.2)
+        // In this tested shell, chat headers and portal menus are outside the message panel.
+        // This sparse traversal is for controlled single-pane research, not proof of pane uniqueness.
+        let identifier = attribute(element, "AXDOMIdentifier") as? String ?? ""
+        let role = attribute(element, kAXRoleAttribute) as? String ?? ""
+        if identifier == "app-shell-sidebar" || identifier.hasSuffix("-chat-panel")
+            || ["AXStaticText", "AXTextArea", "AXImage"].contains(role) { continue }
         let children = attribute(element, kAXChildrenAttribute) as? [AXUIElement] ?? []
         // An incomplete search cannot prove that a header or panel is unique.
         guard queue.count + children.count <= 5000 else { return nil }
@@ -43,6 +59,15 @@ func menuItem(_ title: String, in window: AXUIElement) -> AXUIElement? {
     return items.count == 1 ? items[0] : nil
 }
 
+func waitForMenuItem(_ title: String, in window: AXUIElement) -> AXUIElement? {
+    let deadline = Date().addingTimeInterval(1.2)
+    repeat {
+        if let item = menuItem(title, in: window) { return item }
+        Thread.sleep(forTimeInterval: 0.01)
+    } while Date() < deadline
+    return nil
+}
+
 func pseudonym(_ id: String) -> String {
     SHA256.hash(data: Data(("Hintlet Codex link probe v1:" + id.lowercased()).utf8))
         .prefix(16).map { String(format: "%02x", $0) }.joined()
@@ -61,6 +86,7 @@ func run() throws -> [String: Any] {
     guard let rawWindow = attribute(application, kAXFocusedWindowAttribute),
           CFGetTypeID(rawWindow) == AXUIElementGetTypeID() else { return ["status": "no focused window"] }
     let window = rawWindow as! AXUIElement
+    guard let originalNumber = windowNumber(window) else { return ["status": "native window identity unavailable"] }
     guard let panel = panelIdentifier(in: window), let nodes = descendants(window) else {
         return ["status": "requires one chat panel; no identity guessed"]
     }
@@ -113,13 +139,11 @@ func run() throws -> [String: Any] {
         return ["status": "cannot open chat menu"]
     }
     openedMenu = true
-    Thread.sleep(forTimeInterval: 0.3)
-    guard let copy = menuItem("Copy", in: window),
+    guard let copy = waitForMenuItem("Copy", in: window),
           AXUIElementPerformAction(copy, kAXPressAction as CFString) == .success else {
         return ["status": "Copy submenu unavailable"]
     }
-    Thread.sleep(forTimeInterval: 0.2)
-    guard let deeplink = menuItem("Copy deeplink", in: window),
+    guard let deeplink = waitForMenuItem("Copy deeplink", in: window),
           AXUIElementPerformAction(deeplink, kAXPressAction as CFString) == .success else {
         return ["status": "Copy deeplink item unavailable"]
     }
@@ -138,8 +162,10 @@ func run() throws -> [String: Any] {
     ownedClipboardCount = copiedCount
     guard NSWorkspace.shared.frontmostApplication?.processIdentifier == app.processIdentifier,
           let focused = attribute(application, kAXFocusedWindowAttribute), CFEqual(focused, window),
+          CFGetTypeID(focused) == AXUIElementGetTypeID(), windowNumber(focused as! AXUIElement) == originalNumber,
           panelIdentifier(in: window) == panel else { return ["status": "window or panel changed; identity rejected"] }
     var result: [String: Any] = ["status": "identified", "threadPseudonym": pseudonym(uuid.uuidString),
+                               "windowNumber": originalNumber,
                                "elapsedMilliseconds": Int(Date().timeIntervalSince(started) * 1000)]
     if let index = CommandLine.arguments.firstIndex(of: "--expect"), index + 1 < CommandLine.arguments.count {
         result["matchesExpected"] = UUID(uuidString: CommandLine.arguments[index + 1]) == uuid
@@ -147,6 +173,8 @@ func run() throws -> [String: Any] {
     return result
 }
 
-let result = try run()
+let wallStarted = Date()
+var result = try run()
+result["totalProbeMilliseconds"] = Int(Date().timeIntervalSince(wallStarted) * 1000)
 FileHandle.standardOutput.write(try JSONSerialization.data(withJSONObject: result, options: [.prettyPrinted, .sortedKeys]))
 FileHandle.standardOutput.write(Data("\n".utf8))

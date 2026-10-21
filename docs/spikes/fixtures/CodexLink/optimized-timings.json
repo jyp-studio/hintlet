@@ -1,0 +1,26 @@
+[
+  {
+    "elapsedMilliseconds": 151,
+    "matchesExpected": true,
+    "status": "identified",
+    "threadPseudonym": "1f130a307eb05a9389b7434c87fd6c8a",
+    "totalProbeMilliseconds": 215,
+    "windowNumber": 107
+  },
+  {
+    "elapsedMilliseconds": 145,
+    "matchesExpected": true,
+    "status": "identified",
+    "threadPseudonym": "1f130a307eb05a9389b7434c87fd6c8a",
+    "totalProbeMilliseconds": 210,
+    "windowNumber": 107
+  },
+  {
+    "elapsedMilliseconds": 154,
+    "matchesExpected": true,
+    "status": "identified",
+    "threadPseudonym": "1f130a307eb05a9389b7434c87fd6c8a",
+    "totalProbeMilliseconds": 220,
+    "windowNumber": 107
+  }
+]
