@@ -1,4 +1,4 @@
-// Usage: swift Tools/codex-ax-probe.swift [--enable-accessibility]
+// Usage: swift Tools/codex-ax-probe.swift [--enable-accessibility] [--probe-routing-attributes]
 // Records routing metadata only; never titles, text values, descriptions or messages.
 import AppKit
 import ApplicationServices
@@ -69,6 +69,25 @@ for (windowIndex, window) in windows.enumerated() {
         var parameterizedNames: CFArray?
         if AXUIElementCopyParameterizedAttributeNames(element, &parameterizedNames) == .success {
             row["parameterizedAttributeNames"] = parameterizedNames as? [String] ?? []
+        }
+        // A document URL may carry a route in its query even when its full path isn't allowlisted.
+        // Keep only structure and pseudonymized UUIDs, never arbitrary query values or local paths.
+        if row["AXRole"] as? String == "AXWebArea", let value = attribute(element, kAXURLAttribute),
+           let address = (value as? URL)?.absoluteString ?? (value as? String),
+           let components = URLComponents(string: address), components.scheme == "app" {
+            row["AXURLScheme"] = "app"
+            row["AXURLQueryKeys"] = components.queryItems?.map(\.name) ?? []
+            row["AXURLUUIDs"] = pattern.matches(in: address, range: NSRange(address.startIndex..., in: address)).map {
+                redacted(String(address[Range($0.range, in: address)!]))
+            }
+        }
+        if CommandLine.arguments.contains("--probe-routing-attributes"), row["AXARIACurrent"] as? String == "page" {
+            var results: [String: Int32] = [:]
+            for key in ["data-app-action-sidebar-thread-id", "AXDOMAttributes", "AXHTMLAttributes", "AXDataAttributes"] {
+                var value: AnyObject?
+                results[key] = AXUIElementCopyAttributeValue(element, key as CFString, &value).rawValue
+            }
+            row["customRoutingAttributeResults"] = results
         }
         if let value = attribute(element, kAXURLAttribute) {
             let address = (value as? URL)?.absoluteString ?? (value as? String)

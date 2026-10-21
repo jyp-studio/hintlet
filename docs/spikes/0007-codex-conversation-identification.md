@@ -54,3 +54,19 @@ swift Tools/codex-ax-probe.swift --enable-accessibility > /tmp/codex-ax.json
 - `cd Packages/HintletCore && swift test`：402 個測試通過。
 - 指定 Debug `xcodebuild`：成功，Derived Data 在 `build/DerivedData`。
 - 未啟動 Hintlet 測試真實便利貼，未讀寫正式 `notes.json`，未呼叫摘要後端。
+
+## 補充實測：使用者授權後
+
+同日，使用者在系統設定中授權內附 `CodexCLI.app`（顯示名稱 ChatGPT）後，獨立 Swift 探測程式已能讀取 AX；前述「權限受阻」是第一次調查時的狀態，現在已解除。
+
+- 第一份真實快照讀到 1,011 個節點，沒有截斷。其後以 `codex://threads/<id>` 分別導向本對話與另一個本機資料庫中存在且未封存的對話，各等待 1.5 秒再擷取；完成後送出導回本對話的 deep link。兩次讀到 1,038 與 673 個節點，都未截斷，chat panel 的 React ID 不同。這驗證了畫面結構有變化，沒有藉由讀取對話文字來驗證內容。
+- 兩次的 AXWebArea URL 都是 `app` scheme、沒有 query key、沒有 UUID。所有非空 AXDOMIdentifier 都沒有 UUID，主要是 `root`、`app-shell-sidebar`、`DndLiveRegion-*` 與 React／Radix 產生的 ID。
+- AX 能讀到 `AXARIACurrent = page`，但一次可能有多個這種元素（導覽按鈕、群組與對話列）；不能把任何一個 `page` 直接當成唯一目前對話。
+- 在所有 `AXARIACurrent = page` 元素上直接讀 `data-app-action-sidebar-thread-id`、`AXDOMAttributes`、`AXHTMLAttributes`、`AXDataAttributes` 都回傳 `-25212`（attribute unsupported）。沒有取得 thread UUID。
+- 記錄的 supported attribute／parameterized attribute 名稱也沒有提供自訂 DOM data attribute 的讀取介面。這不構成對所有未來版本或隱藏介面的不存在證明，但目前沒有可交付的可靠識別方法。
+
+經篩選的真實 metadata 存在 [`fixtures/CodexAX/current.json`](fixtures/CodexAX/current.json) 與 [`alternate.json`](fixtures/CodexAX/alternate.json)，保留節點數、網頁 URL 結構、所有非空 DOM ID、current 標記與直接讀取屬性的錯誤碼；不含標題、訊息、實際 thread ID 或完整網址。它們是調查證據，尚無對應已實作的 identifier，不宣稱為功能測試。
+
+探測工具新增 `--probe-routing-attributes`，可重跑不支援屬性的讀取；AXWebArea 的 `app` 網址另記結構與假 UUID，避免完整網址白名單把潛在線索直接省略。
+
+結論仍是停在使用者決策門檻：公開 AX 中已實測的這些訊號不足以自動綁定。下一步可選擇繼續保留視窗範圍，或另行設計需要使用者明確配對的流程；「名稱唯一就自動配對」仍需使用者明確接受，而且不能解決所有改名、索引延遲及 host 衝突。
