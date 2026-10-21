@@ -1,5 +1,5 @@
 import AppKit
-import StickyContextCore
+import HintletCore
 
 /// The paper and ink of each note colour: soft pastels like Stickies, each with a dark ink of its own hue
 /// so text stays easy to read; and the AI notes' own: pastel mist, sunset and frosted glass.

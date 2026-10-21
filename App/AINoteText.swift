@@ -1,5 +1,5 @@
 import AppKit
-import StickyContextCore
+import HintletCore
 
 /// How an AI note words its summary.
 @MainActor

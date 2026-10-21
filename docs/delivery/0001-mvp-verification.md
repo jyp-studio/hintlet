@@ -1,12 +1,12 @@
 # 驗證報告：Hintlet v1 手寫便利貼 MVP
 
-日期：2026-10-18　macOS 27　Claude 桌面 App 2.37337.1　規格：[0001](../specs/0001-stickycontext-v1.md)
+日期：2026-10-18　macOS 27　Claude 桌面 App 2.37337.1　規格：[0001](../specs/0001-hintlet-v1.md)
 
 這份報告逐項對照規格的「驗收清單」，寫出每一項怎麼重現、目前有什麼證據、結果如何。後面是支援矩陣與已知限制。
 
 **寫這份報告的方式**：寫報告時使用者正在用這台 Mac，真實的便利貼也在使用中，所以這次沒有啟動 Hintlet、沒有模擬點擊或按鍵，也沒有觸發任何權限詢問。下面的證據只有三種：
 
-- 自動測試：`cd Packages/StickyContextCore && swift test`，224 個測試、41 組，全部通過（2026-10-18）。App 以 Debug 建置成功。
+- 自動測試：`cd Packages/HintletCore && swift test`，224 個測試、41 組，全部通過（2026-10-18）。App 以 Debug 建置成功。
 - 技術原型報告 [0002](../spikes/0002-claude-conversation-identification.md)–[0006](../spikes/0006-claude-code-cli-binding.md)：其中 0002、0004 是在真實 Claude 上錄的。
 - ticket 筆記裡記下的實機驗證，例如 ticket 05 的 Finder 與外接螢幕。
 

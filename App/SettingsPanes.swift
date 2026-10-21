@@ -1,6 +1,6 @@
 import AppKit
 import ServiceManagement
-import StickyContextCore
+import HintletCore
 import SwiftUI
 
 // MARK: - General

@@ -1,5 +1,5 @@
 import AppKit
-import StickyContextCore
+import HintletCore
 
 /// The menu bar while Hintlet is in front, as it is while a note is clicked into: the app's own menus,
 /// with the 便利貼 menu acting on that note.

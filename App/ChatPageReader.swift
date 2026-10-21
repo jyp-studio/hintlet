@@ -1,5 +1,5 @@
 import ApplicationServices
-import StickyContextCore
+import HintletCore
 
 /// Copies a Chat page out of Claude's Accessibility tree, away from the main thread (a long conversation
 /// is thousands of elements). Only what telling messages apart needs: roles, text, headings' labels and

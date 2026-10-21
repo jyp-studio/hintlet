@@ -1,5 +1,5 @@
 import AppKit
-import StickyContextCore
+import HintletCore
 
 import UniformTypeIdentifiers
 
@@ -7,6 +7,8 @@ import UniformTypeIdentifiers
 @MainActor
 final class AppDelegate: NSObject, NSApplicationDelegate {
     static func main() {
+        // Before anything reads the notes or the settings.
+        LegacyData.migrate()
         // Notes don't go full screen: AppKit shouldn't add "進入全螢幕" to the 顯示方式 menu.
         UserDefaults.standard.register(defaults: ["NSFullScreenMenuItemEverywhere": false])
         let app = NSApplication.shared
@@ -66,6 +68,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     ))
     private static let showsMenuBarIconKey = "showsMenuBarIcon"
     private let windowContext = WindowContextProvider()
+    private let caretWatcher = CaretWatcher()
+    private let optionPeek = OptionPeek()
     private let accessibility = AccessibilityPermission()
     private let hint = HintPanel()
     /// Cowork and Code sessions deleted in Claude take their notes to the trash.
@@ -73,6 +77,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private var replyCheckTimer: Timer?
     #if DEBUG
     private var previewSample: NotePanel?
+    private var previewMarker: NSWindow?
     #endif
     private var housekeepingTimer: Timer?
     /// Writes AI notes' summaries; nil while no backend can, which hides AI notes.
@@ -96,6 +101,24 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private var chatCaptureTimer: Timer?
     /// Often enough that a deleted session's notes are gone within a minute; each check only lists a few folders.
     private static let housekeepingInterval: TimeInterval = 30
+
+    private var isGivingWay = false
+
+    /// Notes slide out of the way of the caret in the app in front, and holding ⌥ sees through them.
+    /// Both need Accessibility, so they start once it is granted.
+    private func startGivingWay() {
+        guard !isGivingWay else { return }
+        isGivingWay = true
+        caretWatcher.onCaret = { [weak self] caret in
+            guard let self else { return }
+            // Typing with ⌥ held is for a character, not for peeking.
+            if caret != nil { optionPeek.interrupt() }
+            overlay.caretMoved(to: caret)
+        }
+        optionPeek.onPeek = { [weak self] peeking in self?.overlay.peekThrough(peeking) }
+        caretWatcher.start()
+        optionPeek.start()
+    }
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         mainMenu.install()
@@ -145,6 +168,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         }
         if accessibility.isGranted {
             windowContext.start()
+            startGivingWay()
         }
         if let problem = saved.problem { explainUnreadableNotes(problem) }
         #if DEBUG
@@ -165,10 +189,19 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                                     next: UserDefaults.standard.string(forKey: "previewAINext") ?? "等你：在 Google Drive 排除 ~/dev",
                                     coverage: .complete, backend: .onDevice, updatedAt: .now)
             let sample = NotePanel(onTextChange: { _ in }, onMove: { _ in }, onFinishEditing: {})
-            sample.update(DisplayedNote(id: UUID(), frame: CGRect(x: 600, y: 500, width: 260, height: 170), text: "",
-                                        scopeLabel: .conversation(title: "登入重構"), color: color,
-                                        ai: DisplayedAI(summary: summary,
-                                                        status: UserDefaults.standard.bool(forKey: "previewAIWriting") ? .updating : .idle)))
+            let ai = DisplayedAI(summary: summary,
+                                 status: UserDefaults.standard.bool(forKey: "previewAIWriting") ? .updating : .idle)
+            // At the default size, then fitted to its text as the engine would (no cap here).
+            let frame = CGRect(x: 600, y: 500, width: NoteEngine.defaultNoteSize.width, height: NoteEngine.defaultNoteSize.height)
+            let note = { (frame: CGRect, fits: Bool) in
+                DisplayedNote(id: UUID(), frame: frame, text: "", scopeLabel: .conversation(title: "登入重構"), color: color,
+                              ai: ai, fitsTextHeight: fits)
+            }
+            sample.onFitHeight = { [weak sample] height in
+                let fitted = max(height, NoteEngine.minimumNoteSize.height)
+                sample?.update(note(CGRect(x: frame.minX, y: frame.maxY - fitted, width: frame.width, height: fitted), false))
+            }
+            sample.update(note(frame, true))
             sample.reveal()
             if UserDefaults.standard.bool(forKey: "previewIsland") {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { sample.debugOpenIsland() }
@@ -199,6 +232,28 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             sample.reveal()
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { sample.debugOpenIsland() }
             previewSample = sample
+        }
+        // `-previewGiveWay fade|peek`: a sample note fades for a pretend caret (drawn in red), or is peeked through as
+        // with ⌥ held.
+        if let how = UserDefaults.standard.string(forKey: "previewGiveWay") {
+            let sample = NotePanel(onTextChange: { _ in }, onMove: { _ in }, onFinishEditing: {})
+            let frame = CGRect(x: 600, y: 450, width: 260, height: 170)
+            sample.update(DisplayedNote(id: UUID(), frame: frame, text: "記得問部署時間", scopeLabel: .window(appName: "Safari", title: "文件")))
+            sample.reveal()
+            let caret = CGRect(x: frame.minX + 60, y: frame.minY + 20, width: 2, height: 18)
+            let marker = NSWindow(contentRect: caret, styleMask: .borderless, backing: .buffered, defer: false)
+            marker.backgroundColor = .systemRed
+            marker.level = .statusBar
+            marker.orderFrontRegardless()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                if how == "peek" {
+                    sample.peekThrough(true)
+                } else {
+                    sample.giveWay(GivingWay.fades(frame, forCaret: caret))
+                }
+            }
+            previewSample = sample
+            previewMarker = marker
         }
         // `-previewList YES` opens the list of notes at launch.
         if UserDefaults.standard.bool(forKey: "previewList") { noteList.show() }
@@ -353,8 +408,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     private static var notesDirectory: URL {
-        FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
-            .appendingPathComponent(Bundle.main.bundleIdentifier ?? "StickyContext", isDirectory: true)
+        #if DEBUG
+        // `-notesDirectory <path>`: a preview run beside the real app keeps its notes elsewhere.
+        if let path = UserDefaults.standard.string(forKey: "notesDirectory") { return URL(fileURLWithPath: path, isDirectory: true) }
+        #endif
+        return FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
+            .appendingPathComponent(Bundle.main.bundleIdentifier ?? "Hintlet", isDirectory: true)
     }
 
     private enum LoadProblem {
@@ -420,7 +479,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     private func installStatusItem() {
         let item = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
-        item.button?.image = NSImage(systemSymbolName: "note.text", accessibilityDescription: String(localized: "Hintlet"))
+        item.button?.image = HintletGlyph.template(accessibilityDescription: String(localized: "Hintlet"))
 
         let menu = NSMenu()
         let newNote = NSMenuItem(title: String(localized: "新增便利貼"), action: #selector(createNoteFromMenu), keyEquivalent: "")
@@ -503,8 +562,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     /// While everything is hidden the menu bar icon says so, so notes aren't thought lost.
     private func showHidingState() {
         let hidden = engine.hidesAll || engine.hidesSomeNotes
-        statusItem?.button?.image = NSImage(systemSymbolName: hidden ? "eye.slash" : "note.text",
-                                            accessibilityDescription: hidden ? String(localized: "Hintlet（已隱藏全部）") : String(localized: "Hintlet"))
+        statusItem?.button?.image = hidden
+            ? NSImage(systemSymbolName: "eye.slash", accessibilityDescription: String(localized: "Hintlet（已隱藏全部）"))
+            : HintletGlyph.template(accessibilityDescription: String(localized: "Hintlet"))
         statusItem?.button?.toolTip = hidden ? String(localized: "Hintlet：便利貼已暫時隱藏") : nil
     }
 
@@ -562,7 +622,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             },
             SettingsPane(id: "permissions", title: String(localized: "權限"), symbol: "lock.shield") {
                 PermissionsPane(accessibility: accessibility,
-                                onAccessibilityGranted: { [weak self] in self?.windowContext.start() },
+                                onAccessibilityGranted: { [weak self] in
+                    self?.windowContext.start()
+                    self?.startGivingWay()
+                },
                                 claudeConsent: { [unowned self] in windowContext.claudePages.consent },
                                 setClaudeConsent: { [unowned self] on in setClaudeConsent(on) })
             },
@@ -632,7 +695,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         hint.dismiss()
         guard accessibility.isGranted else {
             // Without Accessibility the note can only float; explain once, then carry on.
-            let openedSettings = accessibility.requestIfNeeded { [weak self] in self?.windowContext.start() }
+            let openedSettings = accessibility.requestIfNeeded { [weak self] in
+                    self?.windowContext.start()
+                    self?.startGivingWay()
+                }
             placeNote(at: cursor, scope: .automatic, focus: !openedSettings)
             return
         }

@@ -3,7 +3,7 @@
 日期：2026-10-14　Claude 桌面 App 2.37337.1　macOS 27
 
 探測工具：[`Tools/claude-ax-probe.swift`](../../Tools/claude-ax-probe.swift)（`snapshot`、`links`、`watch`、`messages`）
-切面 B 素材：[`Packages/StickyContextCore/Tests/StickyContextCoreTests/Fixtures/ClaudeAX/`](../../Packages/StickyContextCore/Tests/StickyContextCoreTests/Fixtures/ClaudeAX/)，探測工具預設把對話 ID 換成假 UUID、對話名稱換成「範例對話」（`--raw` 才保留原值）。每份快照都記錄焦點元素，以及從它往上找到的最近網頁區域。
+切面 B 素材：[`Packages/HintletCore/Tests/HintletCoreTests/Fixtures/ClaudeAX/`](../../Packages/HintletCore/Tests/HintletCoreTests/Fixtures/ClaudeAX/)，探測工具預設把對話 ID 換成假 UUID、對話名稱換成「範例對話」（`--raw` 才保留原值）。每份快照都記錄焦點元素，以及從它往上找到的最近網頁區域。
 
 ## 錄到的頁面
 

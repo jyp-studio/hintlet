@@ -1,6 +1,6 @@
 import AppKit
 import Carbon.HIToolbox
-import StickyContextCore
+import HintletCore
 
 /// A system-wide hot key registered through Carbon, which needs no Input Monitoring permission.
 @MainActor

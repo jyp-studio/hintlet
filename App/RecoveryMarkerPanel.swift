@@ -1,6 +1,6 @@
 import AppKit
 import QuartzCore
-import StickyContextCore
+import HintletCore
 
 /// "可能是這裡？": a small tag where a waiting note would go on the focused window. Clicking it brings the
 /// note back there; the × turns the suggestion down for this window. Never binds anything by itself.

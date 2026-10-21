@@ -1,6 +1,6 @@
 import AppKit
 import ApplicationServices
-import StickyContextCore
+import HintletCore
 
 /// Reads which web page Safari or Chrome shows, from the address (AXURL) of the page's web area, without
 /// any Automation permission (report 0005). Only reads: the browser's own Accessibility settings are left alone.

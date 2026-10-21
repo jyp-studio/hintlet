@@ -1,5 +1,5 @@
 import AppKit
-import StickyContextCore
+import HintletCore
 
 /// The note's text, with checklist items drawn the way Notes draws them: the "☐ "/"☑ " markers in the text
 /// are invisible and an open circle, or a filled check, is drawn in their place.

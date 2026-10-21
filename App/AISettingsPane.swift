@@ -1,5 +1,5 @@
 import AppKit
-import StickyContextCore
+import HintletCore
 import SwiftUI
 
 /// The AI tab: who writes AI notes (the on-device model; the user's Claude or Codex account through its

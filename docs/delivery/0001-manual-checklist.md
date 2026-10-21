@@ -6,7 +6,7 @@
 
 ## 開始前
 
-- [ ] 先備份真實資料：`cp ~/Library/Application\ Support/com.jyp.stickycontext/notes.json ~/Desktop/notes-before-checks.json`。H2 的匯入請用一份測試檔，不要用這份。
+- [ ] 先備份真實資料：`cp ~/Library/Application\ Support/com.jyp.hintlet/notes.json ~/Desktop/notes-before-checks.json`。H2 的匯入請用一份測試檔，不要用這份。
 - [ ] 照 [README](../../README.md) 建置並打開 Hintlet。選單列「設定… › 權限」顯示輔助使用「已開啟」。
 - [ ] 一台 Mac 接一個外接螢幕（B2、B3 要用）。
 

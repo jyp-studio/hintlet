@@ -1,5 +1,5 @@
 import Foundation
-import StickyContextCore
+import HintletCore
 #if canImport(FoundationModels)
 import FoundationModels
 #endif
@@ -38,7 +38,7 @@ enum AISummaries {
     }
 
     private static let cliFolder = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]
-        .appendingPathComponent("com.jyp.stickycontext/AI", isDirectory: true)
+        .appendingPathComponent("com.jyp.hintlet/AI", isDirectory: true)
 
     /// The conversations AI notes can be made on with the backends here. Chat is read from its page, so
     /// only what the page has loaded (ticket 15).

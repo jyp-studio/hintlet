@@ -1,5 +1,5 @@
 import AppKit
-import StickyContextCore
+import HintletCore
 
 /// Keeps one note panel on screen for each note the engine wants displayed.
 @MainActor
@@ -22,6 +22,12 @@ final class OverlayController {
     private var windowInMotion = false
     /// Notes that were showing when their window started moving.
     private var steppedAside: Set<NoteID> = []
+    /// Notes faded for the caret in the app in front.
+    private var givingWay: Set<NoteID> = []
+    /// Notes the caret has left, about to come back.
+    private var returning: [NoteID: DispatchWorkItem] = [:]
+    /// Long enough that pressing Return under a note doesn't make it bounce back and forth.
+    private static let returnDelay: TimeInterval = 0.8
 
     init(engine: NoteEngine, onFinishEditing: @escaping () -> Void, onNotesChanged: @escaping () -> Void) {
         self.engine = engine
@@ -56,6 +62,10 @@ final class OverlayController {
         for (id, panel) in panels where !displayedIDs.contains(id) {
             panel.conceal(animated: false)
             steppedAside.remove(id)
+            if givingWay.remove(id) != nil {
+                returning.removeValue(forKey: id)?.cancel()
+                panel.giveWay(false)
+            }
         }
         var appearing: [NoteID] = []
         for note in displayed {
@@ -144,6 +154,35 @@ final class OverlayController {
     /// minimized or taken full screen by a click in it, which ends the typing anyway.
     private func isSteppingAside(_ note: DisplayedNote) -> Bool {
         windowInMotion && note.windowID != nil
+    }
+
+    /// Notes under the caret of the app in front fade where they are, and come back a moment after it has left.
+    /// The note being typed in stays as it is.
+    func caretMoved(to caret: CGRect?) {
+        for note in engine.displayedNotes {
+            guard let panel = panels[note.id], panel.isShown, !panel.isEditing else { continue }
+            if let caret, GivingWay.fades(note.frame, forCaret: caret) {
+                returning.removeValue(forKey: note.id)?.cancel()
+                givingWay.insert(note.id)
+                panel.giveWay(true)
+            } else if givingWay.contains(note.id), returning[note.id] == nil {
+                let comeBack = DispatchWorkItem { [weak self] in
+                    self?.returning[note.id] = nil
+                    self?.givingWay.remove(note.id)
+                    self?.panels[note.id]?.giveWay(false)
+                }
+                returning[note.id] = comeBack
+                // Back at once when the caret is gone altogether (another app came in front).
+                DispatchQueue.main.asyncAfter(deadline: .now() + (caret == nil ? 0 : Self.returnDelay), execute: comeBack)
+            }
+        }
+    }
+
+    /// Holding ⌥ makes every note but the one being typed in see-through, with clicks going to what is under it.
+    func peekThrough(_ peeking: Bool) {
+        for panel in panels.values where !panel.isEditing || !peeking {
+            panel.peekThrough(peeking)
+        }
     }
 
     /// Notes left on another desktop for a window that has since closed must not slide back into view.
@@ -275,6 +314,7 @@ final class OverlayController {
             onFinishEditing: { [weak self] in self?.onFinishEditing() }
         )
         panel.onSetFrame = { [weak self] frame in self?.change { $0.setFrame(of: id, to: frame) } }
+        panel.onFitHeight = { [weak self] height in self?.change { $0.fitHeight(of: id, to: height) } }
         panel.onSetColor = { [weak self] color in self?.change { $0.setColor(of: id, to: color) } }
         panel.onSetCollapsed = { [weak self] collapsed in self?.change { $0.setCollapsed(id, collapsed) } }
         panel.onDelete = { [weak self] in self?.delete(id) }

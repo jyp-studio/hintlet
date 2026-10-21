@@ -48,7 +48,7 @@ Requires macOS 14 or later (developed on macOS 27).
 
 Requires Xcode 16 or later and an Apple ID signed in to Xcode (a free Personal Team is enough).
 
-1. Open `Hintlet.xcodeproj`. Under **TARGETS › Hintlet › Signing & Capabilities**, choose your own Team. If the bundle ID `com.jyp.stickycontext` is taken, change it to your own.
+1. Open `Hintlet.xcodeproj`. Under **TARGETS › Hintlet › Signing & Capabilities**, choose your own Team. If the bundle ID `com.jyp.hintlet` is taken, change it to your own.
 2. Build and install:
 
    ```bash
@@ -72,23 +72,24 @@ Hintlet asks only when a feature needs it. You can refuse any of them, and notes
 | Automation: Finder | The first ⌘⌥N on a Finder folder window | Asking Finder which folder a window shows | Notes stick to the window |
 | Automation: Terminal, iTerm *(experimental)* | When the front tab is running Claude Code | Asking which tab (tty) is in front | Notes stick to the folder or window |
 
-Hintlet doesn't need Input Monitoring or Screen Recording: the global shortcuts are registered as system hot keys, so it never watches the keyboard.
+Hintlet doesn't need Input Monitoring or Screen Recording: the global shortcuts are registered as system hot keys. The only keys it notices are modifiers, so holding ⌥ can make notes see-through; it never sees what you type.
 
 If a permission stops working (for example, it's on in System Settings but has no effect after a re-sign), remove Hintlet from that list and add it again, or reset it:
 
 ```bash
-tccutil reset Accessibility com.jyp.stickycontext
+tccutil reset Accessibility com.jyp.hintlet
 ```
 
 ```bash
-tccutil reset AppleEvents com.jyp.stickycontext
+tccutil reset AppleEvents com.jyp.hintlet
 ```
 
 ## Your data
 
-- Notes are saved automatically to `~/Library/Application Support/com.jyp.stickycontext/notes.json`.
+- Notes are saved automatically to `~/Library/Application Support/com.jyp.hintlet/notes.json`.
 - `Backups/` in the same folder keeps the last 5 copies.
 - **Settings › Backups** exports every note to one file and imports it again. Importing merges note by note, so nothing is duplicated, and exports never contain API keys.
+- Coming from 0.1.0, whose bundle ID was `com.jyp.stickycontext`: the first launch copies your notes and settings over and leaves the old folder as it was. Grant Accessibility and Automation again, and type your API keys in again.
 - To uninstall, quit Hintlet and delete the app. Your notes stay in the folder above until you delete it.
 
 ## Known limitations
@@ -111,7 +112,7 @@ Core logic — binding, persistence, layout and each app's recognition rules —
 cd Packages/HintletCore && swift test
 ```
 
-Floating panels, real Accessibility reads, full screen and multiple displays have no automated tests; check them with the [manual checklist](docs/delivery/0001-manual-checklist.md). Design docs: [spec](docs/specs/0001-stickycontext-v1.md), [ADRs](docs/adr/), [spike reports](docs/spikes/).
+Floating panels, real Accessibility reads, full screen and multiple displays have no automated tests; check them with the [manual checklist](docs/delivery/0001-manual-checklist.md). Design docs: [spec](docs/specs/0001-hintlet-v1.md), [ADRs](docs/adr/), [spike reports](docs/spikes/).
 
 ## License
 

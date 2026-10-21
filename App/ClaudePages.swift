@@ -1,6 +1,6 @@
 import AppKit
 import ApplicationServices
-import StickyContextCore
+import HintletCore
 
 /// Reads which conversation the Claude app shows, from the address of its web area (ADR-0001, spike 02).
 /// Claude only builds its full Accessibility tree when asked to, which costs it some resources, so that

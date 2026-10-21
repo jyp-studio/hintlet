@@ -1,5 +1,5 @@
 import Foundation
-import StickyContextCore
+import HintletCore
 
 /// Saves the notes shortly after they change, at most once per `delay` however fast the user types.
 @MainActor

@@ -1,6 +1,6 @@
 import AppKit
 import Darwin
-import StickyContextCore
+import HintletCore
 
 /// Which Claude Code conversation the front tab of Terminal or iTerm shows (spike 06): the tab's tty from
 /// Apple Events, the process in front on that tty, and the session file Claude Code keeps for it.
@@ -14,7 +14,7 @@ final class TerminalSessions {
     /// A busy terminal mustn't hold notes up for long.
     nonisolated private static let timeout: TimeInterval = 0.25
     /// Apple Events wait for the terminal, and the very first one for the user to answer the prompt.
-    private static let queue = DispatchQueue(label: "StickyContext.TerminalSessions", qos: .userInitiated)
+    private static let queue = DispatchQueue(label: "Hintlet.TerminalSessions", qos: .userInitiated)
     nonisolated private static var sessionsFolder: URL {
         FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent(".claude/sessions")
     }

@@ -1,5 +1,5 @@
 import CoreGraphics
-import StickyContextCore
+import HintletCore
 
 /// The text size every note is drawn at, from the settings (`NoteSettings.textSize`).
 @MainActor

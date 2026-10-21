@@ -1,5 +1,5 @@
 import AppKit
-import StickyContextCore
+import HintletCore
 
 /// Tells a click from picking something up: a press that travels a few points becomes a drag.
 struct PressTracker {
@@ -190,7 +190,9 @@ final class NoteIslandView: NSView {
         aiButton.alphaValue = IslandButton.dimmed
         aiButton.isEnabled = false
         ordinaryButton.configure(tip: String(localized: "轉成一般便利貼"), action: #selector(makeOrdinary), target: self)
-        ordinaryButton.image = Self.symbol("note.text", tip: String(localized: "轉成一般便利貼"))
+        // The mark of Hintlet itself: a plain note on a window, without AI.
+        ordinaryButton.image = HintletGlyph.image(pointSize: 15, color: NotePalette.islandInk,
+                                                  accessibilityDescription: String(localized: "轉成一般便利貼"))
         ordinaryButton.fill = NSColor(white: 1, alpha: 0.12)
         ordinaryButton.hoverFill = NSColor(white: 1, alpha: 0.2)
         ordinaryButton.isHidden = true

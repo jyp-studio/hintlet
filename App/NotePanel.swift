@@ -1,6 +1,6 @@
 import AppKit
 import QuartzCore
-import StickyContextCore
+import HintletCore
 
 /// A sticky note that floats above other apps without activating Hintlet.
 ///
@@ -32,6 +32,8 @@ final class NotePanel: NSPanel, NSTextViewDelegate {
     var onEndEditing: (() -> Void)?
     /// The user resized the note from one of its edges.
     var onSetFrame: ((CGRect) -> Void)?
+    /// An AI note's text changed (`DisplayedNote.fitsTextHeight`): the height the paper needs to show all of it.
+    var onFitHeight: ((CGFloat) -> Void)?
     var onSetColor: ((NoteColor) -> Void)?
     var onSetCollapsed: ((Bool) -> Void)?
     var onDelete: (() -> Void)?
@@ -118,6 +120,16 @@ final class NotePanel: NSPanel, NSTextViewDelegate {
     func debugOpenIsland() { island.setOpen(true) }
     #endif
 
+    /// macOS keeps a window's top edge below the menu bar. This window's top is its clear margin, so that rule
+    /// stopped the paper well short of the menu bar; the paper itself goes right up to it instead.
+    override func constrainFrameRect(_ frameRect: NSRect, to screen: NSScreen?) -> NSRect {
+        guard let screen = screen ?? self.screen else { return frameRect }
+        var frame = frameRect
+        let overMenuBar = frame.maxY - Self.margin - screen.visibleFrame.maxY
+        if overMenuBar > 0 { frame.origin.y -= overMenuBar }
+        return frame
+    }
+
     override var canBecomeKey: Bool { true }
     override var canBecomeMain: Bool { false }
 
@@ -159,6 +171,11 @@ final class NotePanel: NSPanel, NSTextViewDelegate {
             card.show(note.color, ripplingFrom: previous == nil ? nil : NSPoint(x: noteSize.width / 2, y: noteSize.height))
         }
         card.showAI(note.ai, offering: note.offersAI)
+        if note.fitsTextHeight {
+            let height = card.heightFitting(width: note.frame.width)
+            // After this update: the engine's answer comes back as another one.
+            DispatchQueue.main.async { [weak self] in self?.onFitHeight?(height) }
+        }
         if note.ai == nil, card.textView.string != note.text { card.setText(note.text) }
         let ai: NoteIslandView.AIControls = if note.ai != nil {
             .aiNote(canRefresh: canRefreshAI())
@@ -371,6 +388,10 @@ final class NotePanel: NSPanel, NSTextViewDelegate {
     func reveal() {
         isShown = true
         visibilityGeneration += 1
+        if isSeeThrough {
+            showSeeThrough()
+            return
+        }
         if !isVisible { alphaValue = 0 }
         orderFrontRegardless()
         NSAnimationContext.runAnimationGroup { context in
@@ -384,6 +405,7 @@ final class NotePanel: NSPanel, NSTextViewDelegate {
     /// stepping aside while its window moves.
     func conceal(animated: Bool) {
         island.dismiss()
+        ghost?.orderOut(nil)
         guard isShown else {
             // Left on a desktop that has since come back into view, under a window that isn't focused.
             if !animated, isVisible, isOnActiveSpace { orderOut(nil) }
@@ -408,6 +430,95 @@ final class NotePanel: NSPanel, NSTextViewDelegate {
                 self.orderOut(nil)
             }
         })
+    }
+
+    // MARK: Giving way
+
+    /// Quick to get out of the way of typing, slower and a moment later to come back (`OverlayController`).
+    private static let fadeAwayDuration: TimeInterval = 0.12
+    private static let fadeBackDuration: TimeInterval = 0.3
+    private static let seeThroughAlpha: CGFloat = 0.12
+    private var givesWay = false
+    private var isPeekedThrough = false
+
+    var isEditing: Bool { card.isEditing }
+
+    private var isSeeThrough: Bool { givesWay || isPeekedThrough }
+    /// A faint copy of the note that takes no clicks, shown in its place while it is see-through.
+    private var ghost: NSWindow?
+
+    /// Fades the note where it is while the caret is under it, the way the pointer hides while you type.
+    func giveWay(_ giving: Bool) {
+        guard giving != givesWay, !isLiveResizing, !isDeleting else { return }
+        givesWay = giving
+        showSeeThrough()
+    }
+
+    /// While ⌥ is held: see-through, with clicks going to what is under the note.
+    func peekThrough(_ peeking: Bool) {
+        guard peeking != isPeekedThrough else { return }
+        isPeekedThrough = peeking
+        showSeeThrough()
+    }
+
+    /// See-through is a ghost copy, while the note itself leaves the screen. The note can't simply ignore clicks
+    /// for a while: once its `ignoresMouseEvents` has been set, turning it back off makes its clear margin (room
+    /// for the shadow and the island) catch every click around the paper for good.
+    private func showSeeThrough() {
+        guard isShown else {
+            ghost?.orderOut(nil)
+            return
+        }
+        if isSeeThrough {
+            guard ghost?.isVisible != true else { return }
+            let ghost = ghost ?? makeGhost()
+            ghost.contentView?.layer?.contents = snapshot()
+            ghost.setFrame(frame, display: false)
+            ghost.alphaValue = alphaValue
+            ghost.orderFrontRegardless()
+            // Ends any fade still running on the note.
+            visibilityGeneration += 1
+            orderOut(nil)
+            NSAnimationContext.runAnimationGroup { context in
+                context.duration = Self.fadeAwayDuration
+                context.timingFunction = CAMediaTimingFunction(name: .easeOut)
+                ghost.animator().alphaValue = Self.seeThroughAlpha
+            }
+        } else if let ghost, ghost.isVisible {
+            alphaValue = Self.seeThroughAlpha
+            orderFrontRegardless()
+            ghost.orderOut(nil)
+            NSAnimationContext.runAnimationGroup { context in
+                context.duration = Self.fadeBackDuration
+                context.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+                animator().alphaValue = 1
+            }
+        }
+    }
+
+    private func makeGhost() -> NSWindow {
+        let ghost = NSWindow(contentRect: frame, styleMask: .borderless, backing: .buffered, defer: true)
+        ghost.isOpaque = false
+        ghost.backgroundColor = .clear
+        ghost.hasShadow = false
+        ghost.ignoresMouseEvents = true
+        ghost.level = level
+        ghost.collectionBehavior = collectionBehavior
+        ghost.isReleasedWhenClosed = false
+        ghost.animationBehavior = .none
+        ghost.isExcludedFromWindowsMenu = true
+        let view = NSView()
+        view.wantsLayer = true
+        view.layer?.contentsGravity = .resize
+        ghost.contentView = view
+        self.ghost = ghost
+        return ghost
+    }
+
+    private func snapshot() -> CGImage? {
+        guard let view = contentView, let bitmap = view.bitmapImageRepForCachingDisplay(in: view.bounds) else { return nil }
+        view.cacheDisplay(in: view.bounds, to: bitmap)
+        return bitmap.cgImage
     }
 
     /// Starts typing in the note, with the caret where the user clicked (or at the end).
@@ -654,6 +765,9 @@ private final class NoteCardView: NSView {
     private static let edgeGrip: CGFloat = 8
     /// Above the text: room for the half of the island that sits on the paper.
     private static let topMargin: CGFloat = 14
+    /// Beside and below the text: where the note is picked up.
+    private static let sideMargin: CGFloat = 10
+    private static let bottomMargin: CGFloat = 10
 
     private var color: NoteColor = .yellow
     private var palette = NotePalette.of(.yellow)
@@ -762,9 +876,9 @@ private final class NoteCardView: NSView {
         // The margin around the text is where the note is picked up.
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: topAnchor, constant: Self.topMargin),
-            scrollView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            scrollView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-            scrollView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
+            scrollView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Self.sideMargin),
+            scrollView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Self.sideMargin),
+            scrollView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Self.bottomMargin),
             offer.centerXAnchor.constraint(equalTo: centerXAnchor),
             offer.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -14),
         ])
@@ -1002,6 +1116,22 @@ private final class NoteCardView: NSView {
 
     @objc private func takeOffer() {
         onMakeAI?()
+    }
+
+    /// How tall the paper must be, at `width`, to show all its text without scrolling: the text laid out
+    /// as the text view lays it out, plus the margins around it.
+    func heightFitting(width: CGFloat) -> CGFloat {
+        let inset = textView.textContainerInset
+        let container = NSTextContainer(size: NSSize(width: max(width - 2 * Self.sideMargin - 2 * inset.width, 1),
+                                                     height: .greatestFiniteMagnitude))
+        container.lineFragmentPadding = textView.textContainer?.lineFragmentPadding ?? 5
+        let layout = NSLayoutManager()
+        layout.addTextContainer(container)
+        let storage = NSTextStorage(attributedString: textView.attributedString())
+        storage.addLayoutManager(layout)
+        layout.ensureLayout(for: container)
+        let text = layout.usedRect(for: container).height
+        return (text + 2 * inset.height + Self.topMargin + Self.bottomMargin).rounded(.up)
     }
 
     /// The settings' text size changed: everything is set again at the new size.

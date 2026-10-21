@@ -1,5 +1,5 @@
 import AppKit
-import StickyContextCore
+import HintletCore
 import SwiftUI
 
 /// What the central list can do to notes. AppDelegate supplies these, so the list never touches the

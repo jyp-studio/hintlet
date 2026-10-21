@@ -1,6 +1,6 @@
 import Foundation
 import Security
-import StickyContextCore
+import HintletCore
 
 /// An API key in the user's login Keychain: one generic password per service that only Hintlet writes. It
 /// never goes into the notes file, its backups or an export. Read once and then kept in memory for this run.
@@ -14,12 +14,12 @@ final class KeychainAPIKeyStore: APIKeyStore, @unchecked Sendable {
     private var cached: String??
 
     static func claude() -> KeychainAPIKeyStore {
-        KeychainAPIKeyStore(service: "com.jyp.stickycontext.claude-api", account: "Claude API key",
+        KeychainAPIKeyStore(service: "com.jyp.hintlet.claude-api", account: "Claude API key",
                             label: String(localized: "Hintlet Claude API key"))
     }
 
     static func openAI() -> KeychainAPIKeyStore {
-        KeychainAPIKeyStore(service: "com.jyp.stickycontext.openai-api", account: "OpenAI API key",
+        KeychainAPIKeyStore(service: "com.jyp.hintlet.openai-api", account: "OpenAI API key",
                             label: String(localized: "Hintlet OpenAI API key"))
     }
 

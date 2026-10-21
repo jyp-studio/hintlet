@@ -1,5 +1,5 @@
 import AppKit
-import StickyContextCore
+import HintletCore
 
 /// Which folder a Finder window shows. Finder doesn't tell Accessibility, only Apple Events (the first ask
 /// shows the system's "Hintlet wants to control Finder" prompt). Answers are remembered per window and title,
@@ -12,7 +12,7 @@ final class FinderFolders {
     /// After an answer about another window (say a Get Info window was in front), wait before asking again.
     private static let retryDelay: TimeInterval = 1
     /// Apple Events wait for Finder, and the very first one for the user to answer the permission prompt.
-    private static let queue = DispatchQueue(label: "StickyContext.FinderFolders", qos: .userInitiated)
+    private static let queue = DispatchQueue(label: "Hintlet.FinderFolders", qos: .userInitiated)
 
     private struct Key: Hashable {
         let window: WindowID

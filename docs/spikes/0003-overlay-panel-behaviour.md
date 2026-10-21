@@ -37,7 +37,7 @@
   - AX 的 `AXPosition`／`AXSize` 和 CGWindowList：原點在主螢幕左上，y 向下。
   - AppKit 的 `NSWindow`／`NSScreen`：原點在主螢幕左下，y 向上。
 - **換算**：兩套座標都涵蓋所有螢幕，所以只需要主螢幕高度：`appKitY = 主螢幕高度 − (topLeftY + 高度)`，x 不變。主螢幕是 `NSScreen.screens[0]`，不是 `NSScreen.main`，後者是目前有焦點的螢幕。
-- **實作與測試**：實作在 `StickyContextCore/ScreenCoordinates.swift`，測試涵蓋主螢幕、位在上方的副螢幕（y 為負）、位在左側的副螢幕（x 為負）。
+- **實作與測試**：實作在 `HintletCore/ScreenCoordinates.swift`，測試涵蓋主螢幕、位在上方的副螢幕（y 為負）、位在左側的副螢幕（x 為負）。
 - **建立位置**：便利貼依游標所在螢幕夾進可視範圍。ticket 01 有單元測試用假的螢幕資料涵蓋「游標在副螢幕選單列」，但沒有在實機上驗證。
 - **換算的範圍**：測試只涵蓋座標翻轉。判斷視窗在哪個螢幕、視窗換螢幕時便利貼怎麼跟著走，屬於 ticket 05 的引擎測試。
 

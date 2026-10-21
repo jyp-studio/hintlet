@@ -1,6 +1,6 @@
 import AppKit
 import Carbon.HIToolbox
-import StickyContextCore
+import HintletCore
 
 /// The global shortcuts the user chose (kept in UserDefaults), registered for whichever actions the app
 /// has handlers for.

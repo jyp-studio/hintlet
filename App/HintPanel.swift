@@ -1,5 +1,5 @@
 import AppKit
-import StickyContextCore
+import HintletCore
 
 /// A short note by the pointer when ⌘⌥N can't do what it usually does, e.g. on a new Claude conversation
 /// that has no ID yet. A system popover pointing at where the note would have gone, laid out like a

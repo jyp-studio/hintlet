@@ -1,7 +1,7 @@
 import AppKit
 import QuartzCore
 import ApplicationServices
-import StickyContextCore
+import HintletCore
 
 /// Watches the frontmost app's focused window through Accessibility and reports two things: which window
 /// the user is working in (`onChange`), and whether that window is in motion (`onMotionChange`).
