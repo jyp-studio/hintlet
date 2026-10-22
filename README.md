@@ -45,7 +45,7 @@ Requires macOS 14 or later (developed on macOS 27).
 
 4. A short welcome guide opens: what Hintlet does, turning on Accessibility (it opens System Settings for you), and making your first note with ⌘⌥N. **Getting Started…** in the menu bar menu shows it again.
 
-After installing a newer version, macOS may no longer recognise it as the app you allowed, because it isn't notarized. If notes stop following windows, turn Hintlet off and on again under **Accessibility** (or remove it and add it back).
+After installing a newer version, macOS may no longer recognise it as the app you allowed, because it isn't notarized: the switch looks on but does nothing. Select Hintlet in the **Accessibility** list, remove it with **−**, then allow it again from **Settings › Permissions** or **Getting Started…**.
 
 ### Build from source
 

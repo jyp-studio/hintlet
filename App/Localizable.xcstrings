@@ -6320,6 +6320,22 @@
           }
         }
       }
+    },
+    "已經打開了卻沒有反應？那是給舊版的。在清單裡選 Hintlet，按「−」移除，再回來按「打開系統設定」。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Turned it on and nothing happened? The switch is for an older version. Select Hintlet in the list, remove it with −, then come back and click Open System Settings."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已經打開了卻沒有反應？那是給舊版的。在清單裡選 Hintlet，按「−」移除，再回來按「打開系統設定」。"
+          }
+        }
+      }
     }
   },
   "version": "1.0"

@@ -123,6 +123,9 @@ private struct OnboardingView: View {
     @State private var granted: Bool
     /// System Settings has been opened from here; the page waits for the switch.
     @State private var asked = false
+    /// Still waiting a while after: the switch may be on for an earlier build (an update), which macOS no
+    /// longer counts.
+    @State private var waitedLong = false
     private let poll = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
     init(model: OnboardingModel, isGranted: @escaping () -> Bool, openSettings: @escaping () -> Void,
@@ -218,9 +221,15 @@ private struct OnboardingView: View {
                         .font(.headline)
                         .foregroundStyle(.green)
                 } else if asked {
-                    HStack(spacing: 8) {
-                        ProgressView().controlSize(.small)
-                        Text(String(localized: "在「\(AccessibilityPermission.permissionName)」裡打開 Hintlet，完成後會自動繼續。"))
+                    VStack(spacing: 8) {
+                        HStack(spacing: 8) {
+                            ProgressView().controlSize(.small)
+                            Text(String(localized: "在「\(AccessibilityPermission.permissionName)」裡打開 Hintlet，完成後會自動繼續。"))
+                        }
+                        if waitedLong {
+                            Text(String(localized: "已經打開了卻沒有反應？那是給舊版的。在清單裡選 Hintlet，按「−」移除，再回來按「打開系統設定」。"))
+                                .multilineTextAlignment(.center)
+                        }
                     }
                     .font(.callout)
                     .foregroundStyle(.secondary)
@@ -281,7 +290,9 @@ private struct OnboardingView: View {
                     // What this page is for is the default; skipping is a quiet link on the page.
                     Button(String(localized: "打開系統設定")) {
                         asked = true
+                        waitedLong = false
                         openSettings()
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 20) { if !granted { waitedLong = true } }
                     }
                     .controlSize(.large)
                     .keyboardShortcut(.defaultAction)
