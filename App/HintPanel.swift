@@ -12,6 +12,8 @@ final class HintPanel {
         var message: String
         /// The way out, as the default button; without one the hint goes away by itself.
         var actionTitle: String?
+        /// How long it stays, when it is worth more than the usual few seconds.
+        var lifetime: TimeInterval?
     }
 
     private static let textWidth: CGFloat = 260
@@ -60,7 +62,7 @@ final class HintPanel {
         popover.show(relativeTo: anchor.contentView!.bounds, of: anchor.contentView!, preferredEdge: .minY)
         self.popover = popover
 
-        let lifetime = hint.actionTitle == nil ? Self.lifetime : Self.lifetimeWithAction
+        let lifetime = hint.lifetime ?? (hint.actionTitle == nil ? Self.lifetime : Self.lifetimeWithAction)
         dismissTimer = Timer.scheduledTimer(withTimeInterval: lifetime, repeats: false) { [weak self] _ in
             MainActor.assumeIsolated { self?.dismiss() }
         }
@@ -142,7 +144,8 @@ final class HintPanel {
 extension HintPanel.Hint {
     static let firstNote = HintPanel.Hint(
         symbol: "hand.tap", title: String(localized: "你的第一張便利貼"),
-        message: String(localized: "直接打字就好，按 Esc 結束。按住上方的標籤可以換顏色、改貼的位置或刪除。"))
+        message: String(localized: "直接打字就好，按 Esc 結束。按住上方的標籤可以換顏色、改貼的位置或刪除。"),
+        lifetime: 10)
     static let draftConversation = HintPanel.Hint(
         symbol: "bubble.left.and.text.bubble.right", title: String(localized: "新對話還沒建立"),
         message: String(localized: "送出第一則訊息後，就能把便利貼貼在這個對話上。也可以先貼在整個 Claude 視窗。"),

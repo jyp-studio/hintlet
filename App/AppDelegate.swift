@@ -187,11 +187,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         onboarding.showIfFirstLaunch()
         #endif
         #if DEBUG
-        // `-previewHint draft|settings|fallback` shows a hint at the pointer, to look at its design.
+        // `-previewHint draft|settings|fallback|firstNote` shows a hint at the pointer, to look at its design.
         if let which = UserDefaults.standard.string(forKey: "previewHint") {
             let preview: HintPanel.Hint = switch which {
             case "settings": .claudeSettings
             case "fallback": .fellBackToWindow
+            case "firstNote": .firstNote
             default: .draftConversation
             }
             hint.show(preview, at: NSEvent.mouseLocation) {}
@@ -771,11 +772,15 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         let id = engine.createNote(at: cursor, scope: scope)
         overlay.render()
         onboarding.noteWasMade()
-        if !UserDefaults.standard.bool(forKey: Self.shownFirstNoteTipKey),
-           let note = engine.displayedNotes.first(where: { $0.id == id }) {
-            UserDefaults.standard.set(true, forKey: Self.shownFirstNoteTipKey)
-            // Pointing at the note from below, so it doesn't cover what the user is about to type.
-            hint.show(.firstNote, at: CGPoint(x: note.frame.midX, y: note.frame.minY), about: id)
+        if !UserDefaults.standard.bool(forKey: Self.shownFirstNoteTipKey) {
+            // Once focus has moved into the note: while it moves, the focused window can't be told for a moment,
+            // and that takes hints away.
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) { [weak self] in
+                guard let self, hint.note == nil, let note = engine.displayedNotes.first(where: { $0.id == id }) else { return }
+                UserDefaults.standard.set(true, forKey: Self.shownFirstNoteTipKey)
+                // Pointing at the note from below, so it doesn't cover what the user is about to type.
+                hint.show(.firstNote, at: CGPoint(x: note.frame.midX, y: note.frame.minY), about: id)
+            }
         }
         // A new note ends "hide all".
         showHidingState()

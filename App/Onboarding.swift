@@ -72,7 +72,7 @@ final class OnboardingWindowController: NSObject, NSWindowDelegate {
         return window
     }
 
-    static let size = NSSize(width: 560, height: 600)
+    static let size = NSSize(width: 560, height: 640)
 
     /// In the middle of the screen the user is on (the one with the pointer), a little above centre, as macOS
     /// places a new window.
@@ -125,11 +125,14 @@ private struct OnboardingView: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             .padding(.horizontal, 48)
-            .padding(.top, 36)
+            .padding(.top, 32)
+            // Each page fits above the bottom bar, which stays put from page to page.
+            .layoutPriority(1)
             .transition(.asymmetric(insertion: .move(edge: model.forward ? .trailing : .leading).combined(with: .opacity),
                                     removal: .move(edge: model.forward ? .leading : .trailing).combined(with: .opacity)))
             .id(model.page)
             footer
+                .frame(height: 76)
         }
         .frame(width: OnboardingWindowController.size.width, height: OnboardingWindowController.size.height)
         .onAppear { granted = isGranted() }
@@ -139,10 +142,10 @@ private struct OnboardingView: View {
     // MARK: Pages
 
     private var welcome: some View {
-        VStack(spacing: 20) {
+        VStack(spacing: 16) {
             Image(nsImage: NSApp.applicationIconImage)
                 .resizable()
-                .frame(width: 72, height: 72)
+                .frame(width: 64, height: 64)
             VStack(spacing: 6) {
                 Text(String(localized: "歡迎使用 Hintlet"))
                     .font(.system(size: 26, weight: .bold))
@@ -151,7 +154,7 @@ private struct OnboardingView: View {
                     .foregroundStyle(.secondary)
             }
             FollowingNoteScene()
-            VStack(alignment: .leading, spacing: 14) {
+            VStack(alignment: .leading, spacing: 12) {
                 Feature(symbol: "macwindow", title: String(localized: "跟著你的工作出現"),
                         text: String(localized: "貼在視窗、資料夾、網頁或 Claude、Codex 對話上。切走就收起來，回來時再出現。"))
                 Feature(symbol: "sparkles", title: String(localized: "AI 便利貼"),
