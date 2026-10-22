@@ -6001,22 +6001,6 @@
         }
       }
     },
-    "做得好！": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nicely done!"
-          }
-        },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "做得好！"
-          }
-        }
-      }
-    },
     "貼一張試試看": {
       "localizations": {
         "en": {

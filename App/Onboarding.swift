@@ -3,9 +3,10 @@ import Combine
 import HintletCore
 import SwiftUI
 
-/// The first launch's three steps: what Hintlet does, the one permission it needs and why, and making the first
-/// note. Shown once by itself; the menu bar menu's 入門指南 shows it again. Closing it, or making a note while it is
-/// open, counts as done.
+/// The first launch's steps: what Hintlet does, the one permission it needs and why, and (once it is on) how to
+/// make a note. Shown once by itself; the menu bar menu's 入門指南 shows it again. One thing at a time: skipping the
+/// permission ends the guide, and making a note while it is open closes it, so the note and its tip have the
+/// screen to themselves.
 @MainActor
 final class OnboardingWindowController: NSObject, NSWindowDelegate {
     private static let doneKey = "onboardingDone"
@@ -34,7 +35,6 @@ final class OnboardingWindowController: NSObject, NSWindowDelegate {
         // `-previewOnboardingPage 2`: straight to that step.
         model.page = UserDefaults.standard.integer(forKey: "previewOnboardingPage")
         #endif
-        model.madeNote = false
         let window = self.window ?? makeWindow()
         self.window = window
         AppPresence.comeForward()
@@ -42,12 +42,10 @@ final class OnboardingWindowController: NSObject, NSWindowDelegate {
         window.makeKeyAndOrderFront(nil)
     }
 
-    /// The user made a note: on the last step, that is the step done; the window says so and closes.
+    /// The user made a note: the guide has done its job and steps out of the way at once.
     func noteWasMade() {
         guard let window, window.isVisible else { return }
-        model.madeNote = true
-        UserDefaults.standard.set(true, forKey: Self.doneKey)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.6) { [weak self] in self?.window?.close() }
+        window.close()
     }
 
     private func makeWindow() -> NSWindow {
@@ -97,7 +95,6 @@ final class OnboardingWindowController: NSObject, NSWindowDelegate {
 @MainActor
 final class OnboardingModel: ObservableObject {
     @Published var page = 0
-    @Published var madeNote = false
     /// Which way the last step went: the next page comes in from the right, the previous one from the left.
     @Published var forward = true
 }
@@ -201,12 +198,11 @@ private struct OnboardingView: View {
 
     private var tryIt: some View {
         VStack(spacing: 22) {
-            Image(systemName: model.madeNote ? "checkmark.circle.fill" : "note.text.badge.plus")
+            Image(systemName: "note.text.badge.plus")
                 .font(.system(size: 64))
-                .foregroundStyle(model.madeNote ? .green : .yellow)
-                .contentTransition(.symbolEffect(.replace))
+                .foregroundStyle(.yellow)
             VStack(spacing: 8) {
-                Text(model.madeNote ? String(localized: "做得好！") : String(localized: "貼一張試試看"))
+                Text(String(localized: "貼一張試試看"))
                     .font(.system(size: 24, weight: .bold))
                 Text(String(localized: "切到任何一個視窗，按下："))
                     .foregroundStyle(.secondary)
@@ -235,8 +231,14 @@ private struct OnboardingView: View {
             }
             Spacer()
             if model.page < Self.pages - 1 {
-                Button(model.page == 1 && !granted ? String(localized: "稍後再說") : String(localized: "繼續")) {
-                    go(model.page + 1)
+                // Without the permission a note can't follow its window yet: the guide ends here, and the first
+                // note made once it is on gets its tip.
+                Group {
+                    if model.page == 1 && !granted {
+                        Button(String(localized: "稍後再說")) { finish() }
+                    } else {
+                        Button(String(localized: "繼續")) { go(model.page + 1) }
+                    }
                 }
                 .controlSize(.large)
                 .keyboardShortcut(.defaultAction)
