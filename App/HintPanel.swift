@@ -14,6 +14,8 @@ final class HintPanel {
         var actionTitle: String?
         /// How long it stays, when it is worth more than the usual few seconds.
         var lifetime: TimeInterval?
+        /// Stays until its one button (`actionTitle`) is clicked: something to read, not a choice.
+        var waitsForOK = false
     }
 
     private static let textWidth: CGFloat = 260
@@ -42,7 +44,9 @@ final class HintPanel {
         anchor.isReleasedWhenClosed = false
     }
 
-    func show(_ hint: Hint, at point: CGPoint, about note: NoteID? = nil, onAction: (() -> Void)? = nil) {
+    /// `edge` is the side of `point` the hint goes on: below by default, above when there is no room below.
+    func show(_ hint: Hint, at point: CGPoint, edge: NSRectEdge = .minY, about note: NoteID? = nil,
+              onAction: (() -> Void)? = nil) {
         dismiss()
         self.note = note
         self.onAction = onAction
@@ -59,9 +63,10 @@ final class HintPanel {
         popover.contentViewController = controller
         popover.behavior = .applicationDefined
         popover.animates = true
-        popover.show(relativeTo: anchor.contentView!.bounds, of: anchor.contentView!, preferredEdge: .minY)
+        popover.show(relativeTo: anchor.contentView!.bounds, of: anchor.contentView!, preferredEdge: edge)
         self.popover = popover
 
+        guard !hint.waitsForOK else { return }
         let lifetime = hint.lifetime ?? (hint.actionTitle == nil ? Self.lifetime : Self.lifetimeWithAction)
         dismissTimer = Timer.scheduledTimer(withTimeInterval: lifetime, repeats: false) { [weak self] _ in
             MainActor.assumeIsolated { self?.dismiss() }
@@ -115,7 +120,13 @@ final class HintPanel {
             column.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: -14),
         ])
 
-        if let actionTitle = hint.actionTitle {
+        if hint.waitsForOK, let actionTitle = hint.actionTitle {
+            // Return stays with the note being typed in; the button is for the pointer.
+            let ok = NSButton(title: actionTitle, target: self, action: #selector(actionClicked))
+            ok.bezelColor = .controlAccentColor
+            ok.refusesFirstResponder = true
+            column.addArrangedSubview(ok)
+        } else if let actionTitle = hint.actionTitle {
             let cancel = NSButton(title: String(localized: "好"), target: self, action: #selector(dismissClicked))
             cancel.keyEquivalent = "\u{1b}"
             let action = NSButton(title: actionTitle, target: self, action: #selector(actionClicked))
@@ -145,7 +156,7 @@ extension HintPanel.Hint {
     static let firstNote = HintPanel.Hint(
         symbol: "hand.tap", title: String(localized: "你的第一張便利貼"),
         message: String(localized: "直接打字就好，按 Esc 結束。按住上方的標籤可以換顏色、改貼的位置或刪除。"),
-        lifetime: 10)
+        actionTitle: String(localized: "好"), waitsForOK: true)
     static let draftConversation = HintPanel.Hint(
         symbol: "bubble.left.and.text.bubble.right", title: String(localized: "新對話還沒建立"),
         message: String(localized: "送出第一則訊息後，就能把便利貼貼在這個對話上。也可以先貼在整個 Claude 視窗。"),

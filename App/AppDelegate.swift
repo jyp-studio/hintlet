@@ -54,8 +54,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         })
     /// The first note ever gets a word on how to change it, once.
     private static let shownFirstNoteTipKey = "shownFirstNoteTip"
-    /// The note the first-note tip is about, while it shows.
-    private var firstNoteTipNote: NoteID?
+    /// Room the first-note tip needs below a note; with less, it goes above.
+    private static let firstNoteTipRoom: CGFloat = 150
     private lazy var mainMenu = MainMenu(engine: engine, overlay: overlay, actions: MainMenu.Actions(
         showSettings: { [unowned self] in showSettings() },
         newNote: { [unowned self] in createNote() },
@@ -739,11 +739,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private func dismissHintIfItsNoteIsGone() {
         guard let note = hint.note, !engine.displayedNotes.contains(where: { $0.id == note }) else { return }
         hint.dismiss()
-        // The first note left without a word (and so was discarded): its tip waits for the next one.
-        if note == firstNoteTipNote {
-            firstNoteTipNote = nil
-            UserDefaults.standard.set(false, forKey: Self.shownFirstNoteTipKey)
-        }
     }
 
     /// Places the note on what the user is looking at, or explains why it can't go there.
@@ -786,10 +781,15 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             // and that takes hints away.
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) { [weak self] in
                 guard let self, hint.note == nil, let note = engine.displayedNotes.first(where: { $0.id == id }) else { return }
-                UserDefaults.standard.set(true, forKey: Self.shownFirstNoteTipKey)
-                // Pointing at the note from below, so it doesn't cover what the user is about to type.
-                hint.show(.firstNote, at: CGPoint(x: note.frame.midX, y: note.frame.minY), about: id)
-                firstNoteTipNote = id
+                // Below the note, or above it (over its tag) when it sits too low for the tip to fit: never on it.
+                let screen = NSScreen.screens.first { $0.frame.intersects(note.frame) }?.visibleFrame ?? .zero
+                let below = note.frame.minY - screen.minY >= Self.firstNoteTipRoom
+                let point = below ? CGPoint(x: note.frame.midX, y: note.frame.minY)
+                                  : CGPoint(x: note.frame.midX, y: note.frame.maxY + 16)
+                // Counted as seen once the user says so; a tip that went with its note comes again on the next one.
+                hint.show(.firstNote, at: point, edge: below ? .minY : .maxY, about: id) {
+                    UserDefaults.standard.set(true, forKey: Self.shownFirstNoteTipKey)
+                }
             }
         }
         // A new note ends "hide all".
