@@ -83,9 +83,13 @@ final class HintPanel {
         anchor.orderOut(nil)
     }
 
+    /// A tip that waits for OK is read alongside the note, so it is small, the way TipKit's tips are.
+    private static let tipTextWidth: CGFloat = 200
+
     private func content(for hint: Hint) -> NSView {
+        let tip = hint.waitsForOK
         let icon = NSImageView(image: NSImage(systemSymbolName: hint.symbol, accessibilityDescription: nil) ?? NSImage())
-        icon.symbolConfiguration = NSImage.SymbolConfiguration(pointSize: 26, weight: .regular)
+        icon.symbolConfiguration = NSImage.SymbolConfiguration(pointSize: tip ? 17 : 26, weight: .regular)
             .applying(.preferringHierarchical())
         icon.contentTintColor = .controlAccentColor
         icon.setContentHuggingPriority(.required, for: .horizontal)
@@ -95,8 +99,9 @@ final class HintPanel {
         let message = NSTextField(wrappingLabelWithString: hint.message)
         message.font = .systemFont(ofSize: NSFont.smallSystemFontSize)
         message.textColor = .secondaryLabelColor
-        message.preferredMaxLayoutWidth = Self.textWidth
-        message.widthAnchor.constraint(equalToConstant: Self.textWidth).isActive = true
+        let width = tip ? Self.tipTextWidth : Self.textWidth
+        message.preferredMaxLayoutWidth = width
+        message.widthAnchor.constraint(equalToConstant: width).isActive = true
         let text = NSStackView(views: [title, message])
         text.orientation = .vertical
         text.alignment = .leading
@@ -104,26 +109,28 @@ final class HintPanel {
 
         let top = NSStackView(views: [icon, text])
         top.alignment = .top
-        top.spacing = 12
+        top.spacing = tip ? 8 : 12
 
         let column = NSStackView(views: [top])
         column.orientation = .vertical
         column.alignment = .trailing
-        column.spacing = 14
+        column.spacing = tip ? 8 : 14
         column.translatesAutoresizingMaskIntoConstraints = false
         let container = NSView()
         container.addSubview(column)
+        let inset: CGFloat = tip ? 12 : 16
         NSLayoutConstraint.activate([
-            column.topAnchor.constraint(equalTo: container.topAnchor, constant: 16),
-            column.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 16),
-            column.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -16),
-            column.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: -14),
+            column.topAnchor.constraint(equalTo: container.topAnchor, constant: inset),
+            column.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: inset),
+            column.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -inset),
+            column.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: tip ? -10 : -14),
         ])
 
         if hint.waitsForOK, let actionTitle = hint.actionTitle {
             // Return stays with the note being typed in; the button is for the pointer.
             let ok = NSButton(title: actionTitle, target: self, action: #selector(actionClicked))
             ok.bezelColor = .controlAccentColor
+            ok.controlSize = .small
             ok.refusesFirstResponder = true
             column.addArrangedSubview(ok)
         } else if let actionTitle = hint.actionTitle {
@@ -155,7 +162,7 @@ final class HintPanel {
 extension HintPanel.Hint {
     static let firstNote = HintPanel.Hint(
         symbol: "hand.tap", title: String(localized: "你的第一張便利貼"),
-        message: String(localized: "直接打字就好，按 Esc 結束。按住上方的標籤可以換顏色、改貼的位置或刪除。"),
+        message: String(localized: "打完字按 Esc。按住上方的標籤，可以換顏色或刪除。"),
         actionTitle: String(localized: "好"), waitsForOK: true)
     static let draftConversation = HintPanel.Hint(
         symbol: "bubble.left.and.text.bubble.right", title: String(localized: "新對話還沒建立"),

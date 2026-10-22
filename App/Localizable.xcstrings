@@ -6209,22 +6209,6 @@
         }
       }
     },
-    "直接打字就好，按 Esc 結束。按住上方的標籤可以換顏色、改貼的位置或刪除。": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Just type, and press Esc when you're done. Press and hold the tag on top to change its colour, where it sticks, or delete it."
-          }
-        },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "直接打字就好，按 Esc 結束。按住上方的標籤可以換顏色、改貼的位置或刪除。"
-          }
-        }
-      }
-    },
     "企劃書": {
       "localizations": {
         "en": {
@@ -6333,6 +6317,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "已經打開了卻沒有反應？那是給舊版的。在清單裡選 Hintlet，按「−」移除，再回來按「打開系統設定」。"
+          }
+        }
+      }
+    },
+    "打完字按 Esc。按住上方的標籤，可以換顏色或刪除。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Type, then press Esc. Press and hold the tag on top to change its colour or delete it."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "打完字按 Esc。按住上方的標籤，可以換顏色或刪除。"
           }
         }
       }
