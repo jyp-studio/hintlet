@@ -602,17 +602,18 @@ public final class NoteEngine {
         reshape(id) { current in current = CGRect(origin: frame.origin, size: fitting) }
     }
 
-    /// The AI note takes the height its text needs (`DisplayedNote.fitsTextHeight`), keeping its top edge and
-    /// width: no shorter than the minimum, no taller than `fittedHeightShare` of its screen. Once per change of
-    /// its text; afterwards the height is the user's again.
+    /// The AI note grows to the height its text needs (`DisplayedNote.fitsTextHeight`), keeping its top edge and
+    /// width, up to `fittedHeightShare` of its screen. It never shrinks: a note that becomes an AI note keeps its
+    /// size until the summary needs more, and a short summary leaves room as it is. Once per change of its text;
+    /// afterwards the height is the user's again.
     public func fitHeight(of id: NoteID, to height: CGFloat) {
         guard heightsToFit.remove(id) != nil, let note = notes.first(where: { $0.id == id }), note.ai != nil,
               let frame = displayed(note)?.frame else { return }
         let screen = screens.first { $0.frame.contains(CGPoint(x: frame.midX, y: frame.maxY)) }
             ?? screen(containing: CGPoint(x: frame.midX, y: frame.midY))
         let cap = screen.map { max($0.visibleFrame.height * Self.fittedHeightShare, Self.minimumNoteSize.height) } ?? .infinity
-        let fitted = min(max(height.rounded(.up), Self.minimumNoteSize.height), cap)
-        guard fitted != frame.height else { return }
+        let fitted = min(height.rounded(.up), cap)
+        guard fitted > frame.height else { return }
         reshape(id) { frame in
             frame = CGRect(x: frame.minX, y: frame.maxY - fitted, width: frame.width, height: fitted)
         }

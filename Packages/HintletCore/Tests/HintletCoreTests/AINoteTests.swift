@@ -433,13 +433,29 @@ struct FittingAINoteHeight {
         let id = aiNote(on: engine)
         #expect(engine.displayedNotes.first?.fitsTextHeight == true)
 
-        engine.fitHeight(of: id, to: 120)
+        engine.fitHeight(of: id, to: 240)
 
         #expect(engine.displayedNotes.first?.fitsTextHeight == false)
-        #expect(engine.displayedNotes.first?.frame.height == 120)
+        #expect(engine.displayedNotes.first?.frame.height == 240)
     }
 
-    @Test("長高或變矮時上緣與寬度不動")
+    @Test("只長高，不縮短：剛轉成 AI 便利貼、摘要很短時維持原本大小")
+    func neverShrinks() {
+        let engine = engineOnLogin()
+        let id = aiNote(on: engine)
+        let before = try! #require(engine.displayedNotes.first?.frame)
+
+        engine.fitHeight(of: id, to: 60)
+        #expect(engine.displayedNotes.first?.frame == before)
+
+        engine.applySummary(summary("很長的摘要"), to: id)
+        engine.fitHeight(of: id, to: 260)
+        engine.applySummary(summary("短"), to: id)
+        engine.fitHeight(of: id, to: 90)
+        #expect(engine.displayedNotes.first?.frame.height == 260)
+    }
+
+    @Test("長高時上緣與寬度不動")
     func keepsTopAndWidth() {
         let engine = engineOnLogin()
         let id = aiNote(on: engine)
@@ -454,13 +470,10 @@ struct FittingAINoteHeight {
         #expect(after.height == 260)
     }
 
-    @Test("不會比最小尺寸矮，也不會比螢幕可用高度的六成高")
+    @Test("不會比螢幕可用高度的六成高")
     func clamped() {
         let engine = engineOnLogin()
         let id = aiNote(on: engine)
-        engine.fitHeight(of: id, to: 20)
-        #expect(engine.displayedNotes.first?.frame.height == NoteEngine.minimumNoteSize.height)
-
         engine.applySummary(summary("很長的摘要"), to: id)
         engine.fitHeight(of: id, to: 5000)
         #expect(engine.displayedNotes.first?.frame.height == (laptop.visibleFrame.height * 0.6).rounded(.up))
@@ -470,17 +483,17 @@ struct FittingAINoteHeight {
     func refitsOnlyWhenTextChanges() {
         let engine = engineOnLogin()
         let id = aiNote(on: engine)
-        engine.fitHeight(of: id, to: 120)
+        engine.fitHeight(of: id, to: 200)
 
         engine.applySummary(summary(), to: id)
         #expect(engine.displayedNotes.first?.fitsTextHeight == true)
-        engine.fitHeight(of: id, to: 140)
+        engine.fitHeight(of: id, to: 220)
 
         engine.applySummary(summary(at: noon.addingTimeInterval(60)), to: id)
         engine.summaryStarted(id)
         #expect(engine.displayedNotes.first?.fitsTextHeight == false)
         engine.fitHeight(of: id, to: 300)
-        #expect(engine.displayedNotes.first?.frame.height == 140)
+        #expect(engine.displayedNotes.first?.frame.height == 220)
     }
 
     @Test("使用者拖出來的高度保留到摘要下次改變")
@@ -497,7 +510,10 @@ struct FittingAINoteHeight {
 
         engine.applySummary(summary("改做部署"), to: id)
         engine.fitHeight(of: id, to: 150)
-        #expect(engine.displayedNotes.first?.frame.height == 150)
+        #expect(engine.displayedNotes.first?.frame.height == 300)
+        engine.applySummary(summary("改做部署，還要回滾"), to: id)
+        engine.fitHeight(of: id, to: 340)
+        #expect(engine.displayedNotes.first?.frame.height == 340)
     }
 
     @Test("拖動邊緣時還沒量的高度就不量了")
