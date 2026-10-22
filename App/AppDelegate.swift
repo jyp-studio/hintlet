@@ -45,6 +45,15 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         sessionInfo: { [unowned self] ref in windowContext.claudePages.sessionInfo(for: ref) }
     ))
     private lazy var settingsWindow = SettingsWindowController { [unowned self] in settingsPanes }
+    private lazy var onboarding = OnboardingWindowController(
+        accessibility: accessibility,
+        shortcut: { [unowned self] in hotKeys.settings[$0].displayString },
+        onGranted: { [weak self] in
+            self?.windowContext.start()
+            self?.startGivingWay()
+        })
+    /// The first note ever gets a word on how to change it, once.
+    private static let shownFirstNoteTipKey = "shownFirstNoteTip"
     private lazy var mainMenu = MainMenu(engine: engine, overlay: overlay, actions: MainMenu.Actions(
         showSettings: { [unowned self] in showSettings() },
         newNote: { [unowned self] in createNote() },
@@ -170,6 +179,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         }
         if let problem = saved.problem { explainUnreadableNotes(problem) }
         #if DEBUG
+        // Not over the design previews; `-previewOnboarding YES` shows it there.
+        let previewing = ProcessInfo.processInfo.arguments.contains { $0.hasPrefix("-preview") }
+        if UserDefaults.standard.bool(forKey: "previewOnboarding") { onboarding.show() }
+        if !previewing { onboarding.showIfFirstLaunch() }
+        #else
+        onboarding.showIfFirstLaunch()
+        #endif
+        #if DEBUG
         // `-previewHint draft|settings|fallback` shows a hint at the pointer, to look at its design.
         if let which = UserDefaults.standard.string(forKey: "previewHint") {
             let preview: HintPanel.Hint = switch which {
@@ -189,18 +206,17 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             let sample = NotePanel(onTextChange: { _ in }, onMove: { _ in }, onFinishEditing: {})
             let ai = DisplayedAI(summary: summary,
                                  status: UserDefaults.standard.bool(forKey: "previewAIWriting") ? .updating : .idle)
-            // At the default size, then fitted to its text as the engine would (no cap here).
             let frame = CGRect(x: 600, y: 500, width: NoteEngine.defaultNoteSize.width, height: NoteEngine.defaultNoteSize.height)
-            let note = { (frame: CGRect, fits: Bool) in
-                DisplayedNote(id: UUID(), frame: frame, text: "", scopeLabel: .conversation(title: "登入重構"), color: color,
-                              ai: ai, fitsTextHeight: fits)
-            }
-            sample.onFitHeight = { [weak sample] height in
-                let fitted = max(height, NoteEngine.minimumNoteSize.height)
-                sample?.update(note(CGRect(x: frame.minX, y: frame.maxY - fitted, width: frame.width, height: fitted), false))
-            }
-            sample.update(note(frame, true))
+            sample.update(DisplayedNote(id: UUID(), frame: frame, text: "", scopeLabel: .conversation(title: "登入重構"),
+                                        color: color, ai: ai))
             sample.reveal()
+            // `-previewAIRecolor sunset`: a second later the note changes to that colour, as from the settings.
+            if let next = UserDefaults.standard.string(forKey: "previewAIRecolor").flatMap(NoteColor.init(rawValue:)) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    sample.update(DisplayedNote(id: UUID(), frame: frame, text: "", scopeLabel: .conversation(title: "登入重構"),
+                                                color: next, ai: ai))
+                }
+            }
             if UserDefaults.standard.bool(forKey: "previewIsland") {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { sample.debugOpenIsland() }
             }
@@ -493,11 +509,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         hideAll.target = self
         menu.addItem(hideAll)
         hideAllItem = hideAll
-        let claude = NSMenuItem(title: String(localized: "認得 Claude 的對話"), action: #selector(toggleClaudeConversations(_:)), keyEquivalent: "")
-        claude.target = self
-        menu.addItem(claude)
         menu.delegate = self
         menu.addItem(.separator())
+        let guide = NSMenuItem(title: String(localized: "入門指南…"), action: #selector(showOnboarding), keyEquivalent: "")
+        guide.target = self
+        menu.addItem(guide)
         let settings = NSMenuItem(title: String(localized: "設定…"), action: #selector(showSettings), keyEquivalent: ",")
         settings.target = self
         menu.addItem(settings)
@@ -666,12 +682,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         return String(localized: "已匯入：新增 \(summary.added) 張，更新 \(summary.updated) 張。")
     }
 
-    /// Turning it on asks Claude for its full tree the next time it is in front; turning it off makes
-    /// notes on Claude go to the window (Claude keeps its tree until it restarts).
-    @objc private func toggleClaudeConversations(_ item: NSMenuItem) {
-        setClaudeConsent(windowContext.claudePages.consent != true)
-    }
-
+    /// From Settings › Permissions. Turning it on asks Claude for its full tree the next time it is in front;
+    /// turning it off makes notes on Claude go to the window (Claude keeps its tree until it restarts).
     private func setClaudeConsent(_ on: Bool) {
         windowContext.claudePages.consent = on
         windowContext.enableClaude()
@@ -749,11 +761,22 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
 
+    @objc private func showOnboarding() {
+        onboarding.show()
+    }
+
     @discardableResult
     private func placeNote(at cursor: CGPoint, scope: NoteScope, focus: Bool) -> NoteID {
         engine.updateScreens(Self.currentScreens())
         let id = engine.createNote(at: cursor, scope: scope)
         overlay.render()
+        onboarding.noteWasMade()
+        if !UserDefaults.standard.bool(forKey: Self.shownFirstNoteTipKey),
+           let note = engine.displayedNotes.first(where: { $0.id == id }) {
+            UserDefaults.standard.set(true, forKey: Self.shownFirstNoteTipKey)
+            // Pointing at the note from below, so it doesn't cover what the user is about to type.
+            hint.show(.firstNote, at: CGPoint(x: note.frame.midX, y: note.frame.minY), about: id)
+        }
         // A new note ends "hide all".
         showHidingState()
         autosave.schedule()
@@ -780,9 +803,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
 extension AppDelegate: NSMenuDelegate {
     func menuNeedsUpdate(_ menu: NSMenu) {
-        for item in menu.items where item.action == #selector(toggleClaudeConversations(_:)) {
-            item.state = windowContext.claudePages.consent == true ? .on : .off
-        }
         for item in menu.items where item.action == #selector(toggleHideAll) {
             item.state = engine.hidesAll ? .on : .off
         }

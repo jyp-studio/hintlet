@@ -2,7 +2,9 @@ import Foundation
 
 /// Reads what was said in a Claude Code or Cowork conversation from its local transcript: one JSON object
 /// a line, in the format Claude Code writes. Only the user's and Claude's own words are kept; internal
-/// messages, thinking, tool calls and results, subagents and system reminders are left out.
+/// messages, thinking, tool calls and results, subagents and system reminders are left out, and so is the
+/// summary Claude Code writes when it compacts a long conversation: it reads as the user's first request,
+/// and its to-do list goes stale.
 public enum ClaudeTranscript {
     public static func messages(jsonl: Data) -> [TranscriptMessage] {
         jsonl.split(separator: UInt8(ascii: "\n")).compactMap { line in
@@ -13,6 +15,7 @@ public enum ClaudeTranscript {
 
     private static func message(in entry: [String: Any]) -> TranscriptMessage? {
         guard entry["isMeta"] as? Bool != true, entry["isSidechain"] as? Bool != true,
+              entry["isCompactSummary"] as? Bool != true,
               let message = entry["message"] as? [String: Any] else { return nil }
         let role: TranscriptMessage.Role
         switch entry["type"] as? String {

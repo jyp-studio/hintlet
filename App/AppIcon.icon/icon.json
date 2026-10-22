@@ -1,0 +1,110 @@
+{
+  "fill-specializations": [
+    {
+      "value": {
+        "linear-gradient": [
+          "srgb:1.00000,0.99216,0.96078,1.00000",
+          "srgb:0.96471,0.94510,0.88235,1.00000"
+        ]
+      }
+    },
+    {
+      "appearance": "dark",
+      "value": {
+        "linear-gradient": [
+          "srgb:0.22353,0.21961,0.20784,1.00000",
+          "srgb:0.13333,0.12941,0.12157,1.00000"
+        ]
+      }
+    }
+  ],
+  "groups": [
+    {
+      "hidden": false,
+      "layers": [
+        {
+          "fill-specializations": [
+            {
+              "appearance": "dark",
+              "value": {
+                "solid": "srgb:0.92157,0.91373,0.88235,1.00000"
+              }
+            }
+          ],
+          "glass-specializations": [
+            {
+              "value": false
+            }
+          ],
+          "hidden": false,
+          "image-name": "window.svg",
+          "name": "Window"
+        }
+      ],
+      "lighting": "individual",
+      "name": "Window",
+      "shadow-specializations": [
+        {
+          "value": {
+            "kind": "neutral",
+            "opacity": 0.18
+          }
+        }
+      ],
+      "specular-specializations": [
+        {
+          "value": false
+        }
+      ],
+      "translucency-specializations": [
+        {
+          "value": {
+            "enabled": false,
+            "value": 0
+          }
+        }
+      ]
+    },
+    {
+      "hidden": false,
+      "layers": [
+        {
+          "glass-specializations": [
+            {
+              "value": true
+            }
+          ],
+          "hidden": false,
+          "image-name": "note.svg",
+          "name": "Note"
+        }
+      ],
+      "lighting": "individual",
+      "name": "Note",
+      "shadow-specializations": [
+        {
+          "value": {
+            "kind": "layer-color",
+            "opacity": 0.45
+          }
+        }
+      ],
+      "specular-specializations": [
+        {
+          "value": true
+        }
+      ],
+      "translucency-specializations": [
+        {
+          "value": {
+            "enabled": true,
+            "value": 0.15
+          }
+        }
+      ]
+    }
+  ],
+  "supported-platforms": {
+    "squares": "shared"
+  }
+}

@@ -21,13 +21,10 @@ public struct DisplayedNote: Equatable, Sendable {
     public let offersAI: Bool
     /// An empty note the menu can turn into the conversation's AI note ("轉成 AI 便利貼"), new or not.
     public let canBecomeAI: Bool
-    /// An AI note whose text just changed: the overlay measures it and hands the height back
-    /// (`NoteEngine.fitHeight(of:to:)`), so the whole summary shows without scrolling.
-    public let fitsTextHeight: Bool
 
     public init(id: NoteID, frame: CGRect, text: String, scopeLabel: ScopeLabel, windowID: WindowID? = nil,
                 color: NoteColor = .yellow, isCollapsed: Bool = false, ai: DisplayedAI? = nil, offersAI: Bool = false,
-                canBecomeAI: Bool = false, fitsTextHeight: Bool = false) {
+                canBecomeAI: Bool = false) {
         self.id = id
         self.frame = frame
         self.text = text
@@ -38,7 +35,6 @@ public struct DisplayedNote: Equatable, Sendable {
         self.ai = ai
         self.offersAI = offersAI
         self.canBecomeAI = canBecomeAI
-        self.fitsTextHeight = fitsTextHeight
     }
 }
 
@@ -302,11 +298,6 @@ public final class NoteEngine {
     private var aiStatus: [NoteID: AIStatus] = [:]
     /// Notes made this run, which offer to become AI notes while they are empty; not saved.
     private var justPlaced: Set<NoteID> = []
-    /// AI notes whose text changed since their height last fitted it; not saved. A height the user drags
-    /// the note to stays until the summary changes again.
-    private var heightsToFit: Set<NoteID> = []
-    /// An AI note grows to fit its text up to this share of its screen's visible height, then scrolls.
-    public static let fittedHeightShare: CGFloat = 0.6
 
     /// Notes the user hid on one window for a while ("隱藏這個視窗的便利貼"); they come back when asked, or
     /// when a new note is made there. Lasts only for the run; it isn't saved.
@@ -347,9 +338,8 @@ public final class NoteEngine {
                 DisplayedNote(id: $0.id, frame: $0.frame, text: $0.text, scopeLabel: $0.scopeLabel, windowID: $0.windowID,
                               color: shownColor(of: note), isCollapsed: note.isCollapsed,
                               ai: note.ai.map { DisplayedAI(summary: $0.summary, status: aiStatus[note.id] ?? .idle) },
-                              offersAI: justPlaced.contains(note.id) && note.text.allSatisfy(\.isWhitespace) && canMakeAINote(note.id),
-                              canBecomeAI: canMakeAINote(note.id),
-                              fitsTextHeight: heightsToFit.contains(note.id))
+                              offersAI: justPlaced.contains(note.id) && note.text.allSatisfy(\.isWhitespace) && offersFirstAINote(note),
+                              canBecomeAI: canMakeAINote(note.id))
             }
         }
     }
@@ -585,7 +575,6 @@ public final class NoteEngine {
 
     /// Resizes the note from its bottom-right corner: the top-left corner stays where it is.
     public func resizeNote(_ id: NoteID, to size: CGSize) {
-        heightsToFit.remove(id)
         let fitting = CGSize(width: max(size.width, Self.minimumNoteSize.width),
                              height: max(size.height, Self.minimumNoteSize.height))
         reshape(id) { frame in
@@ -596,27 +585,9 @@ public final class NoteEngine {
     /// Puts the note at `frame`, as when it is resized from one of its edges. A frame smaller than the
     /// minimum keeps its origin and grows to the minimum size (the overlay keeps the dragged edge in place).
     public func setFrame(of id: NoteID, to frame: CGRect) {
-        heightsToFit.remove(id)
         let fitting = CGSize(width: max(frame.width, Self.minimumNoteSize.width),
                              height: max(frame.height, Self.minimumNoteSize.height))
         reshape(id) { current in current = CGRect(origin: frame.origin, size: fitting) }
-    }
-
-    /// The AI note grows to the height its text needs (`DisplayedNote.fitsTextHeight`), keeping its top edge and
-    /// width, up to `fittedHeightShare` of its screen. It never shrinks: a note that becomes an AI note keeps its
-    /// size until the summary needs more, and a short summary leaves room as it is. Once per change of its text;
-    /// afterwards the height is the user's again.
-    public func fitHeight(of id: NoteID, to height: CGFloat) {
-        guard heightsToFit.remove(id) != nil, let note = notes.first(where: { $0.id == id }), note.ai != nil,
-              let frame = displayed(note)?.frame else { return }
-        let screen = screens.first { $0.frame.contains(CGPoint(x: frame.midX, y: frame.maxY)) }
-            ?? screen(containing: CGPoint(x: frame.midX, y: frame.midY))
-        let cap = screen.map { max($0.visibleFrame.height * Self.fittedHeightShare, Self.minimumNoteSize.height) } ?? .infinity
-        let fitted = min(height.rounded(.up), cap)
-        guard fitted > frame.height else { return }
-        reshape(id) { frame in
-            frame = CGRect(x: frame.minX, y: frame.maxY - fitted, width: frame.width, height: fitted)
-        }
     }
 
     public func setColor(of id: NoteID, to color: NoteColor) {
@@ -1044,27 +1015,38 @@ extension NoteEngine {
 // MARK: - AI notes
 
 extension NoteEngine {
-    /// Whether the note can become an AI note now: an empty, ordinary note on a conversation of a kind AI
-    /// notes are offered on, which has no AI note yet. The note's menu offers it on any such note; the
-    /// note itself offers it only while just placed (`DisplayedNote.offersAI`).
+    /// Whether the note can become an AI note now: an ordinary note on a conversation of a kind AI notes are
+    /// written for. If the conversation has an AI note already, this one takes its place (`makeAINote`).
     public func canMakeAINote(_ id: NoteID) -> Bool {
         guard let note = notes.first(where: { $0.id == id }), note.deletedAt == nil, note.ai == nil,
-              let ref = Self.conversation(of: note.placement),
-              aiConversationKinds.contains(ref.kind) else { return false }
-        return aiNote(on: ref, excluding: id) == nil
+              let ref = Self.conversation(of: note.placement) else { return false }
+        return aiConversationKinds.contains(ref.kind)
+    }
+
+    /// A just-placed note offers itself only on a conversation with no AI note yet, so the offer never nags
+    /// (`DisplayedNote.offersAI`); the ✨ and the menu work on any note that can become one.
+    private func offersFirstAINote(_ note: Note) -> Bool {
+        guard canMakeAINote(note.id), let ref = Self.conversation(of: note.placement) else { return false }
+        return aiNote(on: ref, excluding: note.id) == nil
     }
 
     /// Makes the note the conversation's AI note, read-only and in the AI colour from the settings
-    /// (`aiNoteColor`), and asks for its first summary.
-    public func makeAINote(_ id: NoteID) {
-        guard canMakeAINote(id), let index = notes.firstIndex(where: { $0.id == id }) else { return }
+    /// (`aiNoteColor`), and asks for its first summary. A conversation keeps one AI note: the one it had goes
+    /// back to being an ordinary note saying what it said (`summaryText`, as `makeOrdinaryNote`). Returns that
+    /// note, if there was one.
+    @discardableResult
+    public func makeAINote(_ id: NoteID, summaryText: (AISummary) -> String = { $0.lines.joined(separator: "\n") }) -> NoteID? {
+        guard canMakeAINote(id), let index = notes.firstIndex(where: { $0.id == id }),
+              let ref = Self.conversation(of: notes[index].placement) else { return nil }
+        let replaced = aiNote(on: ref, excluding: id)
+        if let replaced { makeOrdinaryNote(replaced, summaryText: summaryText) }
         let written = notes[index].text
         notes[index].ai = AINoteState(summary: nil, keptText: written.allSatisfy(\.isWhitespace) ? nil : written)
         notes[index].text = ""
         notes[index].updatedAt = now()
         justPlaced.remove(id)
-        heightsToFit.insert(id)
         requestSummary(id)
+        return replaced
     }
 
     /// "轉成一般便利貼": the AI note becomes an ordinary one the user can edit again, in its old colour,
@@ -1077,7 +1059,6 @@ extension NoteEngine {
         notes[index].text = shown.allSatisfy(\.isWhitespace) ? ai.keptText ?? "" : shown
         notes[index].updatedAt = now()
         aiStatus[id] = nil
-        heightsToFit.remove(id)
         summaryRequests.removeAll { $0.noteID == id }
     }
 
@@ -1111,7 +1092,6 @@ extension NoteEngine {
     /// Puts the summary on the AI note. Never touches any other note.
     public func applySummary(_ summary: AISummary, to id: NoteID) {
         guard let index = notes.firstIndex(where: { $0.id == id }), notes[index].ai != nil else { return }
-        if notes[index].ai?.summary?.lines != summary.lines { heightsToFit.insert(id) }
         notes[index].ai?.summary = summary
         // The lines as text too, so the list shows and finds the note by them.
         notes[index].text = summary.lines.joined(separator: "\n")

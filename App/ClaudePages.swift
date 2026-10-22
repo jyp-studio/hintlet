@@ -81,7 +81,7 @@ final class ClaudePages {
 
         開啟後 Claude 會多用一些記憶體與處理器資源。Hintlet 只讀取對話的網址與標題；只有你開了 AI 便利貼的 Chat 對話，才會讀取頁面上已載入的訊息來寫摘要。
 
-        不開啟的話，在 Claude 上的便利貼會綁在整個視窗。之後可以從選單列的 Hintlet 選單改變。
+        不開啟的話，在 Claude 上的便利貼會綁在整個視窗。之後可以在「設定 › 權限」改變。
         """)
         alert.addButton(withTitle: String(localized: "開啟"))
         alert.addButton(withTitle: String(localized: "只用視窗範圍"))

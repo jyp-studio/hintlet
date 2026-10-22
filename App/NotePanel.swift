@@ -32,8 +32,6 @@ final class NotePanel: NSPanel, NSTextViewDelegate {
     var onEndEditing: (() -> Void)?
     /// The user resized the note from one of its edges.
     var onSetFrame: ((CGRect) -> Void)?
-    /// An AI note's text changed (`DisplayedNote.fitsTextHeight`): the height the paper needs to show all of it.
-    var onFitHeight: ((CGFloat) -> Void)?
     var onSetColor: ((NoteColor) -> Void)?
     var onSetCollapsed: ((Bool) -> Void)?
     var onDelete: (() -> Void)?
@@ -171,16 +169,16 @@ final class NotePanel: NSPanel, NSTextViewDelegate {
             card.show(note.color, ripplingFrom: previous == nil ? nil : NSPoint(x: noteSize.width / 2, y: noteSize.height))
         }
         card.showAI(note.ai, offering: note.offersAI)
-        if note.fitsTextHeight {
-            let height = card.heightFitting(width: note.frame.width)
-            // After this update: the engine's answer comes back as another one.
-            DispatchQueue.main.async { [weak self] in self?.onFitHeight?(height) }
-        }
         if note.ai == nil, card.textView.string != note.text { card.setText(note.text) }
         let ai: NoteIslandView.AIControls = if note.ai != nil {
             .aiNote(canRefresh: canRefreshAI())
         } else {
             note.canBecomeAI ? .convert : .none
+        }
+        island.aiUnavailableReason = if case .conversation = note.scopeLabel {
+            String(localized: "先在「設定 › AI」選一個寫 AI 便利貼的模型")
+        } else {
+            String(localized: "貼在 Claude 或 Codex 對話上的便利貼才能轉成 AI 便利貼")
         }
         island.isOnDarkPaper = NotePalette.of(note.color).isDark
         island.show(scope: note.scopeLabel, firstLine: Self.firstLine(of: note.text), color: note.color,
@@ -980,30 +978,24 @@ private final class NoteCardView: NSView {
 
     /// `ripplingFrom` (in this view) spreads the new colour out from that point, as a ripple.
     func show(_ color: NoteColor, ripplingFrom origin: NSPoint? = nil) {
+        // A plain paper colour is carried by the ripple itself. An AI note's looks (patches, a diagonal, glass)
+        // and its words' colour can't be: the note takes its new look at once, under a picture of the old one,
+        // and a hole growing from the same spot opens the picture away.
+        let carried = palette.isPlainPaper && NotePalette.of(color).isPlainPaper
+        let old = origin != nil && !carried ? snapshot() : nil
         self.color = color
         palette = NotePalette.of(color)
-        // Glass follows the system's light or dark; paper keeps its own.
-        appearance = palette.usesMaterial ? nil : NSAppearance(named: palette.isDark ? .darkAqua : .aqua)
-        material.isHidden = !palette.usesMaterial
-        material.maskImage = palette.usesMaterial ? Self.roundedMask : nil
-        layer?.borderColor = (palette.isDark || palette.usesMaterial ? NSColor.white.withAlphaComponent(palette.usesMaterial ? 0.3 : 0.12)
-                                                                     : Self.edge).cgColor
-        sheen.backgroundColor = NSColor.white.withAlphaComponent(palette.isDark ? 0.22 : 0.85).cgColor
-        CATransaction.begin()
-        CATransaction.setDisableActions(true)
-        paper.isHidden = palette.usesMaterial
-        sheen.isHidden = palette.usesMaterial
-        // Layer gradients run bottom to top in AppKit's unflipped layers: top-left is (0, 1).
-        paper.startPoint = palette.diagonal == nil ? CGPoint(x: 0.5, y: 0) : CGPoint(x: 0, y: 1)
-        paper.endPoint = palette.diagonal == nil ? CGPoint(x: 0.5, y: 1) : CGPoint(x: 1, y: 0)
-        showPatches()
-        CATransaction.commit()
-        textView.textColor = palette.ink
-        textView.insertionPointColor = palette.ink
-        textView.ink = palette.ink
-        applyTypography()
+        applyLook()
         // Layer gradients run bottom to top in AppKit's unflipped layers.
         let colors = palette.diagonal?.map(\.cgColor) ?? [palette.paperBottom.cgColor, palette.paperTop.cgColor]
+        if let origin, let old {
+            CATransaction.begin()
+            CATransaction.setDisableActions(true)
+            paper.colors = colors
+            CATransaction.commit()
+            rippleAway(old, from: origin)
+            return
+        }
         guard let origin, let layer else {
             CATransaction.begin()
             CATransaction.setDisableActions(true)
@@ -1034,6 +1026,80 @@ private final class NoteCardView: NSView {
         let grow = CABasicAnimation(keyPath: "path")
         grow.fromValue = from
         grow.toValue = to
+        grow.duration = 0.6
+        grow.timingFunction = CAMediaTimingFunction(controlPoints: 0.3, 0.8, 0.3, 1)
+        mask.add(grow, forKey: "ripple")
+        CATransaction.commit()
+    }
+
+    /// Everything about the note's colour but the paper's own colours, at once.
+    private func applyLook() {
+        // Glass follows the system's light or dark; paper keeps its own.
+        appearance = palette.usesMaterial ? nil : NSAppearance(named: palette.isDark ? .darkAqua : .aqua)
+        material.isHidden = !palette.usesMaterial
+        material.maskImage = palette.usesMaterial ? Self.roundedMask : nil
+        layer?.borderColor = (palette.isDark || palette.usesMaterial ? NSColor.white.withAlphaComponent(palette.usesMaterial ? 0.3 : 0.12)
+                                                                     : Self.edge).cgColor
+        sheen.backgroundColor = NSColor.white.withAlphaComponent(palette.isDark ? 0.22 : 0.85).cgColor
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
+        paper.isHidden = palette.usesMaterial
+        sheen.isHidden = palette.usesMaterial
+        // Layer gradients run bottom to top in AppKit's unflipped layers: top-left is (0, 1).
+        paper.startPoint = palette.diagonal == nil ? CGPoint(x: 0.5, y: 0) : CGPoint(x: 0, y: 1)
+        paper.endPoint = palette.diagonal == nil ? CGPoint(x: 0.5, y: 1) : CGPoint(x: 1, y: 0)
+        showPatches()
+        CATransaction.commit()
+        textView.textColor = palette.ink
+        textView.insertionPointColor = palette.ink
+        textView.ink = palette.ink
+        applyTypography()
+    }
+
+    /// The note as it looks now, for the colour change to open away.
+    /// From the layers themselves: the paper, its patches and the sheen are layers of their own, which a view's
+    /// drawing leaves out. Glass's blur isn't in any layer and comes out clear.
+    private func snapshot() -> CGImage? {
+        guard let layer, bounds.width > 0, bounds.height > 0 else { return nil }
+        let scale = window?.backingScaleFactor ?? 2
+        guard let context = CGContext(data: nil, width: Int(bounds.width * scale), height: Int(bounds.height * scale),
+                                      bitsPerComponent: 8, bytesPerRow: 0, space: CGColorSpace(name: CGColorSpace.sRGB)!,
+                                      bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue) else { return nil }
+        context.scaleBy(x: scale, y: scale)
+        layer.render(in: context)
+        return context.makeImage()
+    }
+
+    /// Lays `old` over the note and opens it away in a circle from `origin`, the way a plain colour spreads.
+    private func rippleAway(_ old: CGImage, from origin: NSPoint) {
+        guard let layer else { return }
+        let cover = CALayer()
+        cover.frame = bounds
+        cover.contents = old
+        cover.contentsGravity = .resize
+        cover.cornerRadius = layer.cornerRadius
+        cover.cornerCurve = layer.cornerCurve
+        cover.masksToBounds = true
+        cover.zPosition = 100
+        layer.addSublayer(cover)
+        let reach = hypot(max(origin.x, bounds.width - origin.x), max(origin.y, bounds.height - origin.y))
+        func holed(_ radius: CGFloat) -> CGPath {
+            let path = CGMutablePath()
+            path.addRect(bounds.insetBy(dx: -1, dy: -1))
+            path.addEllipse(in: CGRect(x: origin.x - radius, y: origin.y - radius, width: 2 * radius, height: 2 * radius))
+            return path
+        }
+        let mask = CAShapeLayer()
+        mask.fillRule = .evenOdd
+        mask.path = holed(reach)
+        cover.mask = mask
+        CATransaction.begin()
+        CATransaction.setCompletionBlock {
+            MainActor.assumeIsolated { cover.removeFromSuperlayer() }
+        }
+        let grow = CABasicAnimation(keyPath: "path")
+        grow.fromValue = holed(0)
+        grow.toValue = holed(reach)
         grow.duration = 0.6
         grow.timingFunction = CAMediaTimingFunction(controlPoints: 0.3, 0.8, 0.3, 1)
         mask.add(grow, forKey: "ripple")
@@ -1116,22 +1182,6 @@ private final class NoteCardView: NSView {
 
     @objc private func takeOffer() {
         onMakeAI?()
-    }
-
-    /// How tall the paper must be, at `width`, to show all its text without scrolling: the text laid out
-    /// as the text view lays it out, plus the margins around it.
-    func heightFitting(width: CGFloat) -> CGFloat {
-        let inset = textView.textContainerInset
-        let container = NSTextContainer(size: NSSize(width: max(width - 2 * Self.sideMargin - 2 * inset.width, 1),
-                                                     height: .greatestFiniteMagnitude))
-        container.lineFragmentPadding = textView.textContainer?.lineFragmentPadding ?? 5
-        let layout = NSLayoutManager()
-        layout.addTextContainer(container)
-        let storage = NSTextStorage(attributedString: textView.attributedString())
-        storage.addLayoutManager(layout)
-        layout.ensureLayout(for: container)
-        let text = layout.usedRect(for: container).height
-        return (text + 2 * inset.height + Self.topMargin + Self.bottomMargin).rounded(.up)
     }
 
     /// The settings' text size changed: everything is set again at the new size.

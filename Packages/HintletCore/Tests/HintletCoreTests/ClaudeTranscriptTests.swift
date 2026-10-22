@@ -5,6 +5,7 @@ import HintletCore
 /// Lines shaped like Claude's local transcripts (`<cliSessionId>.jsonl`), trimmed to what matters.
 private let transcript = #"""
 {"type":"queue-operation","operation":"enqueue"}
+{"type":"user","isCompactSummary":true,"isVisibleInTranscriptOnly":true,"message":{"role":"user","content":"This session is being continued from a previous conversation. Pending: exclude ~/dev from Google Drive"}}
 {"type":"user","isSidechain":false,"message":{"role":"user","content":"幫我重構登入流程<system-reminder>內部提示</system-reminder>"}}
 {"type":"user","isMeta":true,"message":{"role":"user","content":[{"type":"text","text":"Base directory for this skill"}]}}
 {"type":"assistant","message":{"role":"assistant","content":[{"type":"thinking","thinking":"想一下"}]}}
@@ -30,7 +31,7 @@ private func write(_ text: String, to url: URL) throws {
 
 @Suite("讀取 Code 與 Cowork 的本機對話紀錄")
 struct ReadingTranscripts {
-    @Test("只留下使用者與 Claude 說的話：略過內部訊息、思考、工具、子代理與系統提示")
+    @Test("只留下使用者與 Claude 說的話：略過內部訊息、思考、工具、子代理、系統提示與壓縮對話時的摘要")
     func keepsWhatWasSaid() {
         let messages = ClaudeTranscript.messages(jsonl: Data(transcript.utf8))
 

@@ -214,3 +214,38 @@ struct APIKeyStaysOut {
         #expect(!String(describing: defaults.dictionaryRepresentation()).contains(secret))
     }
 }
+
+@Suite("AI 設定：上傳只問一次")
+struct AgreeingToUploads {
+    @Test("同意過的後端，切回來不用再問；沒同意過的要問；裝置端模型從不問")
+    func asksOnlyOnce() {
+        var settings = AISettings()
+        #expect(!settings.needsAgreement(for: .onDevice))
+        #expect(settings.needsAgreement(for: .claudeAccount))
+
+        settings.choose(.claudeAccount)
+        settings.choose(.onDevice)
+        #expect(!settings.needsAgreement(for: .claudeAccount))
+        #expect(settings.needsAgreement(for: .codexAccount))
+        #expect(settings.backend == .onDevice)
+    }
+
+    @Test("同意過的後端會記住")
+    func remembered() {
+        let defaults = scratchDefaults()
+        var settings = AISettings()
+        settings.choose(.codexAccount)
+        settings.choose(.openAIAPI)
+        settings.save(to: defaults)
+
+        #expect(AISettings.load(from: defaults).agreedUploads == [.codexAccount, .openAIAPI])
+    }
+
+    @Test("舊版只存了後端：正在用的那個算同意過")
+    func olderSettingsAgreedToTheBackendInUse() {
+        let defaults = scratchDefaults()
+        defaults.set("claudeAccount", forKey: "aiBackend")
+
+        #expect(AISettings.load(from: defaults).agreedUploads == [.claudeAccount])
+    }
+}

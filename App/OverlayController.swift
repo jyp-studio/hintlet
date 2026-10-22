@@ -316,7 +316,6 @@ final class OverlayController {
             onFinishEditing: { [weak self] in self?.onFinishEditing() }
         )
         panel.onSetFrame = { [weak self] frame in self?.change { $0.setFrame(of: id, to: frame) } }
-        panel.onFitHeight = { [weak self] height in self?.change { $0.fitHeight(of: id, to: height) } }
         panel.onSetColor = { [weak self] color in self?.change { $0.setColor(of: id, to: color) } }
         panel.onSetCollapsed = { [weak self] collapsed in self?.change { $0.setCollapsed(id, collapsed) } }
         panel.onDelete = { [weak self] in self?.delete(id) }
@@ -324,7 +323,8 @@ final class OverlayController {
         panel.onSetScope = { [weak self] scope in self?.change { $0.changeScope(of: id, to: scope) } }
         panel.canRefreshAI = { [weak self] in !(self?.engine.aiConversationKinds.isEmpty ?? true) }
         panel.onMakeAI = { [weak self] in
-            self?.change { $0.makeAINote(id) }
+            // On a conversation that had another AI note, that one turns back into an ordinary note.
+            self?.change { $0.makeAINote(id, summaryText: AINoteText.shownText) }
             self?.onSummariesRequested?()
         }
         panel.onRefreshAI = { [weak self] in

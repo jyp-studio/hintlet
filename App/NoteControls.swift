@@ -94,6 +94,8 @@ final class NoteIslandView: NSView {
     /// "轉成 AI 便利貼", after the dots, on every ordinary note: dimmed, as macOS shows a control that can't be
     /// used, until the note is on a conversation that can have an AI note.
     private let aiButton = IslandButton()
+    /// Why the ✨ is dimmed, for its tooltip: the one thing that keeps this note from becoming an AI note.
+    var aiUnavailableReason = ""
     /// On an AI note: "轉成一般便利貼".
     private let ordinaryButton = IslandButton()
     /// On dark paper the black capsule needs its light rim, as on a dark window.
@@ -242,6 +244,7 @@ final class NoteIslandView: NSView {
     /// What the island says: where the note belongs, or (collapsed) the note's first line.
     func show(scope: ScopeLabel, firstLine: String, color: NoteColor, collapsed: Bool, ai: AIControls = .none) {
         if ai != aiControls { showAIControls(ai) }
+        if ai != .convert { aiButton.toolTip = aiUnavailableReason }
         let (symbol, full) = scope.display
         let text = collapsed ? (firstLine.isEmpty ? String(localized: "便利貼") : firstLine) : scope.short
         let changed = label.stringValue != text || icon.isHidden != collapsed
@@ -282,8 +285,7 @@ final class NoteIslandView: NSView {
         // The ✨ is on every ordinary note, dimmed where the note can't become an AI note.
         aiButton.isHidden = isAINote
         let offersAI = ai == .convert
-        aiButton.toolTip = offersAI ? String(localized: "轉成 AI 便利貼")
-                                    : String(localized: "貼在 Claude 對話上的便利貼才能轉成 AI 便利貼（每個對話一張）")
+        aiButton.toolTip = offersAI ? String(localized: "轉成 AI 便利貼") : aiUnavailableReason
         if aiButton.isEnabled != offersAI {
             aiButton.isEnabled = offersAI
             NSAnimationContext.runAnimationGroup { context in

@@ -27,7 +27,7 @@ The app is in English and Traditional Chinese. Project docs (spec, ADRs, spike r
   - your own Claude API or OpenAI API key, kept in the Keychain
 
   Every option except the on-device model uploads the conversation, and each asks for your consent first.
-- **Menu bar** — Hide All for Now (for screen sharing), Recognize Claude Conversations, and Settings… (⌘,): shortcuts, note defaults, AI, backups, permissions, open at login.
+- **Menu bar** — Hide All for Now (for screen sharing), Getting Started…, and Settings… (⌘,): shortcuts, note defaults, AI, backups, permissions, open at login.
 
 ## Install
 
@@ -37,13 +37,15 @@ Requires macOS 14 or later (developed on macOS 27).
 
 1. Download `Hintlet-<version>.zip` from [Releases](../../releases) and unzip it.
 2. Move `Hintlet.app` to `/Applications`.
-3. The app isn't notarized, so macOS blocks it the first time. Open it once, then go to **System Settings › Privacy & Security** and click **Open Anyway**. Or, in Terminal:
+3. The app isn't notarized (notarizing needs a paid Apple Developer membership), so macOS blocks it the first time. Nothing is wrong with it, and it's free to use: open it once, then go to **System Settings › Privacy & Security**, scroll down, click **Open Anyway** and enter your password. macOS doesn't ask again for that version. Or, in Terminal:
 
    ```bash
    xattr -dr com.apple.quarantine /Applications/Hintlet.app
    ```
 
-4. Press ⌘⌥N. Hintlet explains why it needs Accessibility and opens System Settings; turn on Hintlet there.
+4. A short welcome guide opens: what Hintlet does, turning on Accessibility (it opens System Settings for you), and making your first note with ⌘⌥N. **Getting Started…** in the menu bar menu shows it again.
+
+After installing a newer version, macOS may no longer recognise it as the app you allowed, because it isn't notarized. If notes stop following windows, turn Hintlet off and on again under **Accessibility** (or remove it and add it back).
 
 ### Build from source
 
@@ -68,8 +70,8 @@ Hintlet asks only when a feature needs it. You can refuse any of them, and notes
 
 | Permission | Asked when | Used for | If refused |
 |---|---|---|---|
-| Accessibility | The first ⌘⌥N | Reading the front window's position, title, document path and web address | Notes are always floating |
-| Claude's full accessibility information (Hintlet's own consent, not a system permission) | The first ⌘⌥N in Claude | Lets Claude expose its web content, so the conversation's address can be read. Claude uses somewhat more resources | Notes on Claude stick to the window; toggle any time with Recognize Claude Conversations |
+| Accessibility | The welcome guide, or the first ⌘⌥N | Reading the front window's position, title, document path and web address | Notes are always floating |
+| Claude's full accessibility information (Hintlet's own consent, not a system permission) | The first ⌘⌥N in Claude | Lets Claude expose its web content, so the conversation's address can be read. Claude uses somewhat more resources | Notes on Claude stick to the window; turn it on or off any time in Settings › Permissions |
 | Automation: Finder | The first ⌘⌥N on a Finder folder window | Asking Finder which folder a window shows | Notes stick to the window |
 | Automation: Terminal, iTerm *(experimental)* | When the front tab is running Claude Code | Asking which tab (tty) is in front | Notes stick to the folder or window |
 

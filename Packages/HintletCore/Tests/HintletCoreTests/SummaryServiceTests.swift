@@ -84,6 +84,10 @@ struct GoalPointNextSummaries {
         #expect(state("卡住：build.db 錯誤") == .stuck)
         #expect(state("Your turn: pick a name") == .waitingForYou)
         #expect(state("修好測試") == .unknown)
+        // A small model sometimes leaves the colon out.
+        #expect(AISummary(goal: "g", point: "p", next: "等你測試", coverage: .complete, backend: .onDevice,
+                          updatedAt: noon).state == (.waitingForYou, "測試"))
+        #expect(state("Stuckness everywhere") == .unknown)
     }
 
     @Test("標籤、項目符號、編號、粗體與句號都拿掉，順序照標籤")

@@ -166,17 +166,35 @@ struct OfferingAINotes {
         #expect(!engine.hasAINote(on: login))
     }
 
-    @Test("對話已有 AI 便利貼時，新的便利貼不再出現選項")
-    func onePerConversation() {
+    @Test("對話已有 AI 便利貼時，新的便利貼不跳出選項，但 ✨ 仍可用")
+    func offerOnlyOnTheFirst() {
         let engine = engineOnLogin()
         let first = engine.createNote(at: CGPoint(x: 300, y: 700))
         engine.makeAINote(first)
 
         let second = engine.createNote(at: CGPoint(x: 600, y: 700))
-        engine.makeAINote(second)
 
-        #expect(!engine.canMakeAINote(second))
-        #expect(engine.displayedNotes.filter { $0.ai != nil }.map(\.id) == [first])
+        let shown = engine.displayedNotes.first { $0.id == second }
+        #expect(shown?.offersAI == false)
+        #expect(shown?.canBecomeAI == true)
+    }
+
+    @Test("另一張按 ✨：它變成 AI 便利貼，原本那張變回一般便利貼，內容是它最後的摘要")
+    func swapsWhichNoteIsTheAINote() {
+        let engine = engineOnLogin()
+        let first = engine.createNote(at: CGPoint(x: 300, y: 700))
+        engine.makeAINote(first)
+        _ = engine.takeSummaryRequests()
+        engine.applySummary(summary("第一張"), to: first)
+        let second = engine.createNote(at: CGPoint(x: 600, y: 700))
+
+        let replaced = engine.makeAINote(second)
+
+        #expect(replaced == first)
+        #expect(engine.displayedNotes.filter { $0.ai != nil }.map(\.id) == [second])
+        let old = engine.displayedNotes.first { $0.id == first }
+        #expect(old?.ai == nil)
+        #expect(old?.text.contains("第一張") == true)
     }
 
     @Test("AI 便利貼放進垃圾桶後，這個對話又可以有新的 AI 便利貼")
@@ -415,139 +433,5 @@ struct SavingAINotes {
         #expect(engine.displayedNotes.map(\.text) == ["手寫"])
         #expect(engine.displayedNotes.first?.ai == nil)
         #expect(NotesDocument.currentVersion == 7)
-    }
-}
-
-@Suite("AI 便利貼：高度貼合內容")
-struct FittingAINoteHeight {
-    /// An AI note on `login` with its first summary, its height fitted once to the summary's.
-    private func aiNote(on engine: NoteEngine) -> NoteID {
-        let id = engine.createNote(at: CGPoint(x: 300, y: 700))
-        engine.makeAINote(id)
-        return id
-    }
-
-    @Test("變成 AI 便利貼時要量高度；量好之後就不用再量")
-    func fitsOnceWhenMade() {
-        let engine = engineOnLogin()
-        let id = aiNote(on: engine)
-        #expect(engine.displayedNotes.first?.fitsTextHeight == true)
-
-        engine.fitHeight(of: id, to: 240)
-
-        #expect(engine.displayedNotes.first?.fitsTextHeight == false)
-        #expect(engine.displayedNotes.first?.frame.height == 240)
-    }
-
-    @Test("只長高，不縮短：剛轉成 AI 便利貼、摘要很短時維持原本大小")
-    func neverShrinks() {
-        let engine = engineOnLogin()
-        let id = aiNote(on: engine)
-        let before = try! #require(engine.displayedNotes.first?.frame)
-
-        engine.fitHeight(of: id, to: 60)
-        #expect(engine.displayedNotes.first?.frame == before)
-
-        engine.applySummary(summary("很長的摘要"), to: id)
-        engine.fitHeight(of: id, to: 260)
-        engine.applySummary(summary("短"), to: id)
-        engine.fitHeight(of: id, to: 90)
-        #expect(engine.displayedNotes.first?.frame.height == 260)
-    }
-
-    @Test("長高時上緣與寬度不動")
-    func keepsTopAndWidth() {
-        let engine = engineOnLogin()
-        let id = aiNote(on: engine)
-        let before = try! #require(engine.displayedNotes.first?.frame)
-
-        engine.fitHeight(of: id, to: 260)
-
-        let after = try! #require(engine.displayedNotes.first?.frame)
-        #expect(after.maxY == before.maxY)
-        #expect(after.minX == before.minX)
-        #expect(after.width == before.width)
-        #expect(after.height == 260)
-    }
-
-    @Test("不會比螢幕可用高度的六成高")
-    func clamped() {
-        let engine = engineOnLogin()
-        let id = aiNote(on: engine)
-        engine.applySummary(summary("很長的摘要"), to: id)
-        engine.fitHeight(of: id, to: 5000)
-        #expect(engine.displayedNotes.first?.frame.height == (laptop.visibleFrame.height * 0.6).rounded(.up))
-    }
-
-    @Test("摘要內容變了才重新量；只有時間或狀態變了不量")
-    func refitsOnlyWhenTextChanges() {
-        let engine = engineOnLogin()
-        let id = aiNote(on: engine)
-        engine.fitHeight(of: id, to: 200)
-
-        engine.applySummary(summary(), to: id)
-        #expect(engine.displayedNotes.first?.fitsTextHeight == true)
-        engine.fitHeight(of: id, to: 220)
-
-        engine.applySummary(summary(at: noon.addingTimeInterval(60)), to: id)
-        engine.summaryStarted(id)
-        #expect(engine.displayedNotes.first?.fitsTextHeight == false)
-        engine.fitHeight(of: id, to: 300)
-        #expect(engine.displayedNotes.first?.frame.height == 220)
-    }
-
-    @Test("使用者拖出來的高度保留到摘要下次改變")
-    func userHeightKeptUntilTextChanges() {
-        let engine = engineOnLogin()
-        let id = aiNote(on: engine)
-        engine.applySummary(summary(), to: id)
-        engine.fitHeight(of: id, to: 140)
-        let frame = try! #require(engine.displayedNotes.first?.frame)
-
-        engine.setFrame(of: id, to: CGRect(x: frame.minX, y: frame.maxY - 300, width: frame.width, height: 300))
-        engine.applySummary(summary(at: noon.addingTimeInterval(60)), to: id)
-        #expect(engine.displayedNotes.first?.frame.height == 300)
-
-        engine.applySummary(summary("改做部署"), to: id)
-        engine.fitHeight(of: id, to: 150)
-        #expect(engine.displayedNotes.first?.frame.height == 300)
-        engine.applySummary(summary("改做部署，還要回滾"), to: id)
-        engine.fitHeight(of: id, to: 340)
-        #expect(engine.displayedNotes.first?.frame.height == 340)
-    }
-
-    @Test("拖動邊緣時還沒量的高度就不量了")
-    func dragCancelsPendingFit() {
-        let engine = engineOnLogin()
-        let id = aiNote(on: engine)
-
-        engine.resizeNote(id, to: CGSize(width: 240, height: 200))
-        engine.fitHeight(of: id, to: 120)
-
-        #expect(engine.displayedNotes.first?.frame.height == 200)
-    }
-
-    @Test("一般便利貼不量高度")
-    func ordinaryNotesDoNotFit() {
-        let engine = engineOnLogin()
-        let id = engine.createNote(at: CGPoint(x: 300, y: 700))
-        let height = engine.displayedNotes.first?.frame.height
-
-        engine.fitHeight(of: id, to: 300)
-
-        #expect(engine.displayedNotes.first?.fitsTextHeight == false)
-        #expect(engine.displayedNotes.first?.frame.height == height)
-    }
-
-    @Test("量好的高度跟著對話視窗存下來")
-    func fittedHeightIsSaved() throws {
-        let engine = engineOnLogin()
-        let id = aiNote(on: engine)
-        engine.fitHeight(of: id, to: 230)
-
-        let reloaded = NoteEngine(screens: [laptop], document: engine.document)
-        reloaded.aiConversationKinds = [.code, .cowork]
-        reloaded.observe(.window(claude(login)))
-        #expect(reloaded.displayedNotes.first?.frame.height == 230)
     }
 }

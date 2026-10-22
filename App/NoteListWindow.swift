@@ -194,11 +194,16 @@ private struct NoteListView: View {
                 NoteDetail(note: note, group: group(of: id), model: model)
                     .id(id)
             } else if selection.count > 1 {
-                ContentUnavailableView {
-                    Label(String(localized: "已選取 \(selection.count) 張便利貼"), systemImage: "square.stack")
-                } actions: {
-                    BulkActions(ids: selection, inTrash: place == .trash, waiting: place == .waiting, model: model)
+                VStack(spacing: 22) {
+                    NoteStack(notes: notes.filter { selection.contains($0.id) })
+                    Text(String(localized: "已選取 \(selection.count) 張便利貼"))
+                        .font(.title3.weight(.semibold))
+                    HStack {
+                        BulkActions(ids: selection, inTrash: place == .trash, waiting: place == .waiting, model: model)
+                    }
+                    .controlSize(.large)
                 }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .toolbar {
                     ToolbarItemGroup {
                         BulkActions(ids: selection, inTrash: place == .trash, waiting: place == .waiting, model: model)
@@ -213,6 +218,14 @@ private struct NoteListView: View {
         .frame(minWidth: 760, minHeight: 440)
         .onExitCommand(perform: close)
         .onChange(of: place) { selection = Set(notes.prefix(1).map(\.id)) }
+        #if DEBUG
+        // `-previewListSelect 4`: that many notes selected, to look at the stack.
+        .onAppear {
+            let count = UserDefaults.standard.integer(forKey: "previewListSelect")
+            guard count > 0 else { return }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { selection = Set(notes.prefix(count).map(\.id)) }
+        }
+        #endif
         .onChange(of: model.list) {
             // A place that has emptied out goes back to everything; a note that went, to the first one left.
             if case .app(let app) = place, !apps.contains(where: { $0.app == app }) { place = .all }
@@ -393,6 +406,65 @@ private struct NoteActions: View {
 }
 
 /// What can be done to several selected notes at once.
+/// Several notes picked at once, shown the way Finder shows several files: a small stack of them, a little
+/// fanned, the most recent on top, each on its own paper with its first lines.
+private struct NoteStack: View {
+    let notes: [ListedNote]
+    private static let shown = 5
+    /// How each card lies in the stack, from the top one down.
+    private static let tilts: [Double] = [0, -5, 4, -8, 7]
+    private static let shifts: [CGSize] = [.zero, CGSize(width: -14, height: 6), CGSize(width: 14, height: 4),
+                                          CGSize(width: -22, height: 12), CGSize(width: 22, height: 10)]
+
+    var body: some View {
+        let top = Array(notes.sorted { $0.updatedAt > $1.updatedAt }.prefix(Self.shown))
+        ZStack {
+            ForEach(Array(top.enumerated().reversed()), id: \.element.id) { index, note in
+                Card(note: note)
+                    .rotationEffect(.degrees(Self.tilts[index]))
+                    .offset(Self.shifts[index])
+                    .transition(.scale(scale: 0.85).combined(with: .opacity))
+            }
+        }
+        .frame(width: 260, height: 190)
+        .animation(.spring(response: 0.35, dampingFraction: 0.8), value: top.map(\.id))
+        .accessibilityHidden(true)
+    }
+
+    private struct Card: View {
+        let note: ListedNote
+
+        var body: some View {
+            let palette = NotePalette.of(note.color)
+            let ink = Color(nsColor: palette.ink)
+            let lines = (note.aiLines ?? note.text.split(whereSeparator: \.isNewline).map(String.init)).prefix(3)
+            VStack(alignment: .leading, spacing: 5) {
+                if let first = lines.first {
+                    Text(first).font(.system(size: 13, weight: .semibold)).lineLimit(2)
+                }
+                ForEach(Array(lines.dropFirst()), id: \.self) { line in
+                    Text(line).font(.system(size: 11)).lineLimit(1).opacity(0.75)
+                }
+                Spacer(minLength: 0)
+            }
+            .foregroundStyle(ink)
+            .padding(12)
+            .frame(width: 170, height: 130, alignment: .topLeading)
+            .background(paper(palette), in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+            .overlay(RoundedRectangle(cornerRadius: 12, style: .continuous).strokeBorder(.black.opacity(0.06)))
+            .shadow(color: .black.opacity(0.18), radius: 8, y: 3)
+        }
+
+        private func paper(_ palette: NotePalette) -> LinearGradient {
+            if let diagonal = palette.diagonal {
+                return LinearGradient(colors: diagonal.map { Color(nsColor: $0) }, startPoint: .topLeading, endPoint: .bottomTrailing)
+            }
+            return LinearGradient(colors: [Color(nsColor: palette.paperTop), Color(nsColor: palette.paperBottom)],
+                                  startPoint: .top, endPoint: .bottom)
+        }
+    }
+}
+
 private struct BulkActions: View {
     let ids: Set<NoteID>
     let inTrash: Bool

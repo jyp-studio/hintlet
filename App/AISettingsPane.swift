@@ -21,14 +21,16 @@ struct AIPane: View {
     @State private var pathMessage: String?
     @State private var account: AccountState?
     @State private var isSigningIn = false
+    /// Each account as last checked this run, shown at once when switching back to it while it is checked again.
+    @MainActor private static var knownAccounts: [SummaryTool: AccountState] = [:]
 
     var body: some View {
         SettingsForm {
             SettingsSection(String(localized: "由誰寫 AI 便利貼"), footnote: Self.footnote(for: current.backend)) {
                 Picker(String(localized: "由誰寫 AI 便利貼"), selection: Binding(get: { current.backend }, set: choose)) {
-                    ForEach(Self.backends, id: \.self) { backend in
+                    ForEach(SummaryBackend.choices, id: \.self) { backend in
                         VStack(alignment: .leading, spacing: 1) {
-                            Text(Self.title(of: backend))
+                            Text(backend.displayName)
                             Text(subtitle(of: backend))
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
@@ -66,30 +68,19 @@ struct AIPane: View {
             relocate()
         }
         .task(id: current.backend) { await checkAccount() }
-        .alert(confirming.map(Self.confirmTitle) ?? "", isPresented: Binding(get: { confirming != nil },
+        .alert(confirming?.agreementTitle ?? "", isPresented: Binding(get: { confirming != nil },
                                                                            set: { if !$0 { confirming = nil } }),
                presenting: confirming) { backend in
             Button(String(localized: "改用並上傳")) {
-                current.backend = backend
+                current.choose(backend)
                 apply(current)
             }
             Button(String(localized: "取消"), role: .cancel) {}
         } message: { backend in
-            Text(Self.confirmMessage(backend))
+            Text(backend.agreementMessage)
         }
     }
 
-    private static let backends: [SummaryBackend] = [.onDevice, .claudeAccount, .codexAccount, .claudeAPI, .openAIAPI]
-
-    private static func title(of backend: SummaryBackend) -> String {
-        switch backend {
-        case .claudeAccount: String(localized: "Claude 帳號")
-        case .codexAccount: String(localized: "ChatGPT 帳號（Codex）")
-        case .claudeAPI: String(localized: "Claude API key")
-        case .openAIAPI: String(localized: "OpenAI API key")
-        default: String(localized: "裝置端模型")
-        }
-    }
 
     private func subtitle(of backend: SummaryBackend) -> String {
         switch backend {
@@ -175,6 +166,7 @@ struct AIPane: View {
         guard isSigningIn else { return }
         isSigningIn = false
         account = state
+        Self.knownAccounts[tool] = state
     }
 
     private func checkAccount() async {
@@ -186,9 +178,11 @@ struct AIPane: View {
             account = nil
             return
         }
-        account = nil
+        account = Self.knownAccounts[tool]
         relocate()
-        account = await AISummaries.account(tool, at: found(tool)).state()
+        let state = await AISummaries.account(tool, at: found(tool)).state()
+        Self.knownAccounts[tool] = state
+        account = state
     }
 
     private func found(_ tool: SummaryTool) -> URL? {
@@ -197,11 +191,11 @@ struct AIPane: View {
 
     private func choose(_ backend: SummaryBackend) {
         guard backend != current.backend else { return }
-        if backend.uploadsContent {
-            // Only once the user has read where it goes and agreed.
+        if current.needsAgreement(for: backend) {
+            // Only once the user has read where it goes and agreed; the next time it just switches.
             confirming = backend
         } else {
-            current.backend = backend
+            current.choose(backend)
             apply(current)
         }
     }
@@ -251,27 +245,7 @@ struct AIPane: View {
         }
     }
 
-    private static func confirmTitle(_ backend: SummaryBackend) -> String {
-        switch backend {
-        case .claudeAccount: String(localized: "改用 Claude 帳號？")
-        case .codexAccount: String(localized: "改用 Codex 帳號？")
-        case .openAIAPI: String(localized: "改用 OpenAI API？")
-        default: String(localized: "改用 Claude API？")
-        }
-    }
 
-    private static func confirmMessage(_ backend: SummaryBackend) -> String {
-        switch backend {
-        case .claudeAccount:
-            String(localized: "AI 便利貼要寫摘要時，Hintlet 會在背景執行這台 Mac 上的 Claude Code，把它所在對話的內容（你的要求與 Claude 的回覆）交給 Claude Code 上傳到 Anthropic，用你登入的 Claude 帳號的用量。之後切走對話時的自動更新也會上傳。只有 AI 便利貼的對話會上傳，其他便利貼與對話不會。")
-        case .codexAccount:
-            String(localized: "AI 便利貼要寫摘要時，Hintlet 會在背景執行這台 Mac 上的 Codex，把它所在對話的內容（你的要求與 Claude 的回覆）交給 Codex 上傳到 OpenAI，用你登入 Codex 的 ChatGPT 帳號的用量。之後切走對話時的自動更新也會上傳。只有 AI 便利貼的對話會上傳，其他便利貼與對話不會。")
-        case .openAIAPI:
-            String(localized: "AI 便利貼要寫摘要時，它所在對話的內容（你的要求與 Claude 的回覆）會上傳到 OpenAI API，使用你的 OpenAI API key 並由你付費。之後切走對話時的自動更新也會上傳。只有 AI 便利貼的對話會上傳，其他便利貼與對話不會。")
-        default:
-            String(localized: "AI 便利貼要寫摘要時，它所在對話的內容（你的要求與 Claude 的回覆）會上傳到 Anthropic 的 Claude API，使用你的 API key 並由你付費。之後切走對話時的自動更新也會上傳。只有 AI 便利貼的對話會上傳，其他便利貼與對話不會。")
-        }
-    }
 }
 
 /// An API key: saved in the Keychain or not, entering and removing it.
@@ -338,5 +312,44 @@ struct APIKeyField: View {
             }
         }
         .onAppear { saved = store.hasKey() }
+    }
+}
+
+extension SummaryBackend {
+    /// In the order the settings list them.
+    static let choices: [SummaryBackend] = [.onDevice, .claudeAccount, .codexAccount, .claudeAPI, .openAIAPI]
+
+    /// Its name in the settings.
+    var displayName: String {
+        switch self {
+        case .claudeAccount: String(localized: "Claude 帳號")
+        case .codexAccount: String(localized: "ChatGPT 帳號（Codex）")
+        case .claudeAPI: String(localized: "Claude API key")
+        case .openAIAPI: String(localized: "OpenAI API key")
+        default: String(localized: "裝置端模型")
+        }
+    }
+
+    /// Asking before the first switch to one that uploads.
+    var agreementTitle: String {
+        switch self {
+        case .claudeAccount: String(localized: "改用 Claude 帳號？")
+        case .codexAccount: String(localized: "改用 Codex 帳號？")
+        case .openAIAPI: String(localized: "改用 OpenAI API？")
+        default: String(localized: "改用 Claude API？")
+        }
+    }
+
+    var agreementMessage: String {
+        switch self {
+        case .claudeAccount:
+            String(localized: "AI 便利貼要寫摘要時，Hintlet 會在背景執行這台 Mac 上的 Claude Code，把它所在對話的內容（你的要求與 Claude 的回覆）交給 Claude Code 上傳到 Anthropic，用你登入的 Claude 帳號的用量。之後切走對話時的自動更新也會上傳。只有 AI 便利貼的對話會上傳，其他便利貼與對話不會。")
+        case .codexAccount:
+            String(localized: "AI 便利貼要寫摘要時，Hintlet 會在背景執行這台 Mac 上的 Codex，把它所在對話的內容（你的要求與 Claude 的回覆）交給 Codex 上傳到 OpenAI，用你登入 Codex 的 ChatGPT 帳號的用量。之後切走對話時的自動更新也會上傳。只有 AI 便利貼的對話會上傳，其他便利貼與對話不會。")
+        case .openAIAPI:
+            String(localized: "AI 便利貼要寫摘要時，它所在對話的內容（你的要求與 Claude 的回覆）會上傳到 OpenAI API，使用你的 OpenAI API key 並由你付費。之後切走對話時的自動更新也會上傳。只有 AI 便利貼的對話會上傳，其他便利貼與對話不會。")
+        default:
+            String(localized: "AI 便利貼要寫摘要時，它所在對話的內容（你的要求與 Claude 的回覆）會上傳到 Anthropic 的 Claude API，使用你的 API key 並由你付費。之後切走對話時的自動更新也會上傳。只有 AI 便利貼的對話會上傳，其他便利貼與對話不會。")
+        }
     }
 }

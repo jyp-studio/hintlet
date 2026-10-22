@@ -1313,18 +1313,18 @@
         }
       }
     },
-    "要把便利貼貼在某個 Claude 對話上，Hintlet 需要請 Claude 開啟完整的輔助使用資訊，才能知道目前顯示的是哪個對話。\n\n開啟後 Claude 會多用一些記憶體與處理器資源。Hintlet 只讀取對話的網址與標題；只有你開了 AI 便利貼的 Chat 對話，才會讀取頁面上已載入的訊息來寫摘要。\n\n不開啟的話，在 Claude 上的便利貼會綁在整個視窗。之後可以從選單列的 Hintlet 選單改變。": {
+    "要把便利貼貼在某個 Claude 對話上，Hintlet 需要請 Claude 開啟完整的輔助使用資訊，才能知道目前顯示的是哪個對話。\n\n開啟後 Claude 會多用一些記憶體與處理器資源。Hintlet 只讀取對話的網址與標題；只有你開了 AI 便利貼的 Chat 對話，才會讀取頁面上已載入的訊息來寫摘要。\n\n不開啟的話，在 Claude 上的便利貼會綁在整個視窗。之後可以在「設定 › 權限」改變。": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "To stick notes on a Claude conversation, Hintlet asks Claude to turn on its full accessibility information, so it can tell which conversation is showing.\n\nClaude then uses a little more memory and processor time. Hintlet reads only the conversation’s address and title; only in a Chat conversation where you turned on an AI note does it read the messages the page has loaded, to write the summary.\n\nIf you don’t turn it on, notes on Claude stick to the whole window. You can change this later from the Hintlet menu in the menu bar."
+            "value": "To stick notes on a Claude conversation, Hintlet asks Claude to turn on its full accessibility information, so it can tell which conversation is showing.\n\nClaude then uses a little more memory and processor time. Hintlet reads only the conversation’s address and title; only in a Chat conversation where you turned on an AI note does it read the messages the page has loaded, to write the summary.\n\nIf you don’t turn it on, notes on Claude stick to the whole window. You can change this later in Settings › Permissions."
           }
         },
         "zh-Hant": {
           "stringUnit": {
             "state": "translated",
-            "value": "要把便利貼貼在某個 Claude 對話上，Hintlet 需要請 Claude 開啟完整的輔助使用資訊，才能知道目前顯示的是哪個對話。\n\n開啟後 Claude 會多用一些記憶體與處理器資源。Hintlet 只讀取對話的網址與標題；只有你開了 AI 便利貼的 Chat 對話，才會讀取頁面上已載入的訊息來寫摘要。\n\n不開啟的話，在 Claude 上的便利貼會綁在整個視窗。之後可以從選單列的 Hintlet 選單改變。"
+            "value": "要把便利貼貼在某個 Claude 對話上，Hintlet 需要請 Claude 開啟完整的輔助使用資訊，才能知道目前顯示的是哪個對話。\n\n開啟後 Claude 會多用一些記憶體與處理器資源。Hintlet 只讀取對話的網址與標題；只有你開了 AI 便利貼的 Chat 對話，才會讀取頁面上已載入的訊息來寫摘要。\n\n不開啟的話，在 Claude 上的便利貼會綁在整個視窗。之後可以在「設定 › 權限」改變。"
           }
         }
       }
@@ -5649,22 +5649,6 @@
         }
       }
     },
-    "貼在 Claude 對話上的便利貼才能轉成 AI 便利貼（每個對話一張）": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Only a note on a Claude conversation can become an AI note (one per conversation)"
-          }
-        },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "貼在 Claude 對話上的便利貼才能轉成 AI 便利貼（每個對話一張）"
-          }
-        }
-      }
-    },
     "目標": {
       "localizations": {
         "en": {
@@ -5773,6 +5757,582 @@
           "stringUnit": {
             "state": "translated",
             "value": "重點"
+          }
+        }
+      }
+    },
+    "歡迎使用 Hintlet": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Welcome to Hintlet"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "歡迎使用 Hintlet"
+          }
+        }
+      }
+    },
+    "把便利貼貼在你正在做的事上。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sticky notes that stick to what you're working on."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "把便利貼貼在你正在做的事上。"
+          }
+        }
+      }
+    },
+    "跟著你的工作出現": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notes that follow your work"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "跟著你的工作出現"
+          }
+        }
+      }
+    },
+    "貼在視窗、資料夾、網頁或 Claude、Codex 對話上。切走就收起來，回來時再出現。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stick one on a window, folder, web page, or Claude or Codex conversation. It hides when you switch away and comes back when you return."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "貼在視窗、資料夾、網頁或 Claude、Codex 對話上。切走就收起來，回來時再出現。"
+          }
+        }
+      }
+    },
+    "在對話上，讓 AI 幫你記下目標、重點和下一步，切回來一眼就懂。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "On a conversation, AI keeps its goal, key point and next step, so you're back up to speed at a glance."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在對話上，讓 AI 幫你記下目標、重點和下一步，切回來一眼就懂。"
+          }
+        }
+      }
+    },
+    "不擋你的路": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Out of your way"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "不擋你的路"
+          }
+        }
+      }
+    },
+    "在便利貼底下打字時，它會淡開；按住 ⌥ 可以看穿全部便利貼。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notes fade when you type under them. Hold ⌥ to see through them all."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在便利貼底下打字時，它會淡開；按住 ⌥ 可以看穿全部便利貼。"
+          }
+        }
+      }
+    },
+    "讓便利貼知道你在哪個視窗": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Let notes know which window you're in"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "讓便利貼知道你在哪個視窗"
+          }
+        }
+      }
+    },
+    "Hintlet 需要「%@」權限，才能在你切換視窗時收起或拿出便利貼，並讓它跟著視窗移動。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hintlet needs permission under %@ to hide and show notes as you switch windows, and to keep them with their window as it moves."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hintlet 需要「%@」權限，才能在你切換視窗時收起或拿出便利貼，並讓它跟著視窗移動。"
+          }
+        }
+      }
+    },
+    "只看位置和名稱": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Only places and names"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "只看位置和名稱"
+          }
+        }
+      }
+    },
+    "讀的是前景視窗的位置、標題，以及網頁或對話的網址，不讀你寫的內容。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "It reads the front window's position and title, and the address of its page or conversation, not what you write."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "讀的是前景視窗的位置、標題，以及網頁或對話的網址，不讀你寫的內容。"
+          }
+        }
+      }
+    },
+    "不記錄打字": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No keystroke logging"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "不記錄打字"
+          }
+        }
+      }
+    },
+    "不需要「輸入監控」或「螢幕錄製」，也不會上傳任何東西。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "It doesn't need Input Monitoring or Screen Recording, and uploads nothing."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "不需要「輸入監控」或「螢幕錄製」，也不會上傳任何東西。"
+          }
+        }
+      }
+    },
+    "已經開啟": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Turned on"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已經開啟"
+          }
+        }
+      }
+    },
+    "在清單裡打開「Hintlet」，回到這裡就會看到勾勾。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Turn on Hintlet in the list. Back here, you'll see a checkmark."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在清單裡打開「Hintlet」，回到這裡就會看到勾勾。"
+          }
+        }
+      }
+    },
+    "做得好！": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nicely done!"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "做得好！"
+          }
+        }
+      }
+    },
+    "貼一張試試看": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Try making a note"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "貼一張試試看"
+          }
+        }
+      }
+    },
+    "切到任何一個視窗，按下：": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Switch to any window and press:"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "切到任何一個視窗，按下："
+          }
+        }
+      }
+    },
+    "按住上方的標籤": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Press and hold the tag on top"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "按住上方的標籤"
+          }
+        }
+      }
+    },
+    "可以換顏色、改貼的位置，或刪除。按一下則收合成小標籤。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "to change its colour, where it sticks, or delete it. Click it to fold the note into a tag."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "可以換顏色、改貼的位置，或刪除。按一下則收合成小標籤。"
+          }
+        }
+      }
+    },
+    "所有便利貼：%@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "All notes: %@"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "所有便利貼：%@"
+          }
+        }
+      }
+    },
+    "搜尋、找回或還原便利貼。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Search, find again or restore notes."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "搜尋、找回或還原便利貼。"
+          }
+        }
+      }
+    },
+    "選單列的 Hintlet 圖示": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hintlet in the menu bar"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "選單列的 Hintlet 圖示"
+          }
+        }
+      }
+    },
+    "設定都在這裡，也可以再打開這份指南。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Settings are there, and so is this guide."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "設定都在這裡，也可以再打開這份指南。"
+          }
+        }
+      }
+    },
+    "上一步": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Back"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "上一步"
+          }
+        }
+      }
+    },
+    "稍後再說": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Not Now"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "稍後再說"
+          }
+        }
+      }
+    },
+    "繼續": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Continue"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "繼續"
+          }
+        }
+      }
+    },
+    "開始使用": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Get Started"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "開始使用"
+          }
+        }
+      }
+    },
+    "入門指南…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Getting Started…"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "入門指南…"
+          }
+        }
+      }
+    },
+    "你的第一張便利貼": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your first note"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "你的第一張便利貼"
+          }
+        }
+      }
+    },
+    "直接打字就好，按 Esc 結束。按住上方的標籤可以換顏色、改貼的位置或刪除。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Just type, and press Esc when you're done. Press and hold the tag on top to change its colour, where it sticks, or delete it."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "直接打字就好，按 Esc 結束。按住上方的標籤可以換顏色、改貼的位置或刪除。"
+          }
+        }
+      }
+    },
+    "企劃書": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Proposal"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "企劃書"
+          }
+        }
+      }
+    },
+    "郵件": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mail"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "郵件"
+          }
+        }
+      }
+    },
+    "便利貼貼在一個視窗上；切到另一個視窗時它收起來，回來時再出現。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A note on one window. It steps away when another window comes to the front, and comes back with its window."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "便利貼貼在一個視窗上；切到另一個視窗時它收起來，回來時再出現。"
+          }
+        }
+      }
+    },
+    "先在「設定 › AI」選一個寫 AI 便利貼的模型": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose a model for AI notes in Settings › AI first"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "先在「設定 › AI」選一個寫 AI 便利貼的模型"
+          }
+        }
+      }
+    },
+    "貼在 Claude 或 Codex 對話上的便利貼才能轉成 AI 便利貼": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Only a note on a Claude or Codex conversation can become an AI note"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "貼在 Claude 或 Codex 對話上的便利貼才能轉成 AI 便利貼"
           }
         }
       }

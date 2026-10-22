@@ -137,8 +137,14 @@ public enum SummaryState: CaseIterable, Sendable {
         for state in Self.allCases {
             for word in words[state] ?? [] where text.lowercased().hasPrefix(word.lowercased()) {
                 let rest = text.dropFirst(word.count).trimmingCharacters(in: .whitespaces)
-                guard let mark = rest.first, ":：-—".contains(mark) else { continue }
-                return (state, rest.dropFirst().trimmingCharacters(in: .whitespaces))
+                if let mark = rest.first, ":：-—".contains(mark) {
+                    return (state, rest.dropFirst().trimmingCharacters(in: .whitespaces))
+                }
+                // A small model sometimes leaves the colon out: 「等你測試」. In Chinese the word can't be the
+                // start of another word, so it still counts; in English ("Stuck" in "Stuckness") it can.
+                if word.unicodeScalars.first.map({ $0.value >= 0x2E80 }) == true, !rest.isEmpty {
+                    return (state, rest)
+                }
             }
         }
         return (.unknown, text)

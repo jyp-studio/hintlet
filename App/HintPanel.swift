@@ -140,6 +140,9 @@ final class HintPanel {
 }
 
 extension HintPanel.Hint {
+    static let firstNote = HintPanel.Hint(
+        symbol: "hand.tap", title: String(localized: "你的第一張便利貼"),
+        message: String(localized: "直接打字就好，按 Esc 結束。按住上方的標籤可以換顏色、改貼的位置或刪除。"))
     static let draftConversation = HintPanel.Hint(
         symbol: "bubble.left.and.text.bubble.right", title: String(localized: "新對話還沒建立"),
         message: String(localized: "送出第一則訊息後，就能把便利貼貼在這個對話上。也可以先貼在整個 Claude 視窗。"),

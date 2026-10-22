@@ -16,6 +16,9 @@ struct NotePalette {
     var diagonal: [NSColor]?
     /// Soft patches of colour over the paper, each fading out from a point (in unit coordinates, y up).
     var patches: [(color: NSColor, center: CGPoint)] = []
+
+    /// One flat paper colour, which a ripple can carry; patches, a diagonal or glass can't be.
+    var isPlainPaper: Bool { !usesMaterial && diagonal == nil && patches.isEmpty }
     /// The AI note's "✦ 摘要" heading; the ink, faded, when nil.
     var accent: NSColor?
 
