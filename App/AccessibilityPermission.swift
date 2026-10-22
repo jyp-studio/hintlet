@@ -37,7 +37,9 @@ final class AccessibilityPermission {
 
         沒有授權時，便利貼仍可使用，但會一直浮動顯示。
         """)
-        alert.addButton(withTitle: String(localized: "打開系統設定"))
+        // The first time, macOS's own prompt comes next and has the button that opens System Settings.
+        alert.addButton(withTitle: UserDefaults.standard.bool(forKey: Self.promptedKey)
+                        ? String(localized: "打開系統設定") : String(localized: "繼續"))
         alert.addButton(withTitle: String(localized: "稍後"))
         AppPresence.comeForward()
         guard alert.runModal() == .alertFirstButtonReturn else { return false }
@@ -45,13 +47,22 @@ final class AccessibilityPermission {
         return true
     }
 
-    /// Opens the right pane of System Settings and waits a while for the user to turn the permission on.
+    /// Set once macOS has been asked to show its own prompt for Hintlet, which also puts Hintlet in the list.
+    private static let promptedKey = "accessibilityPrompted"
+
+    /// Takes the user to the switch, one way only. The first time, macOS's own prompt does it: asking for it is
+    /// what puts Hintlet in the list, and its button opens the right pane; opening the pane as well would put two
+    /// things on screen at once. After that the prompt doesn't come again, so the pane is opened directly. Then
+    /// waits a while for the user to turn the permission on.
     func openSystemSettings(onGranted: @escaping @MainActor () -> Void) {
         pollTimer?.invalidate()
-        // Asking with the prompt option is what adds Hintlet to the list in System Settings.
-        let options = ["AXTrustedCheckOptionPrompt": true] as CFDictionary
-        _ = AXIsProcessTrustedWithOptions(options)
-        NSWorkspace.shared.open(Self.settingsURL)
+        if UserDefaults.standard.bool(forKey: Self.promptedKey) {
+            NSWorkspace.shared.open(Self.settingsURL)
+        } else {
+            UserDefaults.standard.set(true, forKey: Self.promptedKey)
+            let options = ["AXTrustedCheckOptionPrompt": true] as CFDictionary
+            _ = AXIsProcessTrustedWithOptions(options)
+        }
         let deadline = Date().addingTimeInterval(Self.pollLimit)
         pollTimer = Timer.scheduledTimer(withTimeInterval: Self.pollInterval, repeats: true) { [weak self] timer in
             let granted = MainActor.assumeIsolated { self?.isGranted ?? false }

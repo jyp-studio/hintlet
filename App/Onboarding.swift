@@ -51,8 +51,18 @@ final class OnboardingWindowController: NSObject, NSWindowDelegate {
     private func makeWindow() -> NSWindow {
         let view = OnboardingView(
             model: model,
-            isGranted: { [accessibility] in accessibility.isGranted },
+            isGranted: { [accessibility] in
+                #if DEBUG
+                // `-previewNotGranted YES`: the permission page as a new user sees it.
+                if UserDefaults.standard.bool(forKey: "previewNotGranted") { return false }
+                #endif
+                return accessibility.isGranted
+            },
             openSettings: { [accessibility, onGranted] in accessibility.openSystemSettings(onGranted: onGranted) },
+            bringForward: { [weak self] in
+                AppPresence.comeForward()
+                self?.window?.makeKeyAndOrderFront(nil)
+            },
             newNoteShortcut: shortcut(.newNote),
             listShortcut: shortcut(.showList),
             finish: { [weak self] in self?.window?.close() })
@@ -103,12 +113,29 @@ private struct OnboardingView: View {
     @ObservedObject var model: OnboardingModel
     let isGranted: () -> Bool
     let openSettings: () -> Void
+    /// Back in front of System Settings, once the permission is on.
+    let bringForward: () -> Void
     let newNoteShortcut: String
     let listShortcut: String
     let finish: () -> Void
 
-    @State private var granted = false
+    /// As it is when the guide opens, so only turning it on while the guide is open moves it on.
+    @State private var granted: Bool
+    /// System Settings has been opened from here; the page waits for the switch.
+    @State private var asked = false
     private let poll = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+
+    init(model: OnboardingModel, isGranted: @escaping () -> Bool, openSettings: @escaping () -> Void,
+         bringForward: @escaping () -> Void, newNoteShortcut: String, listShortcut: String, finish: @escaping () -> Void) {
+        self.model = model
+        self.isGranted = isGranted
+        self.openSettings = openSettings
+        self.bringForward = bringForward
+        self.newNoteShortcut = newNoteShortcut
+        self.listShortcut = listShortcut
+        self.finish = finish
+        _granted = State(initialValue: isGranted())
+    }
     private static let pages = 3
 
     var body: some View {
@@ -132,8 +159,13 @@ private struct OnboardingView: View {
                 .frame(height: 76)
         }
         .frame(width: OnboardingWindowController.size.width, height: OnboardingWindowController.size.height)
-        .onAppear { granted = isGranted() }
         .onReceive(poll) { _ in granted = isGranted() }
+        // Turned on in System Settings: the guide comes back to the front and moves on by itself.
+        .onChange(of: granted) { _, isOn in
+            guard isOn, model.page == 1 else { return }
+            bringForward()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.9) { if model.page == 1 { go(2) } }
+        }
     }
 
     // MARK: Pages
@@ -180,16 +212,27 @@ private struct OnboardingView: View {
                 Feature(symbol: "keyboard", title: String(localized: "不記錄打字"),
                         text: String(localized: "不需要「輸入監控」或「螢幕錄製」，也不會上傳任何東西。"))
             }
-            if granted {
-                Label(String(localized: "已經開啟"), systemImage: "checkmark.circle.fill")
-                    .font(.headline)
-                    .foregroundStyle(.green)
-                    .padding(.top, 4)
-            } else {
-                Button(String(localized: "打開系統設定")) { openSettings() }
-                    .controlSize(.large)
-                    .padding(.top, 4)
-                Text(String(localized: "在清單裡打開「Hintlet」，回到這裡就會看到勾勾。"))
+            Group {
+                if granted {
+                    Label(String(localized: "已經開啟"), systemImage: "checkmark.circle.fill")
+                        .font(.headline)
+                        .foregroundStyle(.green)
+                } else if asked {
+                    HStack(spacing: 8) {
+                        ProgressView().controlSize(.small)
+                        Text(String(localized: "在「\(AccessibilityPermission.permissionName)」裡打開 Hintlet，完成後會自動繼續。"))
+                    }
+                    .font(.callout)
+                    .foregroundStyle(.secondary)
+                }
+            }
+            .padding(.top, 4)
+            .frame(minHeight: 24)
+            if !granted {
+                Button(String(localized: "稍後再說")) { finish() }
+                    .buttonStyle(.link)
+                    // The focus ring belongs on the default button, not here.
+                    .focusable(false)
                     .font(.callout)
                     .foregroundStyle(.secondary)
             }
@@ -228,20 +271,25 @@ private struct OnboardingView: View {
             if model.page > 0 {
                 Button(String(localized: "上一步")) { go(model.page - 1) }
                     .controlSize(.large)
+                    .focusable(false)
             }
             Spacer()
             if model.page < Self.pages - 1 {
                 // Without the permission a note can't follow its window yet: the guide ends here, and the first
                 // note made once it is on gets its tip.
-                Group {
-                    if model.page == 1 && !granted {
-                        Button(String(localized: "稍後再說")) { finish() }
-                    } else {
-                        Button(String(localized: "繼續")) { go(model.page + 1) }
+                if model.page == 1 && !granted {
+                    // What this page is for is the default; skipping is a quiet link on the page.
+                    Button(String(localized: "打開系統設定")) {
+                        asked = true
+                        openSettings()
                     }
+                    .controlSize(.large)
+                    .keyboardShortcut(.defaultAction)
+                } else {
+                    Button(String(localized: "繼續")) { go(model.page + 1) }
+                        .controlSize(.large)
+                        .keyboardShortcut(.defaultAction)
                 }
-                .controlSize(.large)
-                .keyboardShortcut(.defaultAction)
             } else {
                 Button(String(localized: "開始使用")) { finish() }
                     .controlSize(.large)

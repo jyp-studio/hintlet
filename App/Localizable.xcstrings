@@ -5985,22 +5985,6 @@
         }
       }
     },
-    "在清單裡打開「Hintlet」，回到這裡就會看到勾勾。": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Turn on Hintlet in the list. Back here, you'll see a checkmark."
-          }
-        },
-        "zh-Hant": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "在清單裡打開「Hintlet」，回到這裡就會看到勾勾。"
-          }
-        }
-      }
-    },
     "貼一張試試看": {
       "localizations": {
         "en": {
@@ -6317,6 +6301,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "貼在 Claude 或 Codex 對話上的便利貼才能轉成 AI 便利貼"
+          }
+        }
+      }
+    },
+    "在「%@」裡打開 Hintlet，完成後會自動繼續。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Turn on Hintlet under %@. The guide carries on by itself."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在「%@」裡打開 Hintlet，完成後會自動繼續。"
           }
         }
       }
