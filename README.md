@@ -1,6 +1,10 @@
 # Hintlet
 
-A macOS menu-bar app that sticks notes onto the work you're doing — a window, a folder, a web page, a Claude conversation — hides them when you switch away, and brings them back when you return.
+A macOS menu-bar app that sticks notes onto the work you're doing, such as a window, a folder, a web page or a Claude conversation. It hides them when you switch away and brings them back when you return.
+
+[![A 44-second Hintlet demo video. Click to play it with sound.](promo/v7/poster.jpg)](promo/v7/Hintlet-v7.mp4)
+
+*Watch the [44-second demo](promo/v7/Hintlet-v7.mp4) (with sound). It's an animated illustration of the app, not a screen recording.*
 
 > **Preview release.** Everything described here is built and covered by automated tests, but many hands-on checks haven't been done on a real Mac yet, and some scopes are marked *experimental*. See [Known limitations](#known-limitations).
 
@@ -9,25 +13,25 @@ The app is in English and Traditional Chinese. Project docs (spec, ADRs, spike r
 ## Features
 
 - **⌘⌥N** adds a note at the pointer, ready to type. Drag anywhere on a note to move it; click to edit, with the caret where you clicked. Checklists, undo/redo and resizing work as you'd expect. **Esc** stops editing and hands focus back to the app you were in.
-- Click the island at a note's top to collapse or expand it; press and hold it (or right-click) for colour, delete and scope.
-- **Scopes** — what a note sticks to:
-  - **Window** — any app. The note follows the window as it moves, resizes, minimises, goes full screen or changes display.
-  - **Folder or document** — Finder folders and apps that report a file path (Pages, Preview, TextEdit…). Any window showing it brings the note back, even after a restart.
-  - **Claude conversation** — Chat, Cowork and Code in the Claude desktop app. The note shows only on that conversation and comes back after Claude or Hintlet restarts.
-  - **Codex thread** — a thread in the Codex app, when its name is unique (see Known limitations).
-  - **Web page** *(experimental)* — Safari, by address. Private windows only stick to the window, and their addresses and titles are never saved.
-  - **Claude Code in Terminal or iTerm** *(experimental)* — sticks to the session and comes back with `claude --resume`.
-  - **Floating** — on every desktop, including full-screen spaces.
-- **Waiting to Be Found** — notes on an ordinary window can't follow it across an app restart. When a window with the same app and title shows up, a small "Belongs here?" marker offers to put the note back. Nothing is ever re-attached by title alone.
-- **Delete and undo** — "Undo" (or ⌘Z) for 6 seconds after deleting; deleted notes stay in the trash for 30 days.
-- **All Notes (⌘⌥L)** — search every note, bring back waiting notes, restore from the trash, or go straight to a Claude conversation.
-- **AI notes** — a note on a Claude conversation or a Codex thread can become an AI note that keeps the conversation's goal, key point and next step up to date after each reply. You can turn it back into an ordinary note. Choose who writes it:
+- Click the label at the top of a note to collapse or expand it. Press and hold the label, or right-click it, to change the colour, delete the note or change what it sticks to.
+- **What a note can stick to:**
+  - **Window**, in any app. The note follows the window as it moves, resizes, minimises, goes full screen or changes display.
+  - **Folder or document**, in Finder and in apps that report a file path (Pages, Preview, TextEdit…). Any window showing it brings the note back, even after a restart.
+  - **Claude conversation**, in Chat, Cowork and Code in the Claude desktop app. The note shows only on that conversation and comes back after Claude or Hintlet restarts.
+  - **Codex thread**, in the Codex app, as long as no other thread has the same name (see Known limitations).
+  - **Web page** *(experimental)*, in Safari, matched by address. Private windows only stick to the window, and their addresses and titles are never saved.
+  - **Claude Code session** *(experimental)*, in Terminal or iTerm. The note comes back when you run `claude --resume`.
+  - **Floating**, shown on every desktop, including full-screen spaces.
+- **Notes that lose their window.** A note on an ordinary window can't follow it when the app restarts, so All Notes keeps it as waiting to be found. When a window from the same app with the same title opens, a small marker offers to put the note back, and nothing moves until you accept.
+- **Delete and undo.** You can undo a delete (or press ⌘Z) for 6 seconds, and deleted notes stay in the trash for 30 days.
+- **All Notes (⌘⌥L).** Search every note, bring back notes that are waiting for their window, restore notes from the trash, or jump straight to a Claude conversation.
+- **AI notes.** A note on a Claude conversation or a Codex thread can become an AI note, which updates the conversation's goal, key point and next step after each reply. You can turn it back into an ordinary note at any time. You choose who writes it:
   - the on-device model (macOS 26+ with Apple Intelligence; nothing leaves your Mac)
   - your Claude or Codex account, through their CLIs
   - your own Claude API or OpenAI API key, kept in the Keychain
 
   Every option except the on-device model uploads the conversation, and each asks for your consent first.
-- **Menu bar** — Hide All for Now (for screen sharing), Getting Started…, and Settings… (⌘,): shortcuts, note defaults, AI, backups, permissions, open at login.
+- **Menu bar.** Hide All for Now (handy for screen sharing), Getting Started…, and Settings… (⌘,), where you'll find shortcuts, note defaults, AI, backups, permissions and Open at Login.
 
 ## Install
 
@@ -98,7 +102,7 @@ tccutil reset AppleEvents com.jyp.hintlet
 
 The full list is in the [verification report](docs/delivery/0001-mvp-verification.md#已知限制) (in Chinese). The main ones:
 
-- **Many checks haven't been done on a real Mac yet**, notably switching between Claude conversations and the "Belongs here?" flow after a restart. The [manual checklist](docs/delivery/0001-manual-checklist.md) lists what's left.
+- **Many checks haven't been done on a real Mac yet**, notably switching between Claude conversations, and putting notes back on their windows after an app restart. The [manual checklist](docs/delivery/0001-manual-checklist.md) lists what's left.
 - **Recognizing Claude conversations relies on interfaces Claude doesn't publish**: the web area's address, Chat's message markup, and Cowork and Code session files. If a Claude update breaks them, notes fall back to the window; they never land on the wrong conversation.
 - **Chrome** only has the window scope, because it doesn't expose page addresses unless its full accessibility tree is turned on. Arc, Edge, Brave and Firefox only have the window scope too.
 - **Codex threads** can only be told apart by their title, so a note goes on a thread only when no other thread has the same name; otherwise it stays on the window ([ADR-0003](docs/adr/0003-identify-codex-threads-by-unique-title.md)). Deleting or archiving a thread doesn't move its notes to the trash.
@@ -109,7 +113,7 @@ The full list is in the [verification report](docs/delivery/0001-mvp-verificatio
 
 ## Development
 
-Core logic — binding, persistence, layout and each app's recognition rules — lives in a local Swift package and is tested on its own:
+The core logic, which covers binding, persistence, layout and the rules for recognizing each app, lives in a local Swift package and is tested on its own:
 
 ```bash
 cd Packages/HintletCore && swift test

@@ -1,0 +1,4 @@
+# build.sh regenerates these; the backups are local takes
+*.wav
+Hintlet-v7-dense.*
+Hintlet-v7-every-key.*
