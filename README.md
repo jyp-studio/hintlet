@@ -2,9 +2,9 @@
 
 A macOS menu-bar app that sticks notes onto the work you're doing, such as a window, a folder, a web page or a Claude conversation. It hides them when you switch away and brings them back when you return.
 
-[![A still from the Hintlet demo video. Click to download the video.](promo/v7/poster.jpg)](promo/v7/Hintlet-v7.mp4?raw=true)
+https://github.com/user-attachments/assets/a35c1c02-3e8a-4cc1-a442-36e1599644a8
 
-*[Download the 44-second demo](promo/v7/Hintlet-v7.mp4?raw=true) (MP4 with sound, 4 MB). It's an animated illustration of the app, not a screen recording.*
+*A 44-second demo with sound. It's an animated illustration of the app, not a screen recording.*
 
 > **Preview release.** Everything described here is built and covered by automated tests, but many hands-on checks haven't been done on a real Mac yet, and some scopes are marked *experimental*. See [Known limitations](#known-limitations).
 

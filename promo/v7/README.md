@@ -40,7 +40,7 @@ Times are in seconds. Music and interface sounds are listed separately because t
 | `Hintlet-v7.mp4` | The demo video with this soundtrack. The picture is copied unchanged and the audio is AAC at 256 kb/s |
 | `Hintlet-v7.mp3` | The full mix, mastered to -14 LUFS with true peaks at -1.5 dBTP or lower |
 | `Hintlet-v7.mid` | Every note as General MIDI, one track per instrument (piano, marimba, celesta, bass, pad, choir, drums), at 120 BPM from bar 1 |
-| `poster.jpg` | A still from the video, used on the main README |
+| `poster.jpg` | A still from the video, for places that can't play it |
 
 `build.sh` also writes three WAV files. They are left out of git because they are large and easy to rebuild:
 
