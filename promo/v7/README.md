@@ -21,7 +21,7 @@ Times are in seconds. Music and interface sounds are listed separately because t
 | 5.0 | ⌘⌥N opens a note | A single bell | |
 | 5.35 to 6.85 | Typing into the note | | Key clicks |
 | 8.0 to 9.5 | The window is dragged | | A soft whoosh |
-| 10.0 to 12.0 | Finder in front, note hidden | The band is muffled (low-passed at 320 Hz) and only the kick keeps time | A whoosh, then a click at 11.92 |
+| 10.0 to 12.0 | Finder in front, note hidden | The band is muffled, with everything above 320 Hz cut, and only the kick drum keeps time | A whoosh, then a click at 11.92 |
 | 12.0 | The note comes back | The full band returns with the theme | |
 | 14 to 20.2 | Typing in TextEdit | A slow piano line, one note per second (D, B, C#, A, B, G) | Key clicks, and a low thud for the Return key at 19.0 |
 | 15.42 | The note fades to 12% | The band gets thinner and quieter, and the piano line stays clear | |
@@ -46,9 +46,9 @@ Times are in seconds. Music and interface sounds are listed separately because t
 
 - `Hintlet-v7.wav`, the full mix
 - `Hintlet-v7-music.wav`, the music on its own
-- `Hintlet-v7-sfx.wav`, the interface sounds on their own (clicks, keys and whooshes)
+- `Hintlet-v7-sfx.wav`, the sound effects on their own (clicks, keys and whooshes)
 
-The music and SFX files add up to the full mix sample for sample, so an editor can turn either one up, down or off.
+The music and sound effect files add up to the full mix sample for sample, so an editor can turn either one up, down or off.
 
 ## Using real instruments
 
