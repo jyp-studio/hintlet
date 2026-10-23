@@ -181,6 +181,8 @@ private struct NoteListView: View {
     @State private var place: ListPlace? = .all
     /// ⌘-click adds or takes away one note, ⇧-click the ones in between, as in Finder.
     @State private var selection: Set<NoteID> = []
+    /// The selection in the order it was picked, for the stack: the latest pick goes on top.
+    @State private var pickOrder: [NoteID] = []
 
     var body: some View {
         NavigationSplitView {
@@ -195,7 +197,7 @@ private struct NoteListView: View {
                     .id(id)
             } else if selection.count > 1 {
                 VStack(spacing: 22) {
-                    NoteStack(notes: notes.filter { selection.contains($0.id) })
+                    NoteStack(notes: pickOrder.reversed().compactMap(note))
                     Text(String(localized: "已選取 \(selection.count) 張便利貼"))
                         .font(.title3.weight(.semibold))
                     HStack {
@@ -218,6 +220,11 @@ private struct NoteListView: View {
         .frame(minWidth: 760, minHeight: 440)
         .onExitCommand(perform: close)
         .onChange(of: place) { selection = Set(notes.prefix(1).map(\.id)) }
+        .onChange(of: selection) { old, new in
+            // Several picked at once (a Shift range) come in list order.
+            let added = notes.map(\.id).filter { new.contains($0) && !old.contains($0) }
+            pickOrder = pickOrder.filter(new.contains) + added
+        }
         #if DEBUG
         // `-previewListSelect 4`: that many notes selected, to look at the stack.
         .onAppear {
@@ -407,8 +414,9 @@ private struct NoteActions: View {
 
 /// What can be done to several selected notes at once.
 /// Several notes picked at once, shown the way Finder shows several files: a small stack of them, a little
-/// fanned, the most recent on top, each on its own paper with its first lines.
+/// fanned, the one picked last on top, each on its own paper with its first lines.
 private struct NoteStack: View {
+    /// Top first.
     let notes: [ListedNote]
     private static let shown = 5
     /// How each card lies in the stack, from the top one down.
@@ -417,7 +425,7 @@ private struct NoteStack: View {
                                           CGSize(width: -22, height: 12), CGSize(width: 22, height: 10)]
 
     var body: some View {
-        let top = Array(notes.sorted { $0.updatedAt > $1.updatedAt }.prefix(Self.shown))
+        let top = Array(notes.prefix(Self.shown))
         ZStack {
             ForEach(Array(top.enumerated().reversed()), id: \.element.id) { index, note in
                 Card(note: note)
