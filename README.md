@@ -4,9 +4,9 @@ A macOS menu-bar app that sticks notes onto the work you're doing, such as a win
 
 https://github.com/user-attachments/assets/a35c1c02-3e8a-4cc1-a442-36e1599644a8
 
-*A 44-second demo with sound. It's an animated illustration of the app, not a screen recording.*
+*A 44-second demo with sound. It's an animated illustration of the app, not a screen recording. You can also [download the MP4](promo/v7/Hintlet-v7.mp4?raw=true).*
 
-> **Preview release.** Everything described here is built and covered by automated tests, but many hands-on checks haven't been done on a real Mac yet, and some scopes are marked *experimental*. See [Known limitations](#known-limitations).
+> **Preview release.** Everything described here is built, covered by automated tests and mostly tested by hand on a real Mac. Some scopes are still marked *experimental*. See [Known limitations](#known-limitations).
 
 The app is in English and Traditional Chinese. Project docs (spec, ADRs, spike reports) are in Traditional Chinese; the glossary is [CONTEXT.md](CONTEXT.md).
 
@@ -102,7 +102,6 @@ tccutil reset AppleEvents com.jyp.hintlet
 
 The full list is in the [verification report](docs/delivery/0001-mvp-verification.md#已知限制) (in Chinese). The main ones:
 
-- **Many checks haven't been done on a real Mac yet**, notably switching between Claude conversations, and putting notes back on their windows after an app restart. The [manual checklist](docs/delivery/0001-manual-checklist.md) lists what's left.
 - **Recognizing Claude conversations relies on interfaces Claude doesn't publish**: the web area's address, Chat's message markup, and Cowork and Code session files. If a Claude update breaks them, notes fall back to the window; they never land on the wrong conversation.
 - **Chrome** only has the window scope, because it doesn't expose page addresses unless its full accessibility tree is turned on. Arc, Edge, Brave and Firefox only have the window scope too.
 - **Codex threads** can only be told apart by their title, so a note goes on a thread only when no other thread has the same name; otherwise it stays on the window ([ADR-0003](docs/adr/0003-identify-codex-threads-by-unique-title.md)). Deleting or archiving a thread doesn't move its notes to the trash.
